@@ -15,7 +15,7 @@ const Projects = () => {
           desc="Pringo is a organizer for your projects, it will be open-source once released."
         />
         <Project
-          href="http://50.116.41.169/FullSpotSetup.exe"
+          href="https://github.com/ZelrDev/fullspot/releases"
           img="http://cdn.zelr.me/gimcd.png"
           title="Fullspot"
           desc="Fullscreen your spotify without premium. I will be adding an overlay soon. There are some authentication bugs."
