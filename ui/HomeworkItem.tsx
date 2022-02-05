@@ -12,21 +12,26 @@ import { Homework } from "types/ClassCharts";
 
 const HomeworkItem = (props: {
   type: "late" | "submitted" | "fail" | "completed" | "todo";
+  compact?: boolean;
   items: Homework[];
 }) => {
   const context = React.useContext(UserContext);
 
   return (
-    <div className="bg-white dark:bg-gray-900 border dark:border-gray-800 shadow overflow-hidden sm:rounded-b-3xl">
+    <div
+      className={`bg-white dark:bg-gray-900 dark:border-gray-800 overflow-hidden ${
+        props.compact ? "" : "sm:rounded-b-3xl border shadow"
+      }`}
+    >
       <ul className="divide-y divide-gray-200 dark:divide-gray-800">
         {props.items?.map((position) => (
           <li key={position.id}>
             <a
               href="#"
               onClick={() => openHomeworkModal(context, position, props.type)}
-              className="block hover:bg-gray-50 dark:hover:bg-gray-800 transition"
+              className={`${props.compact && "px-2"} block hover:bg-gray-50 dark:hover:bg-gray-800 transition`}
             >
-              <div className="px-4 py-4 sm:px-6">
+              <div className={`${!props.compact && "sm:px-6"} px-4 py-4`}>
                 <div className="flex items-center justify-between">
                   <p className="text-sm font-medium text-orange-600 truncate">
                     {position.title}
@@ -37,8 +42,12 @@ const HomeworkItem = (props: {
                     </p>
                   </div>
                 </div>
-                <div className="mt-2 sm:flex sm:justify-between">
-                  <div className="sm:flex">
+                <div
+                  className={`${
+                    !props.compact && "sm:flex sm:justify-between"
+                  } mt-2`}
+                >
+                  <div className={`${!props.compact && "sm:flex"}`}>
                     <p className="flex items-center text-sm text-gray-500">
                       <UsersIcon
                         className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
@@ -46,14 +55,22 @@ const HomeworkItem = (props: {
                       />
                       {position.teacher}
                     </p>
-                    <p className="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6">
+                    <p
+                      className={`mt-2 flex items-center text-sm text-gray-500 ${
+                        !props.compact && "sm:mt-0 sm:ml-6"
+                      }`}
+                    >
                       <AcademicCapIcon
                         className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
                         aria-hidden="true"
                       />
                       {position.subject}
                     </p>
-                    <p className="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6">
+                    <p
+                      className={`mt-2 flex items-center text-sm text-gray-500 ${
+                        !props.compact && "sm:mt-0 sm:ml-6"
+                      }`}
+                    >
                       <BookOpenIcon
                         className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
                         aria-hidden="true"
@@ -61,7 +78,7 @@ const HomeworkItem = (props: {
                       {position.lesson}
                     </p>
                   </div>
-                  <div className="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 gap-4">
+                  <div className={`mt-2 flex items-center text-sm text-gray-500 ${!props.compact && "sm:mt-0"} gap-4`}>
                     {position.completion_time_value && (
                       <div className="flex">
                         <ClockIcon
@@ -69,7 +86,8 @@ const HomeworkItem = (props: {
                           aria-hidden="true"
                         />
                         <p>
-                          {position.completion_time_value+" " +
+                          {position.completion_time_value +
+                            " " +
                             position.completion_time_unit}
                         </p>
                       </div>

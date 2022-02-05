@@ -5,34 +5,44 @@ import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/solid";
 import { Homework } from "types/ClassCharts";
 
 const HomeworkCategory = (props: {
-  name: string;
-  type: "late" | "submitted" | "fail" | "completed" | "todo",
+  name?: string;
+  compact?: boolean;
+  type: "late" | "submitted" | "fail" | "completed" | "todo";
   homework: Homework[];
 }) => {
-  const [open, setOpen] = useState(props.type === "todo" ? true : false);
+  const isOpenByDefault = () => {
+    if (props.type === "todo") return true;
+    else if (props.compact) return true;
+    else return false;
+  };
+
+  const [open, setOpen] = useState(isOpenByDefault());
 
   return (
     <div>
-      <div
-        onClick={() => setOpen(!open)}
-        className={`flex justify-between bg-white dark:bg-gray-900 px-4 shadow border-gray-200 sm:px-6 ${
-          open ? "sm:rounded-t-3xl" : "sm:rounded-3xl"
-        } transition-all`}
-      >
-        <h3 className="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100 py-5">
-          {props.name}
-          <span className="ml-2 bg-gray-100 dark:bg-gray-800 text-sm px-2 py-1 rounded-lg font-semibold text-gray-600 dark:text-gray-400">
-            {props.homework.length}
-          </span>
-        </h3>
-        <button className="transition focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-slate-900 focus:ring-orange-500 focus:outline-none rounded-xl cursor-pointer h-full my-auto bg-gray-100 dark:bg-gray-800 p-2">
-          <ChevronDownIcon
-            className={`text-gray-500 w-6 transition duration-500  ${
-              open && "rotate-180"
-            }`}
-          />
-        </button>
-      </div>
+      {!props.compact && (
+        <div
+          onClick={() => setOpen(!open)}
+          className={`flex justify-between bg-white dark:bg-gray-900 px-4 shadow border-gray-200 sm:px-6 ${
+            open ? "sm:rounded-t-3xl" : "sm:rounded-3xl"
+          } transition-all`}
+        >
+          <h3 className="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100 py-5">
+            {props.name}
+            <span className="ml-2 bg-gray-100 dark:bg-gray-800 text-sm px-2 py-1 rounded-lg font-semibold text-gray-600 dark:text-gray-400">
+              {props.homework.length}
+            </span>
+          </h3>
+          <button className="transition focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-slate-900 focus:ring-orange-500 focus:outline-none rounded-xl cursor-pointer h-full my-auto bg-gray-100 dark:bg-gray-800 p-2">
+            <ChevronDownIcon
+              className={`text-gray-500 w-6 transition duration-500  ${
+                open && "rotate-180"
+              }`}
+            />
+          </button>
+        </div>
+      )}
+
       <Transition
         enter="transition-opacity duration-75"
         enterFrom="opacity-0"
@@ -42,7 +52,7 @@ const HomeworkCategory = (props: {
         leaveTo="opacity-0"
         show={open}
       >
-        <HomeworkItem type={props.type} items={props.homework} />
+        <HomeworkItem compact={props.compact} type={props.type} items={props.homework} />
       </Transition>
     </div>
   );

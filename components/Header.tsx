@@ -13,8 +13,8 @@ import Transition from "./transition/index";
 import TextTransition, { presets } from "react-text-transition";
 
 const navigation = [
+  { name: "Overview", href: "/dashboard" },
   { name: "Behaviour", href: "/behaviour" },
-  { name: "Annoucements", href: "/annoucements" },
   { name: "Homework", href: "/homework" },
   { name: "Detentions", href: "/detentions" },
 ];
@@ -26,7 +26,7 @@ export default function Header(props: { children: any }) {
   const { user } = useContext(UserContext);
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-800">
-      <Disclosure as="nav" className="bg-white dark:bg-gray-900">
+      <Disclosure as="nav" className="bg-white dark:bg-gray-900 shadow">
         {({ open }) => (
           <>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -77,7 +77,7 @@ export default function Header(props: { children: any }) {
                   </button>
 
                   {/* Profile dropdown */}
-                  <Menu as="div" className="ml-3 relative z-10">
+                  <Menu as="div" className="ml-3 relative">
                     {({ open }) => (
                       <>
                         <div>
@@ -102,7 +102,7 @@ export default function Header(props: { children: any }) {
                         >
                           <Menu.Items
                             static
-                            className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 focus:outline-none"
+                            className="z-10 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 focus:outline-none"
                           >
                             {userNavigation.map((item) => (
                               <Menu.Item key={item.name}>
@@ -203,15 +203,22 @@ export default function Header(props: { children: any }) {
       </Disclosure>
 
       <div>
-        <header className="bg-white dark:bg-gray-900 py-10 filter drop-shadow dark:border-b-gray-900 mt-0.5">
+        <header
+          className={`bg-white dark:bg-gray-900 ${
+            router.asPath.includes("dashboard") ? "py-0 h-0" : "py-10"
+          } filter drop-shadow dark:border-b-gray-900 mt-0.5 transition-all ease-in-out duration-500`}
+        >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h1 className="text-3xl font-bold leading-tight text-gray-900 dark:text-gray-100">
+            <h1
+              className={`text-3xl transition-all font-bold leading-tight text-gray-900 dark:text-gray-100 ease-in-out duration-500`}
+            >
               <TextTransition
                 text={
                   (
-                    navigation.find((nav) =>
-                      router.asPath.includes(nav.href)
-                    ) || { name: "Not Found" }
+                    navigation.find((nav) => {
+                      if (nav.name === "Overview") return "";
+                      else return router.asPath.includes(nav.href);
+                    }) || { name: "" }
                   ).name
                 }
                 springConfig={presets.default}
@@ -220,7 +227,7 @@ export default function Header(props: { children: any }) {
           </div>
         </header>
         <main className="bg-gray-100 dark:bg-gray-800 pb-5">
-          <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+          <div>
             <Transition user={user?.homework} location={router.pathname}>
               {props.children}
             </Transition>

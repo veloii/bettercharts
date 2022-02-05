@@ -60,7 +60,7 @@ const actContent = (item: Activity_point) => {
   return result;
 };
 
-const Timeline = (props: { activity: Activity_point[] }) => {
+const Timeline = (props: { activity: Activity_point[], limit?: number }) => {
   const { activity } = props;
 
   const timeline = activity.map((item) => ({
@@ -77,10 +77,10 @@ const Timeline = (props: { activity: Activity_point[] }) => {
     <div>
       <div className="flow-root">
         <ul className="-mb-8">
-          {timeline.map((event, eventIdx) => (
+          {timeline.slice(0, props.limit).map((event, eventIdx) => (
             <li key={event.id}>
               <div className="relative pb-8">
-                {eventIdx !== timeline.length - 1 ? (
+                {eventIdx !== timeline.slice(0, props.limit).length - 1 ? (
                   <span
                     className="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200 dark:bg-gray-700"
                     aria-hidden="true"

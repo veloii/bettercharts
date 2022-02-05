@@ -2,7 +2,7 @@ import { Doughnut } from "react-chartjs-2";
 import { Behaviour } from "types/ClassCharts";
 import { useState, useEffect } from "react";
 
-const PieChartPositive = (props: { behaviour: Behaviour }) => {
+const PieChartPositive = (props: { behaviour: Behaviour, text?: string }) => {
   const [pieChartData, setPieChartData] = useState<any>();
   const { behaviour } = props;
   const [pointsPercentage, setPointsPercentage] = useState<number>(0);
@@ -120,7 +120,7 @@ const PieChartPositive = (props: { behaviour: Behaviour }) => {
             className="flex justify-center items-start"
           >
             <div className="absolute dark:text-gray-400 font-medium xl:-mt-0 -mt-4">
-              Behaviour Breakdown
+              {props.text}
             </div>
           </div>
           <div

@@ -52,7 +52,8 @@ const convertStageToIcon: (stage: string) => JSX.Element = (stage: string) => {
 };
 
 export default function Detention(props: {
-  title: string;
+  title?: string;
+  compact?: boolean;
   detentions: {
     id: number;
     date: string;
@@ -68,19 +69,27 @@ export default function Detention(props: {
 }) {
   return (
     <>
-      {props.detentions.length !== 0 && (
+      {props.detentions.length !== 0 && props.title && (
         <h2 className="text-2xl text-gray-900 dark:text-white font-bold py-2">
           {props.title}
         </h2>
       )}
-      <div className="bg-white dark:bg-gray-900 shadow overflow-hidden sm:rounded-md">
+      <div
+        className={`bg-white dark:bg-gray-900 ${
+          !props.compact && "shadow"
+        } overflow-hidden sm:rounded-md`}
+      >
         <ul className="divide-y divide-gray-200 dark:divide-gray-800">
           {props.detentions.map((detention) => (
             <li key={detention.id}>
               <a className="block hover:bg-gray-50 dark:hover:bg-gray-800">
                 <div className="px-4 py-4 sm:px-6">
                   <div>
-                    <div className="lg:flex justify-between">
+                    <div
+                      className={`${
+                        !props.compact && "lg:flex"
+                      } justify-between`}
+                    >
                       <div>
                         <p className="text-sm font-medium text-orange-600 truncate">
                           {detention.title}
@@ -148,7 +157,11 @@ export default function Detention(props: {
                         </p>
                       </div>
                       <div>
-                        <div className="flex gap-2 mt-2 lg:mt-0 lg:block items-center">
+                        <div
+                          className={`${
+                            !props.compact && "lg:mt-0 lg:block"
+                          } flex gap-2 mt-2 items-center`}
+                        >
                           <p className="text-sm text-gray-900 dark:text-gray-400">
                             Detention for{" "}
                             <span className="font-semibold">
@@ -157,7 +170,11 @@ export default function Detention(props: {
                               </time>
                             </span>
                           </p>
-                          <p className="lg:mt-2 flex lg:justify-end items-center text-sm text-gray-500">
+                          <p
+                            className={`${
+                              !props.compact && "lg:mt-2 lg:justify-end"
+                            } flex items-center text-sm text-gray-500`}
+                          >
                             {convertStageToIcon(detention.stage)}
                             {detention.stage}
                           </p>

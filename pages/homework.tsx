@@ -4,24 +4,25 @@ import React, { useEffect, useState } from "react";
 import { Homework } from "../types/ClassCharts";
 import { DateRangePicker, FocusedInputShape } from "react-dates";
 import { useRouter } from "next/router";
+import Container from "ui/Container";
 
-const homeworkTodo = (homework: Homework[]) =>
+export const homeworkTodo = (homework: Homework[]) =>
   homework.filter(
     (item) => item.status.state === null && item.status.ticked === "no"
   );
 
-const homeworkCompleted = (homework: Homework[]) =>
+export const homeworkCompleted = (homework: Homework[]) =>
   homework.filter(
     (item) => item.status.state === null && item.status.ticked === "yes"
   );
 
-const homeworkNotSubmitted = (homework: Homework[]) =>
+export const homeworkNotSubmitted = (homework: Homework[]) =>
   homework.filter((item) => item.status.state === "not_completed");
 
-const homeworkLate = (homework: Homework[]) =>
+export const homeworkLate = (homework: Homework[]) =>
   homework.filter((item) => item.status.state === "late");
 
-const homeworkSubmitted = (homework: Homework[]) =>
+export const homeworkSubmitted = (homework: Homework[]) =>
   homework.filter((item) => item.status.state === "completed");
 
 const homework = () => {
@@ -83,80 +84,82 @@ const homework = () => {
   }, [currentQuery]);
 
   return user?.homework ? (
-    <div className="pt-5 space-y-2">
-      <div className="dark:bg-gray-900 lg:-mt-24 lg:float-right sm:rounded-3xl flex justify-center items-center lg:bg-transparent bg-white lg:p-0 border dark:border-gray-700 lg:border-none lg:shadow-none lg:rounded-none lg:-mb-0 -mb-16 p-5">
-        <DateRangePicker
-          startDate={startDate}
-          startDateId="s_id"
-          endDate={endDate}
-          endDateId="e_id"
-          onDatesChange={({ startDate, endDate }: any) => {
-            let startDateFormat = startDate;
-            let endDateFormat = endDate;
+    <Container>
+      <div className="pt-5 space-y-2">
+        <div className="dark:bg-gray-900 lg:-mt-24 lg:float-right sm:rounded-3xl flex justify-center items-center lg:bg-transparent bg-white lg:p-0 border dark:border-gray-700 lg:border-none lg:shadow-none lg:rounded-none lg:-mb-0 -mb-16 p-5">
+          <DateRangePicker
+            startDate={startDate}
+            startDateId="s_id"
+            endDate={endDate}
+            endDateId="e_id"
+            onDatesChange={({ startDate, endDate }: any) => {
+              let startDateFormat = startDate;
+              let endDateFormat = endDate;
 
-            if (startDateFormat)
-              startDateFormat = startDate?.format("YYYY-MM-DD");
-            if (endDateFormat) endDateFormat = endDate?.format("YYYY-MM-DD");
+              if (startDateFormat)
+                startDateFormat = startDate?.format("YYYY-MM-DD");
+              if (endDateFormat) endDateFormat = endDate?.format("YYYY-MM-DD");
 
-            if (startDateFormat && endDateFormat) {
-              setCurrentQuery({
-                startDate: startDateFormat,
-                endDate: endDateFormat,
-              });
-            }
-            if (!startDateFormat && !endDateFormat) {
-              setCurrentQuery(null);
-            }
+              if (startDateFormat && endDateFormat) {
+                setCurrentQuery({
+                  startDate: startDateFormat,
+                  endDate: endDateFormat,
+                });
+              }
+              if (!startDateFormat && !endDateFormat) {
+                setCurrentQuery(null);
+              }
 
-            setStartDate(startDate);
-            setEndDate(endDate);
-          }}
-          focusedInput={focusedInput}
-          onFocusChange={(e: any) => setFocusedInput(e)}
-          displayFormat="DD/MM/YYYY"
-          isOutsideRange={() => false}
-          noBorder={true}
-        />
+              setStartDate(startDate);
+              setEndDate(endDate);
+            }}
+            focusedInput={focusedInput}
+            onFocusChange={(e: any) => setFocusedInput(e)}
+            displayFormat="DD/MM/YYYY"
+            isOutsideRange={() => false}
+            noBorder={true}
+          />
+        </div>
+
+        <div className="pt-16 lg:pt-0 space-y-2">
+          {homework && (
+            <HomeworkCategory
+              type="todo"
+              name="Todo"
+              homework={homeworkTodo(homework)}
+            />
+          )}
+          {homework && (
+            <HomeworkCategory
+              type="completed"
+              name="Completed"
+              homework={homeworkCompleted(homework)}
+            />
+          )}
+          {homework && (
+            <HomeworkCategory
+              type="late"
+              name="Late"
+              homework={homeworkLate(homework)}
+            />
+          )}
+          {homework && (
+            <HomeworkCategory
+              type="fail"
+              name="Not Submitted"
+              homework={homeworkNotSubmitted(homework)}
+            />
+          )}
+          {homework && (
+            <HomeworkCategory
+              type="submitted"
+              name="Submitted"
+              homework={homeworkSubmitted(homework)}
+            />
+          )}
+        </div>
       </div>
-
-      <div className="pt-16 lg:pt-0 space-y-2">
-        {homework && (
-          <HomeworkCategory
-            type="todo"
-            name="Todo"
-            homework={homeworkTodo(homework)}
-          />
-        )}
-        {homework && (
-          <HomeworkCategory
-            type="completed"
-            name="Completed"
-            homework={homeworkCompleted(homework)}
-          />
-        )}
-        {homework && (
-          <HomeworkCategory
-            type="late"
-            name="Late"
-            homework={homeworkLate(homework)}
-          />
-        )}
-        {homework && (
-          <HomeworkCategory
-            type="fail"
-            name="Not Submitted"
-            homework={homeworkNotSubmitted(homework)}
-          />
-        )}
-        {homework && (
-          <HomeworkCategory
-            type="submitted"
-            name="Submitted"
-            homework={homeworkSubmitted(homework)}
-          />
-        )}
-      </div>
-    </div>
+    </Container>
   ) : (
     <div className="m-0 p-0 w-screen h-screen absolute top-0 left-0 bg-white dark:bg-gray-900 flex justify-center items-center z-50">
       <div className="loading"></div>
