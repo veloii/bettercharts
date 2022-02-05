@@ -1,6 +1,6 @@
-# Zelr Portfolio
+# Better Charts
 
-A simple and clean website in TailwindCSS on React, NextJS. ✨
+A better looking classcharts for students.
 
 ## Run
 
@@ -10,10 +10,8 @@ A simple and clean website in TailwindCSS on React, NextJS. ✨
 
 - [React](https://reactjs.org) ([NextJS 12](https://vercel.com/solutions/nextjs))
 - [TailwindCSS](https://tailwindcss.com)
-- [Vercel](https://vercel.com)
 - [TypeScript](https://typescriptlang.org)
 
 ## Usage
 
 - Read License
-- Please leave the footer, with the credit.
