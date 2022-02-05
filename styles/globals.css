@@ -2,130 +2,196 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --light-color: rgba(255, 115, 0, 0.2);
+  --dark-color: rgba(255, 115, 0, 1);
+  --radius: 64px;
+  --ring-width: 4px;
+}
+
 html,
 body {
-  overflow-x: hidden;
   padding: 0;
   margin: 0;
+  overflow: overlay;
 }
 
-@font-face {
-  font-family: "Hey August";
-  src: url("/HeyAugust.woff2") format("woff2"),
-    url("/HeyAugust.woff") format("woff");
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
+*::-webkit-scrollbar {
+  display: block;
+  width: 16px;
 }
 
-ul {
-  @apply text-center overflow-hidden p-0 m-0 list-none;
+*::-webkit-scrollbar-button {
+  display: none;
 }
 
-li {
-  @apply inline-block mx-2 my-1 px-3 p-1.5 bg-neutral-900 opacity-75 hover:opacity-100 transition hover:scale-110;
+*::-webkit-scrollbar-track {
+  background-color: #00000000;
 }
 
-li a {
-  @apply block text-center no-underline;
+*::-webkit-scrollbar-track-piece {
+  background-color: #00000000;
 }
 
-.waves {
-  background: #000;
-  background-image: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.7)),
-    url("/waves.webp");
-
-  background-attachment: fixed;
-  background-position: bottom;
-  background-repeat: no-repeat;
-  background-size: cover;
+*::-webkit-scrollbar-thumb {
+  background-color: #00000040;
+  border: 1px solid #ffffff40;
+  border-radius: 24px;
 }
 
-::selection {
-  background: #979797; /* WebKit/Blink Browsers */
-}
-::-moz-selection {
-  background: #979797; /* Gecko Browsers */
+* {
+  --scrollbar-color: #00000000;
 }
 
-::-webkit-scrollbar {
-  height: 12px;
-  width: 12px;
-  background: #000;
+*:hover,
+*:focus,
+*:focus-within {
+  --scrollbar-color: #00000040 !important;
 }
 
-::-webkit-scrollbar-thumb {
-  background: #464646;
+*::-webkit-scrollbar-thumb {
+  background-color: #00000000;
+  border: 5px solid transparent;
+  border-radius: 24px;
+  box-shadow: 4px 0px 0px 4px var(--scrollbar-color) inset;
 }
 
-::-webkit-scrollbar-corner {
-  background: #000;
+*::-webkit-scrollbar-thumb:hover {
+  background-color: var(--scrollbar-color);
+  border: 0px solid transparent;
+  box-shadow: none;
 }
 
-:root {
-  scrollbar-color: #464646 #141414;
+.DateInput {
+  position: static !important;
 }
 
-@-webkit-keyframes fadeInDown {
-  from {
-    opacity: 0;
-    -webkit-transform: translatey(-10px);
-    -moz-transform: translatey(-10px);
-    -o-transform: translatey(-10px);
-    transform: translatey(-10px);
+.DateRangePicker_picker {
+  width: 100%;
+}
+
+.DateInput_input {
+  border-radius: 0.5rem !important;
+  @apply bg-gray-50 dark:bg-gray-800 dark:text-white font-normal font-sans !important;
+}
+
+.DayPicker {
+  @apply dark:bg-gray-800 !important;
+}
+
+.CalendarMonth {
+  @apply dark:bg-gray-800 !important;
+}
+
+.CalendarMonthGrid {
+  @apply dark:bg-gray-800 !important;
+}
+
+.DayPickerNavigation_button {
+  @apply dark:bg-gray-700 dark:border-gray-800 !important;
+}
+
+.CalendarMonth_caption {
+  @apply dark:text-gray-300 !important;
+}
+
+.DateInput_input__focused {
+  border-bottom: 2px solid #f97316 !important;
+}
+
+.CalendarDay {
+  @apply dark:bg-gray-900 dark:border-gray-800 dark:text-white !important;
+}
+
+.DateInput_fangShape {
+  @apply dark:fill-gray-800 !important;
+}
+
+.DateInput_fangStroke {
+  @apply dark:stroke-gray-900 !important;
+}
+
+.CalendarDay__selected,
+.CalendarDay__selected:active,
+.CalendarDay__selected:hover {
+  background: #ff964b !important;
+  border: 1px solid #ce783b !important;
+}
+
+.CalendarDay__selected_span {
+  background: #f97316 !important;
+  border: 1px double #d36314 !important;
+}
+
+.CalendarDay__hovered_span {
+  background: rgba(249, 115, 22, 0.3) !important;
+  border: 1px double rgba(214, 89, 0, 0.1) !important;
+  color: rgba(184, 77, 0, 1) !important;
+}
+
+.CalendarDay__hovered_span:hover {
+  background: #ff964b !important;
+  border: 1px solid #ce783b !important;
+  color: #fff !important;
+}
+.DayPickerKeyboardShortcuts_show__bottomRight::before {
+  border-right: transparent !important;
+}
+
+.DateRangePickerInput_arrow {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.DateInput {
+  background: transparent !important;
+}
+
+.DateRangePickerInput {
+  background: transparent !important;
+}
+
+.DateRangePicker_picker {
+  position: absolute !important;
+  z-index: 999999 !important;
+  background: transparent !important;
+}
+
+.DayPickerKeyboardShortcuts_showSpan {
+  color: transparent !important;
+}
+
+.pie canvas {
+  position: relative;
+  z-index: 99999;
+}
+
+.loading {
+  width: var(--radius);
+  height: var(--radius);
+  border-radius: 50%;
+  border: var(--ring-width) solid var(--light-color);
+}
+
+.loading:before {
+  display: block;
+  position: relative;
+  left: calc(var(--ring-width) * -1);
+  top: calc(var(--ring-width) * -1);
+  content: " ";
+  width: var(--radius);
+  height: var(--radius);
+  border-radius: 50%;
+  border: var(--ring-width) solid;
+  border-color: var(--dark-color) transparent transparent transparent;
+  animation: loading-rotate 0.8s ease-out infinite;
+}
+
+@keyframes loading-rotate {
+  0% {
+    transform: rotate(0deg);
   }
-  to {
-    opacity: 1;
-    -webkit-transform: translatey(0);
-    -moz-transform: translatey(0);
-    -o-transform: translatey(0);
-    transform: translatey(0);
+  100% {
+    transform: rotate(360deg);
   }
 }
-@-moz-keyframes fadeInDown {
-  from {
-    opacity: 0;
-    -webkit-transform: translatey(-10px);
-    -moz-transform: translatey(-10px);
-    -o-transform: translatey(-10px);
-    transform: translatey(-10px);
-  }
-  to {
-    opacity: 1;
-    -webkit-transform: translatey(0);
-    -moz-transform: translatey(0);
-    -o-transform: translatey(0);
-    transform: translatey(0);
-  }
-}
-@keyframes fadeInDown {
-  from {
-    opacity: 0;
-    -webkit-transform: translatey(-10px);
-    -moz-transform: translatey(-10px);
-    -o-transform: translatey(-10px);
-    transform: translatey(-10px);
-  }
-  to {
-    opacity: 1;
-    -webkit-transform: translatey(0);
-    -moz-transform: translatey(0);
-    -o-transform: translatey(0);
-    transform: translatey(0);
-  }
-}
-.in-down {
-  -webkit-animation-name: fadeInDown;
-  -moz-animation-name: fadeInDown;
-  -o-animation-name: fadeInDown;
-  animation-name: fadeInDown;
-  -webkit-animation-fill-mode: both;
-  -moz-animation-fill-mode: both;
-  -o-animation-fill-mode: both;
-  animation-fill-mode: both;
-  -webkit-animation-duration: 1s;
-  -moz-animation-duration: 1s;
-  -o-animation-duration: 1s;
-  animation-duration: 1s;
-}
-

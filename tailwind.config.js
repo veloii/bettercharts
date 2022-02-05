@@ -5,22 +5,14 @@ module.exports = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
+    "./ui/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/@themesberg/flowbite/**/*.js",
   ],
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Hey August", ...defaultTheme.fontFamily.sans],
+        sans: ["Inter var", ...defaultTheme.fontFamily.sans],
       },
-      blur: {
-        xs: "2px",
-      },
-      zIndex: {
-        "-1": "-1",
-      },
-    },
-    letterSpacing: {
-      nav: "0.6em",
     },
   },
-  plugins: [],
 };
