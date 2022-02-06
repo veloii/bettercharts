@@ -5,9 +5,7 @@ import Header from "../components/Header";
 import { UserContextProvider } from "../context/ClassChartsContext";
 import ClassCharts from "../types/ClassCharts";
 import "react-dates/initialize";
-import { DateRangePicker } from "react-dates";
 import "react-dates/lib/css/_datepicker.css";
-import Transition from "components/transition";
 
 function MyApp({ Component, pageProps, router }: AppProps) {
   const [user, setUser] = useState<ClassCharts>();
