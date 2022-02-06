@@ -12,7 +12,7 @@ import {
 import SwitchWithRightLabel from "./Switch";
 import { UserContextType } from "../context/ClassChartsContext";
 import React from "react";
-import { Homework } from "types/ClassCharts";
+import { Homework } from "classcharts-api/dist/types";
 import { DownloadIcon } from "@heroicons/react/outline";
 
 function sleep(time: number) {

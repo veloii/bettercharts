@@ -85,7 +85,7 @@ export default function Header(props: { children: any }) {
                             <span className="sr-only">Open user menu</span>
                             <img
                               className="h-8 w-8 rounded-full"
-                              src={user?.avatar_url}
+                              src={user?.student?.avatar_url}
                               alt=""
                             />
                           </Menu.Button>
@@ -173,13 +173,13 @@ export default function Header(props: { children: any }) {
                   <div className="flex-shrink-0">
                     <img
                       className="h-10 w-10 rounded-full"
-                      src={user?.avatar_url}
+                      src={user?.student?.avatar_url}
                       alt=""
                     />
                   </div>
                   <div className="ml-3">
                     <div className="text-base font-medium text-gray-800 dark:text-gray-100">
-                      {user?.first_name}
+                      {user?.student?.first_name}
                     </div>
                   </div>
                   <button className="ml-auto bg-white dark:bg-gray-900 flex-shrink-0 p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-900 focus:ring-orange-500">

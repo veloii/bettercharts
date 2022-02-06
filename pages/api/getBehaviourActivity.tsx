@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { ClasschartsClient } from "@/classcharts/index";
+import { ClasschartsClient } from "classcharts-api";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { startDate, endDate } = req.query;
@@ -9,7 +9,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       process.env.TESTING_CLASSCHARTS_CODE!,
       process.env.TESTING_BIRTHDAY
     );
-    await client.init();
+    await client.login();
 
     const behaviourInfo = await client.getBehaviour({
       from: startDate.toString(),
@@ -29,7 +29,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       process.env.TESTING_CLASSCHARTS_CODE!,
       process.env.TESTING_BIRTHDAY
     );
-    await client.init();
+    await client.login();
 
     const behaviourInfo = await client.getBehaviour();
 

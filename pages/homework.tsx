@@ -1,28 +1,27 @@
 import HomeworkCategory from "../ui/HomeworkCategory";
 import { UserContext } from "../context/ClassChartsContext";
 import React, { useEffect, useState } from "react";
-import { Homework } from "../types/ClassCharts";
-import { DateRangePicker, FocusedInputShape } from "react-dates";
-import { useRouter } from "next/router";
+import { HomeworksResponse } from "classcharts-api/dist/types";
+import { DateRangePicker } from "react-dates";
 import Container from "ui/Container";
 
-export const homeworkTodo = (homework: Homework[]) =>
+export const homeworkTodo = (homework: HomeworksResponse) =>
   homework.filter(
     (item) => item.status.state === null && item.status.ticked === "no"
   );
 
-export const homeworkCompleted = (homework: Homework[]) =>
+export const homeworkCompleted = (homework: HomeworksResponse) =>
   homework.filter(
     (item) => item.status.state === null && item.status.ticked === "yes"
   );
 
-export const homeworkNotSubmitted = (homework: Homework[]) =>
+export const homeworkNotSubmitted = (homework: HomeworksResponse) =>
   homework.filter((item) => item.status.state === "not_completed");
 
-export const homeworkLate = (homework: Homework[]) =>
+export const homeworkLate = (homework: HomeworksResponse) =>
   homework.filter((item) => item.status.state === "late");
 
-export const homeworkSubmitted = (homework: Homework[]) =>
+export const homeworkSubmitted = (homework: HomeworksResponse) =>
   homework.filter((item) => item.status.state === "completed");
 
 const homework = () => {
@@ -33,15 +32,15 @@ const homework = () => {
   const [focusedInput, setFocusedInput] = useState(null);
   const [prevQuery, setPrevQuery] = useState<any>(undefined);
   const [currentQuery, setCurrentQuery] = useState<any>(undefined);
-  const [homework, setHomework] = useState<Homework[] | undefined>(
+  const [homework, setHomework] = useState<HomeworksResponse | undefined>(
     user?.homework
   );
   const [originalHomework, setOriginalHomework] = useState<
-    Homework[] | undefined
+    HomeworksResponse | undefined
   >();
 
   useEffect(() => {
-    if (!homework && user?.id) setHomework(user?.homework);
+    if (!homework && user?.student) setHomework(user?.homework);
   }, [user]);
 
   //! Everytime homework is updated we update the user and keep a seperate copy of the using
@@ -57,7 +56,7 @@ const homework = () => {
 
   //! This lets it still keep the functionalty of not fetching for the original timeframe
   useEffect(() => {
-    if (user?.id && user?.homework) {
+    if (user?.student && user?.homework) {
       if (originalHomework === undefined) {
         setOriginalHomework([...user?.homework!]);
       }

@@ -1,12 +1,10 @@
 import { UserContext } from "context/ClassChartsContext";
 import { NextPage } from "next";
 import { useContext, useEffect, useState } from "react";
-import BehaviourBreakdown from "ui/BehaviourBreakdown";
 import Button from "ui/Button";
 import Card from "ui/Card";
 import Detention from "ui/Detention";
 import HomeworkCategory from "ui/HomeworkCategory";
-import RecentDetentions from "ui/RecentDetentions";
 import Timeline from "ui/Timeline";
 import { convertDetentions, detentionType } from "./detentions";
 import {
@@ -16,11 +14,12 @@ import {
   homeworkSubmitted,
   homeworkTodo,
 } from "./homework";
-
 import "chart.js/auto";
 import PieChartBreakdown from "ui/PieChartBreakdown";
-const convertDate = (date: Date) =>
-  date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+import dayjs from "dayjs";
+
+const convertDate = (date: dayjs.Dayjs) =>
+  date.year() + "-" + (date.month() + 1) + "-" + date.date();
 
 const Dashboard: NextPage = () => {
   const { user, setUser } = useContext(UserContext);
@@ -32,21 +31,17 @@ const Dashboard: NextPage = () => {
     if (completedFetch) return;
     else setCompletedFetch(true);
 
-    const curr = new Date();
-    const firstday = new Date(curr.setDate(curr.getDate() - curr.getDay()));
-    const lastday = new Date(curr.setDate(curr.getDate() - curr.getDay() + 6));
-
     fetch(
       `/api/getHomework?startDate=${convertDate(
-        firstday
-      )}&endDate=${convertDate(lastday)}`
+        dayjs().subtract(7, "day")
+      )}&endDate=${convertDate(dayjs())}`
     )
       .then((res) => res.json())
       .then((homeworkRes) => {
         fetch(
           `/api/getBehaviourActivity?startDate=${convertDate(
-            firstday
-          )}&endDate=${convertDate(lastday)}`
+            dayjs().subtract(7, "day")
+          )}&endDate=${convertDate(dayjs())}`
         )
           .then((res) => res.json())
           .then((activityRes) => {
@@ -54,8 +49,6 @@ const Dashboard: NextPage = () => {
             shallowCopy!.behaviour = activityRes.behaviour;
             shallowCopy!.activity = activityRes.activity;
             shallowCopy!.homework = homeworkRes;
-
-            console.log(shallowCopy);
 
             setUser(shallowCopy);
             setReady(true);
@@ -143,7 +136,9 @@ const Dashboard: NextPage = () => {
       </Card>
     </div>
   ) : (
-    <div className={`m-0 p-0 w-screen h-screen gap-4 absolute top-0 left-0 bg-white dark:bg-gray-900 flex justify-center items-center z-50`}>
+    <div
+      className={`m-0 p-0 w-screen h-screen gap-4 absolute top-0 left-0 bg-white dark:bg-gray-900 flex justify-center items-center z-50`}
+    >
       <div className="loading"></div>
     </div>
   );

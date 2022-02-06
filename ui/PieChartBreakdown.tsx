@@ -1,8 +1,11 @@
 import { Doughnut } from "react-chartjs-2";
-import { Behaviour } from "types/ClassCharts";
+import { BehaviourResponse } from "classcharts-api/dist/types";
 import { useState, useEffect } from "react";
 
-const PieChartPositive = (props: { behaviour: Behaviour, text?: string }) => {
+const PieChartPositive = (props: {
+  behaviour: BehaviourResponse;
+  text?: string;
+}) => {
   const [pieChartData, setPieChartData] = useState<any>();
   const { behaviour } = props;
   const [pointsPercentage, setPointsPercentage] = useState<number>(0);
@@ -37,7 +40,7 @@ const PieChartPositive = (props: { behaviour: Behaviour, text?: string }) => {
 
     for (const key in behaviour.positive_reasons) {
       const val = behaviour.positive_reasons[key];
-      totalPositive += parseInt(val);
+      totalPositive += val;
 
       labels.push(key);
       positiveData.push(val);
@@ -49,7 +52,7 @@ const PieChartPositive = (props: { behaviour: Behaviour, text?: string }) => {
 
     for (const key in behaviour.negative_reasons) {
       const val = behaviour.negative_reasons[key];
-      totalNegative += parseInt(val);
+      totalNegative += val;
 
       labels.push(key);
       negativeData.push(val);
@@ -59,9 +62,7 @@ const PieChartPositive = (props: { behaviour: Behaviour, text?: string }) => {
       else if (val < 15) negativeBackgroundColors.push("#7f1515");
     }
 
-    setPointsPercentage(
-      Math.floor((totalNegative / totalPositive) * 100)
-    );
+    setPointsPercentage(Math.floor((totalNegative / totalPositive) * 100));
 
     setPieChartData({
       labels: labels,

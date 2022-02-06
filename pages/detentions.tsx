@@ -1,7 +1,7 @@
 import { UserContext } from "context/ClassChartsContext";
 import { useContext } from "react";
 import Detention from "ui/Detention";
-import { Detention as DetentionType } from "types/ClassCharts";
+import { Detention as DetentionType } from "classcharts-api/dist/types";
 import Container from "ui/Container";
 
 function capitalize(str: string) {

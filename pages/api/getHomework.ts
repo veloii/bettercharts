@@ -1,12 +1,12 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { ClasschartsClient } from "@/classcharts/index";
+import { ClasschartsClient } from "classcharts-api";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { startDate, endDate } = req.query;
 
   if (startDate && endDate) {
     const client = new ClasschartsClient(process.env.TESTING_CLASSCHARTS_CODE!, process.env.TESTING_BIRTHDAY);
-    await client.init();
+    await client.login();
 
     const homeworkInfo = await client.listHomeworks({
       displayDate: 'due_date',

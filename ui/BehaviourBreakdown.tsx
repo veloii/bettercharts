@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { Behaviour } from "types/ClassCharts";
+import { BehaviourResponse } from "classcharts-api/dist/types";
 import { Doughnut } from "react-chartjs-2";
 import PieChartBreakdown from "./PieChartBreakdown";
 import BarChartWeekly from "./BarChartWeeklyBreakdown";
 
-const BehaviourBreakdown = (props: { behaviour: Behaviour }) => {
+const BehaviourBreakdown = (props: { behaviour: BehaviourResponse }) => {
   const { behaviour } = props;
 
   return (

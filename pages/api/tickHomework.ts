@@ -11,7 +11,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   // TODO add a cookie check for the code
 
   const client = new ClasschartsClient(process.env.TESTING_CLASSCHARTS_CODE!, process.env.TESTING_BIRTHDAY);
-  await client.init();
+  await client.login();
 
   await client.makeAuthedRequest(
     `https://www.classcharts.com/apiv2student/homeworkticked/${homeworkId}?pupil_id=${client.studentId}`,

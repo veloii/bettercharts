@@ -8,12 +8,12 @@ import {
 import React from "react";
 import openHomeworkModal from "../hooks/openHomeworkModal";
 import { UserContext } from "../context/ClassChartsContext";
-import { Homework } from "types/ClassCharts";
+import { HomeworksResponse } from "classcharts-api/dist/types";
 
 const HomeworkItem = (props: {
   type: "late" | "submitted" | "fail" | "completed" | "todo";
   compact?: boolean;
-  items: Homework[];
+  items: HomeworksResponse;
 }) => {
   const context = React.useContext(UserContext);
 

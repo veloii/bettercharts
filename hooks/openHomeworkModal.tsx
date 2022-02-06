@@ -2,7 +2,7 @@ import ReactDOM, { unmountComponentAtNode } from "react-dom";
 import React from "react";
 import HomeworkModal from "../ui/HomeworkModal";
 import { UserContextType } from "../context/ClassChartsContext";
-import { Homework } from "types/ClassCharts";
+import { Homework } from "classcharts-api/dist/types";
 
 const openHomeworkModal = (
   userContext: UserContextType,

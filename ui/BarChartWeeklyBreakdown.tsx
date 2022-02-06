@@ -1,8 +1,8 @@
 import { Bar } from "react-chartjs-2";
-import { Behaviour } from "types/ClassCharts";
+import { BehaviourResponse } from "classcharts-api/dist/types";
 import { useState, useEffect } from "react";
 
-const BarChartWeekly = (props: { behaviour: Behaviour }) => {
+const BarChartWeekly = (props: { behaviour: BehaviourResponse }) => {
   const [barChartData, setBarChartData] = useState<any>();
   const { behaviour } = props;
 

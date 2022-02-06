@@ -1,12 +1,12 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { ClasschartsClient } from "@/classcharts/index";
+import { ClasschartsClient } from "classcharts-api";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const client = new ClasschartsClient(
     process.env.TESTING_CLASSCHARTS_CODE!,
     process.env.TESTING_BIRTHDAY
   );
-  await client.init();
+  await client.login();
 
   const studentInfo = await client.getStudentInfo();
   const homeworkInfo = await client.listHomeworks();
@@ -15,8 +15,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   const detentionInfo = await client.getDetentions();
 
   res.status(200).json({
-    ...studentInfo,
-    homework: [...homeworkInfo],
+    student: studentInfo,
+    homework: homeworkInfo,
     behaviour: behaviourInfo,
     activity: activityInfo,
     detentions: detentionInfo,

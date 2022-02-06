@@ -1,6 +1,6 @@
 import { CheckIcon, XIcon } from "@heroicons/react/solid";
 import classNames from "lib/classNames";
-import { Activity_point } from "types/ClassCharts";
+import { ActivityPoint, ActivityResponse } from "classcharts-api/dist/types";
 
 function parseTwitterDate(tdate: string) {
   const systemDate = new Date(Date.parse(tdate));
@@ -47,7 +47,7 @@ function parseTwitterDate(tdate: string) {
   );
 }
 
-const actContent = (item: Activity_point) => {
+const actContent = (item: ActivityPoint) => {
   let result: string = "awarded";
 
   if (item.teacher_name) {
@@ -60,7 +60,7 @@ const actContent = (item: Activity_point) => {
   return result;
 };
 
-const Timeline = (props: { activity: Activity_point[], limit?: number }) => {
+const Timeline = (props: { activity: ActivityResponse; limit?: number }) => {
   const { activity } = props;
 
   const timeline = activity.map((item) => ({
@@ -104,9 +104,7 @@ const Timeline = (props: { activity: Activity_point[], limit?: number }) => {
                     <div>
                       <p className="text-sm text-gray-500 dark:text-gray-400">
                         {event.target}{" "}
-                        <a
-                          className="font-medium text-gray-900 dark:text-gray-100"
-                        >
+                        <a className="font-medium text-gray-900 dark:text-gray-100">
                           {event.content}
                         </a>
                       </p>

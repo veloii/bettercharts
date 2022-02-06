@@ -2,13 +2,13 @@ import { Transition } from "@headlessui/react";
 import React, { useState } from "react";
 import HomeworkItem from "./HomeworkItem";
 import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/solid";
-import { Homework } from "types/ClassCharts";
+import { HomeworksResponse } from "classcharts-api/dist/types";
 
 const HomeworkCategory = (props: {
   name?: string;
   compact?: boolean;
   type: "late" | "submitted" | "fail" | "completed" | "todo";
-  homework: Homework[];
+  homework: HomeworksResponse;
 }) => {
   const isOpenByDefault = () => {
     if (props.type === "todo") return true;

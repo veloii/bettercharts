@@ -1,7 +1,7 @@
 import { UserContext } from "../context/ClassChartsContext";
 import React, { useEffect, useState } from "react";
-import { Activity_point, Behaviour } from "../types/ClassCharts";
-import { DateRangePicker, FocusedInputShape } from "react-dates";
+import { ActivityResponse, BehaviourResponse } from "classcharts-api/dist/types";
+import { DateRangePicker } from "react-dates";
 import BehaviourBreakdown from "ui/BehaviourBreakdown";
 import "chart.js/auto";
 import Timeline from "ui/Timeline";
@@ -15,19 +15,19 @@ const behaviour = () => {
   const [focusedInput, setFocusedInput] = useState(null);
   const [prevQuery, setPrevQuery] = useState<any>(undefined);
   const [currentQuery, setCurrentQuery] = useState<any>(undefined);
-  const [activity, setActivity] = useState<Activity_point[] | undefined>(
+  const [activity, setActivity] = useState<ActivityResponse | undefined>(
     user?.activity
   );
-  const [behaviour, setBehaviour] = useState<Behaviour | undefined>(
+  const [behaviour, setBehaviour] = useState<BehaviourResponse | undefined>(
     user?.behaviour
   );
   const [hasReset, setHasReset] = useState(false);
-  const [ready, setReady] = useState(false)
+  const [ready, setReady] = useState(false);
 
   // Reset data from overview
   useEffect(() => {
     if (hasReset) return;
-    setHasReset(true)
+    setHasReset(true);
     fetch(`/api/getBehaviourActivity`)
       .then((res) => res.json())
       .then((res) => {
@@ -116,7 +116,9 @@ const behaviour = () => {
       </div>
     </Container>
   ) : (
-    <div className={`m-0 p-0 w-screen h-screen gap-4 absolute top-0 left-0 bg-white dark:bg-gray-900 flex justify-center items-center`}>
+    <div
+      className={`m-0 p-0 w-screen h-screen gap-4 absolute top-0 left-0 bg-white dark:bg-gray-900 flex justify-center items-center`}
+    >
       <div className="loading"></div>
     </div>
   );
