@@ -17,6 +17,7 @@ import {
 import "chart.js/auto";
 import PieChartBreakdown from "ui/PieChartBreakdown";
 import dayjs from "dayjs";
+import Head from "next/head";
 
 const convertDate = (date: dayjs.Dayjs) =>
   date.year() + "-" + (date.month() + 1) + "-" + date.date();
@@ -58,6 +59,9 @@ const Dashboard: NextPage = () => {
 
   return user && ready ? (
     <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-4 sm:p-6 lg:p-8 items-start justify-center">
+      <Head>
+        <title>Overview | BetterCharts</title>
+      </Head>
       {detentionType(user.detentions, "today").length !== 0 && (
         <Card title="Detentions">
           <Detention
@@ -139,6 +143,9 @@ const Dashboard: NextPage = () => {
     <div
       className={`m-0 p-0 w-screen h-screen gap-4 absolute top-0 left-0 bg-white dark:bg-gray-900 flex justify-center items-center z-50`}
     >
+      <Head>
+        <title>Loading | BetterCharts</title>
+      </Head>
       <div className="loading"></div>
     </div>
   );

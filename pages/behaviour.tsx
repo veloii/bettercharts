@@ -1,11 +1,15 @@
 import { UserContext } from "../context/ClassChartsContext";
 import React, { useEffect, useState } from "react";
-import { ActivityResponse, BehaviourResponse } from "classcharts-api/dist/types";
+import {
+  ActivityResponse,
+  BehaviourResponse,
+} from "classcharts-api/dist/types";
 import { DateRangePicker } from "react-dates";
 import BehaviourBreakdown from "ui/BehaviourBreakdown";
 import "chart.js/auto";
 import Timeline from "ui/Timeline";
 import Container from "ui/Container";
+import Head from "next/head";
 
 const behaviour = () => {
   const { user, setUser } = React.useContext(UserContext);
@@ -67,6 +71,9 @@ const behaviour = () => {
 
   return user && ready ? (
     <Container>
+      <Head>
+        <title>Behaviour | BetterCharts</title>
+      </Head>
       <div className="pt-5 space-y-2">
         <div className="dark:bg-gray-900 lg:-mt-24 lg:float-right sm:rounded-3xl flex justify-center items-center lg:bg-transparent bg-white lg:p-0 border dark:border-gray-700 lg:border-none lg:shadow-none lg:rounded-none lg:-mb-0 -mb-16 p-5">
           <DateRangePicker
@@ -119,6 +126,9 @@ const behaviour = () => {
     <div
       className={`m-0 p-0 w-screen h-screen gap-4 absolute top-0 left-0 bg-white dark:bg-gray-900 flex justify-center items-center`}
     >
+      <Head>
+        <title>Loading | BetterCharts</title>
+      </Head>
       <div className="loading"></div>
     </div>
   );

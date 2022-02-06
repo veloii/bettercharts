@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { HomeworksResponse } from "classcharts-api/dist/types";
 import { DateRangePicker } from "react-dates";
 import Container from "ui/Container";
+import Head from "next/head";
 
 export const homeworkTodo = (homework: HomeworksResponse) =>
   homework.filter(
@@ -84,6 +85,9 @@ const homework = () => {
 
   return user?.homework ? (
     <Container>
+      <Head>
+        <title>Homework | BetterCharts</title>
+      </Head>
       <div className="pt-5 space-y-2">
         <div className="dark:bg-gray-900 lg:-mt-24 lg:float-right sm:rounded-3xl flex justify-center items-center lg:bg-transparent bg-white lg:p-0 border dark:border-gray-700 lg:border-none lg:shadow-none lg:rounded-none lg:-mb-0 -mb-16 p-5">
           <DateRangePicker
@@ -161,6 +165,9 @@ const homework = () => {
     </Container>
   ) : (
     <div className="m-0 p-0 w-screen h-screen absolute top-0 left-0 bg-white dark:bg-gray-900 flex justify-center items-center z-50">
+      <Head>
+        <title>Loading | BetterCharts</title>
+      </Head>
       <div className="loading"></div>
     </div>
   );
