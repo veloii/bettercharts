@@ -17,6 +17,31 @@ const HomeworkItem = (props: {
 }) => {
   const context = React.useContext(UserContext);
 
+  const getChipColors = () => {
+    switch (props.type) {
+      case "completed":
+        return completed;
+      case "fail":
+        return fail;
+      case "late":
+        return late;
+      case "submitted":
+        return submitted;
+      case "todo":
+        return todo;
+      default:
+        break;
+    }
+  };
+
+  const todo = "bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-100";
+  const completed =
+    "bg-green-100 dark:bg-green-800 text-green-800 dark:text-green-100";
+  const submitted = completed;
+  const late =
+    "bg-yellow-100 dark:bg-yellow-800 text-yellow-800 dark:text-yellow-100";
+  const fail = "bg-red-100 dark:bg-red-800 text-red-800 dark:text-red-100";
+
   return (
     <div
       className={`bg-white dark:bg-gray-900 dark:border-gray-800 overflow-hidden ${
@@ -29,17 +54,28 @@ const HomeworkItem = (props: {
             <a
               href="#"
               onClick={() => openHomeworkModal(context, position, props.type)}
-              className={`${props.compact && "px-2"} block hover:bg-gray-50 dark:hover:bg-gray-800 transition`}
+              className={`${
+                props.compact && "px-2"
+              } block hover:bg-gray-50 dark:hover:bg-gray-800 transition`}
             >
               <div className={`${!props.compact && "sm:px-6"} px-4 py-4`}>
                 <div className="flex items-center justify-between">
                   <p className="text-sm font-medium text-orange-600 truncate">
                     {position.title}
                   </p>
-                  <div className="ml-2 flex-shrink-0 flex">
-                    <p className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-orange-100 dark:bg-orange-800 text-orange-800 dark:text-orange-100">
-                      {position.homework_type}
-                    </p>
+                  <div className="flex">
+                    <div className="ml-2 flex-shrink-0 flex">
+                      <p className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-orange-100 dark:bg-orange-800 text-orange-800 dark:text-orange-100">
+                        {position.homework_type}
+                      </p>
+                    </div>
+                    {props.compact && (
+                      <div className="ml-2 flex-shrink-0 flex">
+                        <p className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${getChipColors()}`}>
+                          {props.type.slice(0,1).toUpperCase() + props.type.slice(1)}
+                        </p>
+                      </div>
+                    )}
                   </div>
                 </div>
                 <div
@@ -78,7 +114,11 @@ const HomeworkItem = (props: {
                       {position.lesson}
                     </p>
                   </div>
-                  <div className={`mt-2 flex items-center text-sm text-gray-500 ${!props.compact && "sm:mt-0"} gap-4`}>
+                  <div
+                    className={`mt-2 flex items-center text-sm text-gray-500 ${
+                      !props.compact && "sm:mt-0"
+                    } gap-4`}
+                  >
                     {position.completion_time_value && (
                       <div className="flex">
                         <ClockIcon

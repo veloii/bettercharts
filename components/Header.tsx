@@ -10,18 +10,20 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { UserContext } from "../context/ClassChartsContext";
 import Transition from "./transition/index";
-import TextTransition, { presets } from "react-text-transition";
-
-const navigation = [
-  { name: "Overview", href: "/dashboard" },
-  { name: "Behaviour", href: "/behaviour" },
-  { name: "Homework", href: "/homework" },
-  { name: "Detentions", href: "/detentions" },
-];
+import TextTransition from "react-text-transition";
 
 const userNavigation = [{ name: "Sign out", href: "#" }];
 
 export default function Header(props: { children: any }) {
+  const navigation = [
+    { name: "Overview", href: "/dashboard" },
+    { name: "Behaviour", href: "/behaviour" },
+    { name: "Homework", href: "/homework" },
+    { name: "Detentions", href: "/detentions" },
+    { name: "Announcements", href: "/announcements" },
+    { name: "Timetable", href: "/timetable" },
+  ];
+
   const router = useRouter();
   const { user } = useContext(UserContext);
   return (
@@ -205,12 +207,12 @@ export default function Header(props: { children: any }) {
       <div>
         <header
           className={`bg-white dark:bg-gray-900 ${
-            router.asPath.includes("dashboard") ? "py-0 h-0" : "py-10"
-          } filter drop-shadow dark:border-b-gray-900 mt-0.5 transition-all ease-in-out duration-500`}
+            router.asPath.includes("dashboard") ? "py-0 h-0" : "py-10 border-b"
+          } filter drop-shadow dark:border-b-gray-700 mt-0.5 transition-all ease-in-out duration-500`}
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h1
-              className={`text-3xl transition-all font-bold leading-tight text-gray-900 dark:text-gray-100 ease-in-out duration-500`}
+              className={`text-3xl font-bold leading-tight text-gray-900 dark:text-gray-100 ease-in-out duration-500`}
             >
               <TextTransition
                 text={
@@ -221,7 +223,6 @@ export default function Header(props: { children: any }) {
                     }) || { name: "" }
                   ).name
                 }
-                springConfig={presets.default}
               />
             </h1>
           </div>

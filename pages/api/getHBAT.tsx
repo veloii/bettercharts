@@ -10,6 +10,14 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   );
   await client.login();
 
+  const today = new Date();
+  const date =
+    today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
+
+  const lessons = await client.getLessons({
+    date: date.toString(),
+  });
+
   if (startDate && endDate) {
     const behaviourInfo = await client.getBehaviour({
       from: startDate.toString(),
@@ -21,16 +29,28 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       to: endDate.toString(),
     });
 
-    return res
-      .status(200)
-      .json({ behaviour: behaviourInfo, activity: activityInfo });
+    const homeworkInfo = await client.listHomeworks({
+      displayDate: "due_date",
+      fromDate: startDate.toString(),
+      toDate: endDate.toString(),
+    });
+
+    return res.status(200).json({
+      behaviour: behaviourInfo,
+      activity: activityInfo,
+      homework: homeworkInfo,
+      lessons,
+    });
   } else {
     const behaviourInfo = await client.getBehaviour();
-
     const activityInfo = await client.getActivity();
+    const homeworkInfo = await client.listHomeworks();
 
-    return res
-      .status(200)
-      .json({ behaviour: behaviourInfo, activity: activityInfo });
+    return res.status(200).json({
+      behaviour: behaviourInfo,
+      activity: activityInfo,
+      homework: homeworkInfo,
+      lessons,
+    });
   }
 };

@@ -143,6 +143,14 @@ body {
   padding-right: 1rem;
 }
 
+.SingleDatePickerInput {
+  background: transparent !important;
+}
+
+.SingleDatePicker_picker {
+  background: transparent !important;
+}
+
 .DateInput {
   background: transparent !important;
 }
@@ -248,4 +256,21 @@ body {
       #111827 100%
     ) !important;
   }
+}
+
+.dash-grid {
+  display: -webkit-box; /* Not needed if autoprefixing */
+  display: -ms-flexbox; /* Not needed if autoprefixing */
+  display: flex;
+  margin-left: -10px; /* gutter size offset */
+  width: auto;
+}
+.dash-grid_column {
+  padding-left: 10px; /* gutter size */
+  background-clip: padding-box;
+}
+
+/* Style your items */
+.dash-grid_column > div {
+  margin-top: 40px;
 }

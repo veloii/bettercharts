@@ -13,10 +13,18 @@ import SwitchWithRightLabel from "./Switch";
 import { UserContextType } from "../context/ClassChartsContext";
 import React from "react";
 import { Homework } from "classcharts-api/dist/types";
-import { DownloadIcon } from "@heroicons/react/outline";
+import { DownloadIcon, UploadIcon } from "@heroicons/react/outline";
+import Button from "./Button";
 
 function sleep(time: number) {
   return new Promise((resolve) => setTimeout(resolve, time));
+}
+
+function buildFileSelector() {
+  const fileSelector = document.createElement("input");
+  fileSelector.setAttribute("type", "file");
+  fileSelector.setAttribute("multiple", "multiple");
+  return fileSelector;
 }
 
 export default function HomeworkModal(props: {
@@ -133,7 +141,6 @@ export default function HomeworkModal(props: {
           >
             <Dialog.Overlay className="fixed inset-0 bg-gray-500 dark:bg-gray-900 dark:bg-opacity-75 bg-opacity-75 transition-opacity" />
           </Transition.Child>
-
           {/* This element is to trick the browser into centering the modal contents. */}
           <span
             className="hidden sm:inline-block sm:align-middle sm:h-screen"
@@ -192,7 +199,6 @@ export default function HomeworkModal(props: {
                       {props.homework.issue_date}
                     </p>
                   </div>
-
                   {props.homework.completion_time_value && (
                     <div className="flex ">
                       <p className="text-gray-400 text-sm font-medium">
@@ -205,7 +211,6 @@ export default function HomeworkModal(props: {
                       </p>
                     </div>
                   )}
-
                   <div className="py-5">
                     <SwitchWithRightLabel
                       disabled={props.status === "submitted"}
@@ -229,17 +234,15 @@ export default function HomeworkModal(props: {
                       }}
                     />
                   </div>
-
-                  {props.homework.description === "" && (
+                  {props.homework.description.length > 1 && (
                     <div
-                      className="max-w-2xl dark:bg-white dark:text-black rounded-xl p-5 shadow"
+                      className="max-w-2xl filter dark:invert dark:bg-[#eee7d8] dark:text-black rounded-xl"
                       dangerouslySetInnerHTML={{
-                        __html: props.homework.description,
+                        __html: props.homework.description_raw,
                       }}
                     ></div>
                   )}
-
-                  {/* this doesnt even work as if theres no valid attachments but you are allowed to attach it will not show anything */}
+                  {/* this doesnt even work as if theres no valid attachments but you are allowed to attach it will not show anything */}{" "}
                   {props.homework.validated_attachments.length != 0 && (
                     <div>
                       <h1 className="text-gray-900 dark:text-gray-100 text-2xl pt-5 pb-2 font-semibold">
@@ -248,7 +251,11 @@ export default function HomeworkModal(props: {
                       <div className="flex gap-2">
                         {props.homework.validated_attachments.map(
                           (attachment) => (
-                            <a target="_blank" href={attachment.validated_file}>
+                            <a
+                              key={attachment.id}
+                              target="_blank"
+                              href={attachment.validated_file}
+                            >
                               <button className="transition bg-gray-400 text-gray-800 dark:text-gray-100 flex justify-center items-center gap-2 bg-opacity-30 rounded-lg font-medium p-2 px-4 hover:bg-opacity-60">
                                 <DownloadIcon className="w-6" />
                                 {attachment.file_name}
@@ -259,6 +266,34 @@ export default function HomeworkModal(props: {
                       </div>
                     </div>
                   )}
+                  <div className="pt-5">
+                    {props.homework.status.allow_attachments && (
+                      <Button
+                        onClick={() => {
+                          const fileSelector = buildFileSelector();
+                          fileSelector.click();
+                          fileSelector.onchange = (ev: any) => {
+                            const file = ev.target.files[0];
+                            const formData = new FormData();
+
+                            formData.append("attachment", file);
+
+
+                            fetch("/api/"+props.homework.status.id+"/uploadHomeworkAttachment", {
+                              method: "POST",
+                              body: formData,
+                            })
+                              .then((res) => res.json())
+                              .then((res) => console.log(res));
+                          };
+                        }}
+                        size="2"
+                      >
+                        <UploadIcon className="w-6 mr-2" />
+                        Upload Attachments
+                      </Button>
+                    )}
+                  </div>
                 </div>
               </div>
               <div className="mt-5 sm:mt-6">

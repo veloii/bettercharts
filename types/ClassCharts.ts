@@ -4,6 +4,8 @@ import {
   ActivityResponse,
   HomeworksResponse,
   DetentionsResponse,
+  AnnouncementsResponse,
+  LessonsResponse
 } from "classcharts-api/dist/types";
 
 export default interface ClassCharts {
@@ -12,4 +14,6 @@ export default interface ClassCharts {
   behaviour: BehaviourResponse;
   activity: ActivityResponse;
   detentions: DetentionsResponse;
+  announcements: AnnouncementsResponse;
+  lessons: LessonsResponse;
 }

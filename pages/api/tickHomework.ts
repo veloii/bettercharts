@@ -2,8 +2,8 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { ClasschartsClient } from "classcharts-api";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-  // if (req.method !== "POST")
-  //   return res.status(400).json({ message: "Bad Request" });
+  if (req.method !== "POST")
+    return res.status(400).json({ message: "Bad Request" });
 
   const { homeworkId } = req.query;
   if (!homeworkId) return res.status(400).json({ message: "Bad Request" });
