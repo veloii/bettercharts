@@ -1,5 +1,5 @@
 import classNames from "../lib/classNames";
-import { Fragment, useContext } from "react";
+import { Fragment, useContext, useEffect, useState } from "react";
 import {
   Disclosure,
   Menu,
@@ -11,22 +11,35 @@ import Link from "next/link";
 import { UserContext } from "../context/ClassChartsContext";
 import Transition from "./transition/index";
 import TextTransition from "react-text-transition";
+import allowClassChartsFeature from "../hooks/allowClassChartsFeature";
 
-const userNavigation = [{ name: "Sign out", href: "#" }];
+const userNavigation = [{ name: "Sign out", href: "/logout" }];
 
 export default function Header(props: { children: any }) {
-  const navigation = [
-    { name: "Overview", href: "/dashboard" },
-    { name: "Behaviour", href: "/behaviour" },
-    { name: "Homework", href: "/homework" },
-    { name: "Detentions", href: "/detentions" },
-    { name: "Announcements", href: "/announcements" },
-    { name: "Timetable", href: "/timetable" },
-  ];
-
   const router = useRouter();
   const { user } = useContext(UserContext);
-  return (
+  const [navigation, setNavigation] = useState<
+    undefined | Array<{ name: string; href: string }>
+  >(undefined);
+
+  useEffect(() => {
+    if (user && navigation === undefined) {
+      const classChartsFeatures: string[] = allowClassChartsFeature(
+        user
+      ) as any;
+
+      setNavigation([
+        { name: "Overview", href: "/overview" },
+
+        ...classChartsFeatures!.map((feature) => ({
+          name: feature,
+          href: "/" + feature.toLowerCase(),
+        })),
+      ]);
+    }
+  }, [user]);
+
+  return navigation ? (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-800">
       <Disclosure as="nav" className="bg-white dark:bg-gray-900 shadow">
         {({ open }) => (
@@ -207,7 +220,7 @@ export default function Header(props: { children: any }) {
       <div>
         <header
           className={`bg-white dark:bg-gray-900 ${
-            router.asPath.includes("dashboard") ? "py-0 h-0" : "py-10 border-b"
+            router.asPath.includes("overview") ? "py-0 h-0" : "py-10 border-b"
           } filter drop-shadow dark:border-b-gray-700 mt-0.5 transition-all ease-in-out duration-500`}
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -236,5 +249,7 @@ export default function Header(props: { children: any }) {
         </main>
       </div>
     </div>
+  ) : (
+    props.children
   );
 }

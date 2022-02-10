@@ -2,11 +2,19 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { ClasschartsClient } from "classcharts-api";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
+  if (!(req.cookies?.cc_access_code && req.cookies?.cc_date_of_birth))
+    return res.status(401).json({ message: "Unauthorized" });
+
   const client = new ClasschartsClient(
-    process.env.TESTING_CLASSCHARTS_CODE!,
-    process.env.TESTING_BIRTHDAY
+    req.cookies?.cc_access_code,
+    req.cookies?.cc_date_of_birth
   );
-  await client.login();
+
+  try {
+    await client.login();
+  } catch {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
 
   const today = new Date();
   const date =

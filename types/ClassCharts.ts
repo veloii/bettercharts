@@ -5,7 +5,7 @@ import {
   HomeworksResponse,
   DetentionsResponse,
   AnnouncementsResponse,
-  LessonsResponse
+  LessonsResponse,
 } from "classcharts-api/dist/types";
 
 export default interface ClassCharts {
@@ -17,3 +17,10 @@ export default interface ClassCharts {
   announcements: AnnouncementsResponse;
   lessons: LessonsResponse;
 }
+
+export type ClassChartsFeature =
+  | "behaviour"
+  | "homework"
+  | "detentions"
+  | "announcements"
+  | "timetable";

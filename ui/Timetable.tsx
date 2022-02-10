@@ -5,7 +5,7 @@ const Timetable = (props: { timetable: LessonsResponse, noShadow?: boolean, comp
   return (
     <div className="flex flex-col">
       <div className="-my-2">
-        <div className={`py-2 align-middle inline-block min-w-full ${!props.compact && "sm:px-6 lg:px-8"}`}>
+        <div className={`py-2 align-middle inline-block min-w-full`}>
           <div className={`${!props.noShadow && "shadow"} overflow-hidden border-b border-gray-200 dark:border-gray-700 sm:rounded-lg`}>
             <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
               <thead className="bg-gray-50 dark:bg-gray-900">

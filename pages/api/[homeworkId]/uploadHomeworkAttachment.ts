@@ -29,7 +29,7 @@ class BlobFromStream {
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { homeworkId } = req.query;
 
-  console.log(homeworkId);
+  console.log(homeworkId, "rigged");
 
   if (req.method !== "POST")
     return res.status(400).json({ message: "Bad Request" });

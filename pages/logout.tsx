@@ -1,13 +1,21 @@
-import { NextPage } from "next";
 import Head from "next/head";
-import { useRouter } from "next/router";
 import { useEffect } from "react";
+import { useCookies } from "react-cookie";
+import { useRouter } from "next/router";
 
-const Index: NextPage = () => {
+const logout = () => {
+  const [cookies, setCookie, removeCookie] = useCookies([
+    "cc_access_code",
+    "cc_date_of_birth",
+  ]);
+
   const router = useRouter();
 
   useEffect(() => {
-    router.push("/login");
+    removeCookie("cc_access_code");
+    removeCookie("cc_date_of_birth");
+    
+    router.push("/");
   }, []);
 
   return (
@@ -20,4 +28,4 @@ const Index: NextPage = () => {
   );
 };
 
-export default Index;
+export default logout;
