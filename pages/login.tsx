@@ -51,7 +51,7 @@ const Login = () => {
     }
   });
 
-  if (user === false)
+  if (user === null)
     return (
       <div>
         <div className="min-h-screen bg-white dark:bg-gray-900 flex">

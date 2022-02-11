@@ -2,7 +2,7 @@ import { createContext } from "react";
 import ClassCharts from "../types/ClassCharts";
 
 export type UserContextType = {
-  user?: ClassCharts | false;
+  user?: ClassCharts | null;
   setUser: Function;
 };
 

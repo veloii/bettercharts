@@ -10,7 +10,7 @@ import allowClassChartsFeature from "hooks/allowClassChartsFeature";
 import { CookiesProvider, useCookies } from "react-cookie";
 
 function MyApp({ Component, pageProps, router }: AppProps) {
-  const [user, setUser] = useState<ClassCharts | false>();
+  const [user, setUser] = useState<ClassCharts | null>();
   const [cookies, setCookie, removeCookie] = useCookies([
     "cc_access_code",
     "cc_date_of_birth",
@@ -21,7 +21,7 @@ function MyApp({ Component, pageProps, router }: AppProps) {
       .then((res) => res.json())
       .then((res) => {
         if (res?.message === "Unauthorized") {
-          setUser(false);
+          setUser(null);
           return router.push("/login");
         }
 
