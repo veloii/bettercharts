@@ -267,7 +267,7 @@ export default function HomeworkModal(props: {
                     </div>
                   )}
                   <div className="pt-5">
-                    {props.homework.status.allow_attachments && (
+                    {/* {props.homework.status.allow_attachments && (
                       <Button
                         onClick={() => {
                           const fileSelector = buildFileSelector();
@@ -284,7 +284,6 @@ export default function HomeworkModal(props: {
                               body: formData,
                             })
                               .then((res) => res.json())
-                              .then((res) => console.log(res));
                           };
                         }}
                         size="2"
@@ -292,7 +291,7 @@ export default function HomeworkModal(props: {
                         <UploadIcon className="w-6 mr-2" />
                         Upload Attachments
                       </Button>
-                    )}
+                    )} */}
                   </div>
                 </div>
               </div>

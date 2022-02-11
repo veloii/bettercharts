@@ -36,8 +36,6 @@ const Dashboard: NextPage = () => {
     if (completedFetch) return;
     else setCompletedFetch(true);
 
-    console.log("Okay")
-
     fetch(
       `/api/getHBAT?startDate=${convertDate(
         dayjs().subtract(7, "day")

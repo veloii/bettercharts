@@ -14,8 +14,8 @@ const logout = () => {
   useEffect(() => {
     removeCookie("cc_access_code");
     removeCookie("cc_date_of_birth");
-    
-    router.push("/");
+
+    window.location.pathname = "/";
   }, []);
 
   return (

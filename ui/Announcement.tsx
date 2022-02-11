@@ -35,7 +35,7 @@ const Announcement = (props: {
           </div>
         </div>
         <div className="dark:text-gray-50 filter dark:invert">
-          <p className="pt-5">
+          <div className="pt-5">
             {props?.announcement.description!.length > 1 && (
               <div
                 className="dark:bg-[#eee7d8] dark:text-black"
@@ -44,7 +44,7 @@ const Announcement = (props: {
                 }}
               ></div>
             )}
-          </p>
+          </div>
         </div>
         {/* this doesnt even work as if theres no valid attachments but you are allowed to attach it will not show anything */}
         {props.announcement.attachments.length != 0 && (
