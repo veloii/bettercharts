@@ -21,22 +21,26 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
 
   const studentInfo = await client.getStudentInfo();
-  const homeworkInfo = await client.listHomeworks();
-  const behaviourInfo = await client.getBehaviour();
-  const activityInfo = await client.getActivity();
-  const detentionInfo = await client.getDetentions();
-  const announcementInfo = await client.listAnnouncements();
-  const lessonsInfo = await client.getLessons({
-    date,
-  });
+
+  let response: any = {};
+
+  if (studentInfo.display_homework)
+    response.homework = await client.listHomeworks();
+  if (studentInfo.display_behaviour)
+    response.behaviour = await client.getBehaviour();
+  if (studentInfo.display_activity)
+    response.activity = await client.getActivity();
+  if (studentInfo.display_detentions)
+    response.detentions = await client.getDetentions();
+  if (studentInfo.display_announcements)
+    response.announcements = await client.listAnnouncements();
+  if (studentInfo.display_timetable)
+    response.lessons = await client.getLessons({
+      date,
+    });
 
   res.status(200).json({
     student: studentInfo,
-    homework: homeworkInfo,
-    behaviour: behaviourInfo,
-    activity: activityInfo,
-    detentions: detentionInfo,
-    announcements: announcementInfo,
-    lessons: lessonsInfo,
+    ...response,
   });
 };
