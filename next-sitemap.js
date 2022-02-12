@@ -1,4 +1,4 @@
 module.exports = {
-  siteUrl: "https://zelr.me",
+  siteUrl: "https://app.bettercharts.zelr.me",
   generateRobotsTxt: true, // (optional)
 };
