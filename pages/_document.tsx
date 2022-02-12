@@ -35,6 +35,9 @@ class MyDocument extends Document {
             property="og:description"
             content="Unoffical cleaner version of ClassCharts"
           />
+          <link rel="manifest" href="/manifest.json" />
+          <link rel="apple-touch-icon" href="/icon.png"></link>
+          <meta name="theme-color" content="#9333EA" />
           <meta property="og:url" content="https://bettercharts.zelr.me/" />
           <meta property="og:type" content="website" />
           <link rel="icon" href="/favicon.ico" />

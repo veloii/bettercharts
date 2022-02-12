@@ -298,7 +298,7 @@ export default function HomeworkModal(props: {
               <div className="mt-5 sm:mt-6">
                 <button
                   type="button"
-                  className="transition inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-orange-600 text-base font-medium text-white hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 sm:text-sm"
+                  className="transition inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-purple-600 text-base font-medium text-white hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:text-sm"
                   onClick={() => setOpen(false)}
                 >
                   Back

@@ -61,11 +61,7 @@ const Login = () => {
           <div className="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
             <div className="mx-auto w-full max-w-sm lg:w-96">
               <div>
-                <img
-                  className="h-12 w-auto"
-                  src="/CC_logo_no_tes.png"
-                  alt="BetterCharts"
-                />
+                <span className="text-3xl font-brand text-purple-600 dark:text-purple-300">bettercharts</span>
                 <h2 className="mt-6 text-3xl font-extrabold text-gray-900 dark:text-gray-50">
                   Sign in to your account
                 </h2>
@@ -88,7 +84,7 @@ const Login = () => {
                           type="password"
                           autoComplete="current-password"
                           required
-                          className="dark:bg-gray-800 dark:text-white appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
+                          className="dark:bg-gray-800 dark:text-white appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm"
                         />
                       </div>
                     </div>
@@ -100,16 +96,16 @@ const Login = () => {
                         Date of birth
                       </label>
 
-                      <div className="mt-1 flex rounded-md shadow-sm">
+                      <div className="mt-1 flex rounded-md">
                         <input
                           type="number"
                           name="day"
                           required
                           id="day"
-                          className="z-10 dark:bg-gray-800  dark:border-gray-600 dark:text-white focus:ring-orange-500 dark:focus:ring-offset-gray-900 rounded-l-md focus:border-orange-500 w-12 text-center block rounded-none sm:text-sm border-gray-300"
+                          className="z-10 shadow-sm dark:bg-gray-800  dark:border-gray-600 dark:text-white focus:ring-purple-500 dark:focus:ring-offset-gray-900 rounded-l-md focus:border-purple-500 w-12 text-center block rounded-none sm:text-sm border-gray-300"
                           placeholder="23"
                         />
-                        <span className="inline-flex dark:bg-gray-700 border border-x-0 dark:border-gray-600 items-center px-3 bg-gray-50 text-gray-500 text-sm">
+                        <span className="inline-flex shadow-sm dark:bg-gray-700 border border-x-0 dark:border-gray-600 items-center px-3 bg-gray-50 text-gray-500 text-sm">
                           /
                         </span>
                         <input
@@ -117,10 +113,10 @@ const Login = () => {
                           name="month"
                           required
                           id="month"
-                          className="z-10 dark:bg-gray-800 dark:border-gray-600 dark:text-white focus:ring-orange-500 dark:focus:ring-offset-gray-900 focus:border-orange-500 block w-12 text-center rounded-none sm:text-sm border-gray-300"
+                          className="z-10 shadow-sm dark:bg-gray-800 dark:border-gray-600 dark:text-white focus:ring-purple-500 dark:focus:ring-offset-gray-900 focus:border-purple-500 block w-12 text-center rounded-none sm:text-sm border-gray-300"
                           placeholder="02"
                         />
-                        <span className="inline-flex dark:bg-gray-700 border border-x-0 dark:border-gray-600 items-center px-3 bg-gray-50 text-gray-500 text-sm">
+                        <span className="shadow-sm inline-flex dark:bg-gray-700 border border-x-0 dark:border-gray-600 items-center px-3 bg-gray-50 text-gray-500 text-sm">
                           /
                         </span>
                         <input
@@ -128,7 +124,7 @@ const Login = () => {
                           name="year"
                           required
                           id="year"
-                          className="z-10 dark:bg-gray-800 rounded-r-md dark:border-gray-600 dark:text-white focus:ring-orange-500 dark:focus:ring-offset-gray-900 focus:border-orange-500 text-center block w-16 rounded-none sm:text-sm border-gray-300"
+                          className="shadow-sm z-10 dark:bg-gray-800 rounded-r-md dark:border-gray-600 dark:text-white focus:ring-purple-500 dark:focus:ring-offset-gray-900 focus:border-purple-500 text-center block w-16 rounded-none sm:text-sm border-gray-300"
                           placeholder="2003"
                         />
                       </div>
@@ -138,7 +134,7 @@ const Login = () => {
                         id="remember_me"
                         name="remember_me"
                         type="checkbox"
-                        className="h-4 w-4 text-orange-600 focus:ring-orange-500 dark:border-gray-600 dark:bg-gray-800 rounded dark:focus:ring-offset-gray-900"
+                        className="h-4 w-4 text-purple-600 focus:ring-purple-500 dark:border-gray-600 dark:bg-gray-800 rounded dark:focus:ring-offset-gray-900"
                       />
                       <label
                         htmlFor="remember_me"
@@ -151,7 +147,7 @@ const Login = () => {
                     <div>
                       <button
                         type="submit"
-                        className="focus:dark:ring-offset-gray-900 w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
+                        className="focus:dark:ring-offset-gray-900 w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
                       >
                         Sign in
                       </button>

@@ -33,7 +33,7 @@ const HomeworkCategory = (props: {
               {props.homework.length}
             </span>
           </h3>
-          <button className="transition focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-slate-900 focus:ring-orange-500 focus:outline-none rounded-xl cursor-pointer h-full my-auto bg-gray-100 dark:bg-gray-800 p-2">
+          <button className="transition focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-slate-900 focus:ring-purple-500 focus:outline-none rounded-xl cursor-pointer h-full my-auto bg-gray-100 dark:bg-gray-800 p-2">
             <ChevronDownIcon
               className={`text-gray-500 w-6 transition duration-500  ${
                 open && "rotate-180"
@@ -52,7 +52,11 @@ const HomeworkCategory = (props: {
         leaveTo="opacity-0"
         show={open}
       >
-        <HomeworkItem compact={props.compact} type={props.type} items={props.homework} />
+        <HomeworkItem
+          compact={props.compact}
+          type={props.type}
+          items={props.homework}
+        />
       </Transition>
     </div>
   );

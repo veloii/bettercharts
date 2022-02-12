@@ -60,19 +60,22 @@ const HomeworkItem = (props: {
             >
               <div className={`${!props.compact && "sm:px-6"} px-4 py-4`}>
                 <div className="flex items-center justify-between">
-                  <p className="text-sm font-medium text-orange-600 truncate">
+                  <p className="text-sm font-medium text-purple-600 truncate">
                     {position.title}
                   </p>
                   <div className="flex">
                     <div className="ml-2 flex-shrink-0 flex">
-                      <p className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-orange-100 dark:bg-orange-800 text-orange-800 dark:text-orange-100">
+                      <p className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-purple-100 dark:bg-purple-800 text-purple-800 dark:text-purple-100">
                         {position.homework_type}
                       </p>
                     </div>
                     {props.compact && (
                       <div className="ml-2 flex-shrink-0 flex">
-                        <p className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${getChipColors()}`}>
-                          {props.type.slice(0,1).toUpperCase() + props.type.slice(1)}
+                        <p
+                          className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${getChipColors()}`}
+                        >
+                          {props.type.slice(0, 1).toUpperCase() +
+                            props.type.slice(1)}
                         </p>
                       </div>
                     )}

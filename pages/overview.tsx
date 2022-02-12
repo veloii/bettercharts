@@ -57,14 +57,14 @@ const Dashboard: NextPage = () => {
   return user && ready ? (
     <div className="mx-auto">
       <Head>
-        <title>Overview | BetterCharts</title>
+        <title>Dashboard | BetterCharts</title>
       </Head>
       <div className="dark:bg-gray-900 bg-white border-b dark:border-gray-700 py-10 shadow-lg">
-        <h1 className="text-4xl font-bold dark:text-gray-50 text-gray-900 text-center">
-          Your weekly rundown
+        <h1 className="text-5xl font-brand dark:text-purple-300 text-purple-500 text-center">
+          dashboard
         </h1>
         <p className="text-sm dark:text-gray-400 text-gray-700 text-center">
-          Updates every day
+          an exclusive bettercharts feature
         </p>
       </div>
       <div>

@@ -27,6 +27,22 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     return res.status(200).json(homeworkInfo);
   } else {
-    return res.status(400).json({ message: "Bad Request" });
+    if (!(req.cookies?.cc_access_code && req.cookies?.cc_date_of_birth))
+      return res.status(401).json({ message: "Unauthorized" });
+
+    const client = new ClasschartsClient(
+      req.cookies?.cc_access_code,
+      req.cookies?.cc_date_of_birth
+    );
+
+    try {
+      await client.login();
+    } catch {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+
+    const homeworkInfo = await client.listHomeworks();
+
+    return res.status(200).json(homeworkInfo);
   }
 };

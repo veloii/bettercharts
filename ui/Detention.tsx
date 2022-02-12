@@ -91,7 +91,7 @@ export default function Detention(props: {
                       } justify-between`}
                     >
                       <div>
-                        <p className="text-sm font-medium text-orange-600 truncate">
+                        <p className="text-sm font-medium text-purple-600 truncate">
                           {detention.title}
                         </p>
                         <p className="mt-2 flex flex-wrap gap-2 items-center text-sm text-gray-500">

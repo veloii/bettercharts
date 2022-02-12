@@ -13,13 +13,16 @@ import Transition from "./transition/index";
 import TextTransition from "react-text-transition";
 import allowClassChartsFeature from "../hooks/allowClassChartsFeature";
 
-const userNavigation = [{ name: "Sign out", href: "/logout" }];
+const userNavigation = [
+  { name: "Awards", href: "/awards" },
+  { name: "Sign out", href: "/logout" },
+];
 
 export default function Header(props: { children: any }) {
   const router = useRouter();
   const { user } = useContext(UserContext);
   const [navigation, setNavigation] = useState<
-    undefined | Array<{ name: string; href: string }>
+    undefined | Array<{ name: string; href: string; logo?: boolean }>
   >(undefined);
 
   useEffect(() => {
@@ -29,7 +32,7 @@ export default function Header(props: { children: any }) {
       ) as any;
 
       setNavigation([
-        { name: "Overview", href: "/overview" },
+        { name: "bettercharts", href: "/overview", logo: true },
 
         ...classChartsFeatures!.map((feature) => ({
           name: feature,
@@ -44,22 +47,15 @@ export default function Header(props: { children: any }) {
       <Disclosure as="nav" className="bg-white dark:bg-gray-900 shadow">
         {({ open }) => (
           <>
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
               <div className="flex justify-between h-16">
                 <div className="flex">
                   <div className="flex-shrink-0 flex items-center">
-                    <img
-                      className="block lg:hidden h-8 w-auto"
-                      src="/CC_icon.png"
-                      alt="Class Charts"
-                    />
-                    <img
-                      className="hidden lg:block h-8 w-auto"
-                      src="/CC_logo_no_tes.png"
-                      alt="Class Charts"
-                    />
+                    <span className="block md:hidden font-brand dark:text-purple-400 text-purple-500 text-3xl">
+                      bettercharts
+                    </span>
                   </div>
-                  <div className="hidden sm:-my-px sm:ml-6 sm:flex sm:space-x-8">
+                  <div className="hidden md:-my-px md:flex md:space-x-8">
                     {navigation.map((item) => (
                       <Link key={item.name} href={item.href}>
                         <a
@@ -67,7 +63,7 @@ export default function Header(props: { children: any }) {
                             router.asPath
                               .toLowerCase()
                               .includes(item.href.toLowerCase())
-                              ? "border-orange-500 text-gray-900 dark:text-gray-200 font-semibold "
+                              ? "border-purple-400 text-gray-900 dark:text-gray-200 font-semibold "
                               : "border-transparent text-gray-500 hover:text-gray-700 dark:hover:text-gray-400 hover:border-gray-300 dark:hover:border-gray-600",
                             "inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-all duration-250"
                           )}
@@ -79,24 +75,25 @@ export default function Header(props: { children: any }) {
                               : undefined
                           }
                         >
-                          {item.name}
+                          {item.logo ? (
+                            <span className="dark:text-purple-300 text-purple-500 font-brand text-3xl">
+                              {item.name}
+                            </span>
+                          ) : (
+                            item.name
+                          )}
                         </a>
                       </Link>
                     ))}
                   </div>
                 </div>
-                <div className="hidden sm:ml-6 sm:flex sm:items-center">
-                  <button className="bg-white dark:bg-gray-900 p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-900 focus:ring-orange-500">
-                    <span className="sr-only">View notifications</span>
-                    <BellIcon className="h-6 w-6" aria-hidden="true" />
-                  </button>
-
+                <div className="hidden md:ml-6 md:flex md:items-center">
                   {/* Profile dropdown */}
                   <Menu as="div" className="ml-3 relative">
                     {({ open }) => (
                       <>
                         <div>
-                          <Menu.Button className="bg-white dark:bg-gray-900 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-900 focus:ring-orange-500">
+                          <Menu.Button className="bg-white dark:bg-gray-900 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-900 focus:ring-purple-500">
                             <span className="sr-only">Open user menu</span>
                             <img
                               className="h-8 w-8 rounded-full"
@@ -143,9 +140,9 @@ export default function Header(props: { children: any }) {
                     )}
                   </Menu>
                 </div>
-                <div className="-mr-2 flex items-center sm:hidden">
+                <div className="-mr-2 flex items-center md:hidden">
                   {/* Mobile menu button */}
-                  <Disclosure.Button className="bg-white dark:bg-gray-900 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-900 focus:ring-orange-500">
+                  <Disclosure.Button className="bg-white dark:bg-gray-900 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-900 focus:ring-purple-500">
                     <span className="sr-only">Open main menu</span>
                     {open ? (
                       <XIcon className="block h-6 w-6" aria-hidden="true" />
@@ -157,7 +154,7 @@ export default function Header(props: { children: any }) {
               </div>
             </div>
 
-            <Disclosure.Panel className="sm:hidden">
+            <Disclosure.Panel className="md:hidden">
               <div className="pt-2 pb-3 space-y-1">
                 {navigation.map((item) => (
                   <Link key={item.name} href={item.href}>
@@ -166,7 +163,7 @@ export default function Header(props: { children: any }) {
                         router.asPath
                           .toLowerCase()
                           .includes(item.href.toLowerCase())
-                          ? "bg-orange-50 dark:bg-orange-900 border-orange-500 dark:border-orange-700 text-orange-700 dark:text-orange-200 font-semibold "
+                          ? "bg-purple-50 dark:bg-purple-900 border-purple-500 dark:border-purple-700 text-purple-600 dark:text-purple-200 font-semibold "
                           : "border-transparent text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 hover:border-gray-300 dark:hover:border-gray-700 hover:text-gray-800 dark:hover:text-gray-300",
                         "block pl-3 pr-4 py-2 border-l-4 text-base font-medium transition-all duration-250"
                       )}
@@ -178,7 +175,13 @@ export default function Header(props: { children: any }) {
                           : undefined
                       }
                     >
-                      {item.name}
+                      {item.logo ? (
+                        <span className="dark:text-purple-300 font-brand text-3xl">
+                          {item.name}
+                        </span>
+                      ) : (
+                        item.name
+                      )}
                     </a>
                   </Link>
                 ))}
@@ -197,7 +200,7 @@ export default function Header(props: { children: any }) {
                       {user?.student?.first_name}
                     </div>
                   </div>
-                  <button className="ml-auto bg-white dark:bg-gray-900 flex-shrink-0 p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-900 focus:ring-orange-500">
+                  <button className="ml-auto bg-white dark:bg-gray-900 flex-shrink-0 p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-900 focus:ring-purple-500">
                     <span className="sr-only">View notifications</span>
                     <BellIcon className="h-6 w-6" aria-hidden="true" />
                   </button>
@@ -223,7 +226,7 @@ export default function Header(props: { children: any }) {
             router.asPath.includes("overview") ? "py-0 h-0" : "py-10 border-b"
           } filter drop-shadow dark:border-b-gray-700 mt-0.5 transition-all ease-in-out duration-500`}
         >
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
             <h1
               className={`text-3xl font-bold leading-tight text-gray-900 dark:text-gray-100 ease-in-out duration-500`}
             >
@@ -231,7 +234,7 @@ export default function Header(props: { children: any }) {
                 text={
                   (
                     navigation.find((nav) => {
-                      if (nav.name === "Overview") return "";
+                      if (nav.name === "bettercharts") return "";
                       else return router.asPath.includes(nav.href);
                     }) || { name: "" }
                   ).name

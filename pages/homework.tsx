@@ -39,10 +39,26 @@ const homework = () => {
   const [originalHomework, setOriginalHomework] = useState<
     HomeworksResponse | undefined
   >();
+  const [ready, setReady] = useState<boolean>(false);
+  const [completedFetch, setCompletedFetch] = useState<boolean>(false);
 
   useEffect(() => {
     if (!homework && user?.student) setHomework(user?.homework);
   }, [user]);
+
+  // Update to recent homework cus of dashboard might be changing it
+  useEffect(() => {
+    if (!user) return;
+    if (completedFetch) return;
+    setCompletedFetch(true);
+
+    fetch(`/api/getHomework`)
+      .then((res) => res.json())
+      .then((res) => {
+        setHomework(res);
+        setReady(true);
+      });
+  });
 
   //! Everytime homework is updated we update the user and keep a seperate copy of the using
   //! This might seem unnessarry but this is the easiest way to fix the bug of another component
@@ -83,7 +99,7 @@ const homework = () => {
     }
   }, [currentQuery]);
 
-  return user?.homework ? (
+  return user?.homework && ready ? (
     <Container>
       <Head>
         <title>Homework | BetterCharts</title>

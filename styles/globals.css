@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 :root {
-  --light-color: rgba(255, 115, 0, 0.2);
-  --dark-color: rgba(255, 115, 0, 1);
+  --light-color: rgba(147, 51, 234, 0.2);
+  --dark-color: #9333ea;
   --radius: 64px;
   --ring-width: 4px;
 }
@@ -285,4 +285,13 @@ body {
 /* Style your items */
 .dash-grid_column > div {
   margin-top: 40px;
+}
+
+@font-face {
+  font-family: "Antipasto Pro";
+  src: url("/fonts/AntipastoPro.woff2") format("woff2"),
+    url("/fonts/AntipastoPro.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
