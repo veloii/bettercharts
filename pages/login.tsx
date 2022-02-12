@@ -45,7 +45,7 @@ const Login = () => {
       );
       setCookie("cc_date_of_birth", date, options);
 
-      window.location.pathname = "/";
+      window.location.pathname = "/overview";
 
       return;
     }
@@ -54,6 +54,9 @@ const Login = () => {
   if (user === null)
     return (
       <div>
+        <Head>
+          <title>Login | BetterCharts</title>
+        </Head>
         <div className="min-h-screen bg-white dark:bg-gray-900 flex">
           <div className="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
             <div className="mx-auto w-full max-w-sm lg:w-96">
