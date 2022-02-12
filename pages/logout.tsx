@@ -15,7 +15,7 @@ const logout = () => {
     removeCookie("cc_access_code");
     removeCookie("cc_date_of_birth");
 
-    window.location.pathname = "/login";
+    window.location.pathname = "https://bettercharts.zelr.me";
   }, []);
 
   return (
