@@ -7,8 +7,6 @@ import Head from "next/head";
 const Awards = () => {
   const { user } = useContext(UserContext);
 
-  console.log(user?.awards);
-
   return user ? (
     <Container>
       <Head>
