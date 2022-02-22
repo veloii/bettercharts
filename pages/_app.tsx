@@ -23,7 +23,7 @@ function MyApp({ Component, pageProps, router }: AppProps) {
       .then((res) => {
         if (res?.message === "Unauthorized") {
           setUser(null);
-          return router.push("/login");
+          return 
         }
 
         const classCharts: ClassCharts = res as any;

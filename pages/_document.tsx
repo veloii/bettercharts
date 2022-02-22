@@ -14,7 +14,7 @@ class MyDocument extends Document {
 
   render() {
     return (
-      <Html lang="en" className="cursor-default">
+      <Html lang="en" className="cursor-default h-full">
         <Head>
           <meta name="title" content="BetterCharts" />
           <meta
@@ -43,7 +43,7 @@ class MyDocument extends Document {
           <link rel="icon" href="/favicon.ico" />
           <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
         </Head>
-        <body>
+        <body className="h-full">
           <Main />
           <NextScript />
         </body>
