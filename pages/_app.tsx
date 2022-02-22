@@ -8,6 +8,7 @@ import "react-dates/initialize";
 import "react-dates/lib/css/_datepicker.css";
 import allowClassChartsFeature from "hooks/allowClassChartsFeature";
 import { CookiesProvider, useCookies } from "react-cookie";
+import CookieConsent from "components/CookieConsent";
 
 function MyApp({ Component, pageProps, router }: AppProps) {
   const [user, setUser] = useState<ClassCharts | null>();
@@ -54,6 +55,7 @@ function MyApp({ Component, pageProps, router }: AppProps) {
     <React.Fragment>
       <CookiesProvider>
         <UserContextProvider value={{ user, setUser }}>
+          <CookieConsent />
           {user ? (
             <Header>
               <Component key={router.route} {...pageProps} />
