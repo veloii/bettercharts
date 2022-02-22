@@ -14,7 +14,7 @@ const Awards = () => {
       <Head>
         <title>Awards | BetterCharts</title>
       </Head>
-      <div className="flex gap-2 flex-wrap pt-5">
+      <div className="flex gap-2 flex-wrap pt-5 justify-center md:justify-start">
         {user?.awards?.map((award) => (
           <Badge
             dateCreated={award.created_date}
