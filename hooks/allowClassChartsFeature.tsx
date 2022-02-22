@@ -19,6 +19,8 @@ const allowClassChartsFeature = (
         return user?.student.display_announcements;
       case "timetable":
         return user?.student.display_timetable;
+      case "awards":
+        return user?.student.display_event_badges;
       default:
         break;
     }
@@ -31,6 +33,7 @@ const allowClassChartsFeature = (
       { name: "Detentions", value: user?.student.display_detentions },
       { name: "Announcements", value: user?.student.display_announcements },
       { name: "Timetable", value: user?.student.display_timetable },
+      { name: "Awards", value: user?.student.display_event_badges },
     ];
   }
 
@@ -42,6 +45,7 @@ const allowClassChartsFeature = (
   if (user?.student.display_announcements)
     allowedFeatures.push("Announcements");
   if (user?.student.display_timetable) allowedFeatures.push("Timetable");
+  if (user?.student.display_event_badges) allowedFeatures.push("Awards");
 
   return allowedFeatures;
 };

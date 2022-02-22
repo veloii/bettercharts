@@ -22,7 +22,8 @@ export default function Header(props: { children: any }) {
   const router = useRouter();
   const { user } = useContext(UserContext);
   const [navigation, setNavigation] = useState<
-    undefined | Array<{ name: string; href: string; logo?: boolean }>
+    | undefined
+    | Array<{ name: string; href: string; logo?: boolean; hidden?: boolean }>
   >(undefined);
 
   useEffect(() => {
@@ -37,6 +38,11 @@ export default function Header(props: { children: any }) {
         ...classChartsFeatures!.map((feature) => ({
           name: feature,
           href: "/" + feature.toLowerCase(),
+        })),
+        ...userNavigation!.map((nav) => ({
+          name: nav.name,
+          href: nav.href,
+          hidden: true,
         })),
       ]);
     }
@@ -56,35 +62,38 @@ export default function Header(props: { children: any }) {
                     </span>
                   </div>
                   <div className="hidden md:-my-px md:flex md:space-x-8">
-                    {navigation.map((item) => (
-                      <Link key={item.name} href={item.href}>
-                        <a
-                          className={classNames(
-                            router.asPath
-                              .toLowerCase()
-                              .includes(item.href.toLowerCase())
-                              ? "border-purple-400 text-gray-900 dark:text-gray-200 font-semibold "
-                              : "border-transparent text-gray-500 hover:text-gray-700 dark:hover:text-gray-400 hover:border-gray-300 dark:hover:border-gray-600",
-                            "inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-all duration-250"
-                          )}
-                          aria-current={
-                            router.asPath
-                              .toLowerCase()
-                              .includes(item.href.toLowerCase())
-                              ? "page"
-                              : undefined
-                          }
-                        >
-                          {item.logo ? (
-                            <span className="dark:text-purple-300 text-purple-500 font-brand text-3xl">
-                              {item.name}
-                            </span>
-                          ) : (
-                            item.name
-                          )}
-                        </a>
-                      </Link>
-                    ))}
+                    {navigation.map(
+                      (item) =>
+                        !item?.hidden && (
+                          <Link key={item.name} href={item.href}>
+                            <a
+                              className={classNames(
+                                router.asPath
+                                  .toLowerCase()
+                                  .includes(item.href.toLowerCase())
+                                  ? "border-purple-400 text-gray-900 dark:text-gray-200 font-semibold "
+                                  : "border-transparent text-gray-500 hover:text-gray-700 dark:hover:text-gray-400 hover:border-gray-300 dark:hover:border-gray-600",
+                                "inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-all duration-250"
+                              )}
+                              aria-current={
+                                router.asPath
+                                  .toLowerCase()
+                                  .includes(item.href.toLowerCase())
+                                  ? "page"
+                                  : undefined
+                              }
+                            >
+                              {item.logo ? (
+                                <span className="dark:text-purple-300 text-purple-500 font-brand text-3xl">
+                                  {item.name}
+                                </span>
+                              ) : (
+                                item.name
+                              )}
+                            </a>
+                          </Link>
+                        )
+                    )}
                   </div>
                 </div>
                 <div className="hidden md:ml-6 md:flex md:items-center">
@@ -156,35 +165,38 @@ export default function Header(props: { children: any }) {
 
             <Disclosure.Panel className="md:hidden">
               <div className="pt-2 pb-3 space-y-1">
-                {navigation.map((item) => (
-                  <Link key={item.name} href={item.href}>
-                    <a
-                      className={classNames(
-                        router.asPath
-                          .toLowerCase()
-                          .includes(item.href.toLowerCase())
-                          ? "bg-purple-50 dark:bg-purple-900 border-purple-500 dark:border-purple-700 text-purple-600 dark:text-purple-200 font-semibold "
-                          : "border-transparent text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 hover:border-gray-300 dark:hover:border-gray-700 hover:text-gray-800 dark:hover:text-gray-300",
-                        "block pl-3 pr-4 py-2 border-l-4 text-base font-medium transition-all duration-250"
-                      )}
-                      aria-current={
-                        router.asPath
-                          .toLowerCase()
-                          .includes(item.href.toLowerCase())
-                          ? "page"
-                          : undefined
-                      }
-                    >
-                      {item.logo ? (
-                        <span className="dark:text-purple-300 font-brand text-3xl">
-                          {item.name}
-                        </span>
-                      ) : (
-                        item.name
-                      )}
-                    </a>
-                  </Link>
-                ))}
+                {navigation.map(
+                  (item) =>
+                    !item?.hidden && (
+                      <Link key={item.name} href={item.href}>
+                        <a
+                          className={classNames(
+                            router.asPath
+                              .toLowerCase()
+                              .includes(item.href.toLowerCase())
+                              ? "bg-purple-50 dark:bg-purple-900 border-purple-500 dark:border-purple-700 text-purple-600 dark:text-purple-200 font-semibold "
+                              : "border-transparent text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 hover:border-gray-300 dark:hover:border-gray-700 hover:text-gray-800 dark:hover:text-gray-300",
+                            "block pl-3 pr-4 py-2 border-l-4 text-base font-medium transition-all duration-250"
+                          )}
+                          aria-current={
+                            router.asPath
+                              .toLowerCase()
+                              .includes(item.href.toLowerCase())
+                              ? "page"
+                              : undefined
+                          }
+                        >
+                          {item.logo ? (
+                            <span className="dark:text-purple-300 font-brand text-3xl">
+                              {item.name}
+                            </span>
+                          ) : (
+                            item.name
+                          )}
+                        </a>
+                      </Link>
+                    )
+                )}
               </div>
               <div className="pt-4 pb-3 border-t border-gray-200 dark:border-gray-800">
                 <div className="flex items-center px-4">

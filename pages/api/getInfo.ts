@@ -38,6 +38,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     response.lessons = await client.getLessons({
       date,
     });
+  if (studentInfo.display_event_badges)
+    response.awards = await client.getBadges();
 
   res.status(200).json({
     student: studentInfo,
