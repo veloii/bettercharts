@@ -108,7 +108,7 @@ body {
 }
 
 .DateInput_input__focused {
-  border-bottom: 2px solid #f97316 !important;
+  border-bottom: 2px solid #A855F7 !important;
 }
 
 .CalendarDay {
@@ -126,24 +126,24 @@ body {
 .CalendarDay__selected,
 .CalendarDay__selected:active,
 .CalendarDay__selected:hover {
-  background: #ff964b !important;
-  border: 1px solid #ce783b !important;
+  background: #a94dff !important;
+  border: 1px solid #873bce !important;
 }
 
 .CalendarDay__selected_span {
-  background: #f97316 !important;
-  border: 1px double #d36314 !important;
+  background: #A855F7 !important;
+  border: 1px double #7614d2 !important;
 }
 
 .CalendarDay__hovered_span {
-  background: rgba(249, 115, 22, 0.3) !important;
-  border: 1px double rgba(214, 89, 0, 0.1) !important;
-  color: rgba(184, 77, 0, 1) !important;
+  background: rgba(139, 21, 249, 0.3) !important;
+  border: 1px double rgba(111, 0, 214, 0.1) !important;
+  color: rgba(95, 0, 184, 1) !important;
 }
 
 .CalendarDay__hovered_span:hover {
-  background: #ff964b !important;
-  border: 1px solid #ce783b !important;
+  background: #a94dff !important;
+  border: 1px solid #873bce !important;
   color: #fff !important;
 }
 .DayPickerKeyboardShortcuts_show__bottomRight::before {
