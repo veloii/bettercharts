@@ -8,23 +8,6 @@ import { Encoder } from "form-data-encoder";
 import { Readable } from "stream";
 import { fileFromPath } from "formdata-node/file-from-path";
 
-class BlobFromStream {
-  #stream;
-  size: any;
-
-  constructor(stream: unknown, size: any) {
-    this.#stream = stream;
-    this.size = size;
-  }
-
-  stream() {
-    return this.#stream;
-  }
-
-  get [Symbol.toStringTag]() {
-    return "Blob";
-  }
-}
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { homeworkId } = req.query;

@@ -227,7 +227,8 @@ export default function HomeworkModal(props: {
                       onChange={(value: boolean) => {
                         fetch(
                           "/api/tickHomework?homeworkId=" +
-                            props.homework.status.id
+                            props.homework.status.id,
+                            {method: "POST"}
                         );
 
                         markComplete(value);

@@ -30,7 +30,6 @@ const Dashboard: NextPage = () => {
   const [completedFetch, setCompletedFetch] = useState(false);
   const [ready, setReady] = useState(false);
 
-
   useEffect(() => {
     if (!user) return;
     if (completedFetch) return;
@@ -91,43 +90,36 @@ const Dashboard: NextPage = () => {
               </div>
             </Card>
           )}
-          {user?.homework && (
-            <Card title="Homework">
-              <HomeworkCategory
-                compact={true}
-                homework={homeworkTodo(user.homework)}
-                type="todo"
-              />
-              <HomeworkCategory
-                compact={true}
-                homework={homeworkCompleted(user.homework)}
-                type="completed"
-              />
-              <HomeworkCategory
-                compact={true}
-                homework={homeworkNotSubmitted(user.homework)}
-                type="fail"
-              />
-              <HomeworkCategory
-                compact={true}
-                homework={homeworkLate(user.homework)}
-                type="late"
-              />
-              <HomeworkCategory
-                compact={true}
-                homework={homeworkSubmitted(user.homework)}
-                type="submitted"
-              />
-              <div className="px-5 pt-5">
-                <Button
-                  size="3"
-                  link="/homework"
-                  text="View All"
-                  classes="w-full flex justify-center items-center"
+          {user?.homework &&
+            homeworkTodo(user.homework).length > 0 &&
+            homeworkNotSubmitted(user.homework).length > 0 &&
+            homeworkLate.length > 0 && (
+              <Card title="Homework">
+                <HomeworkCategory
+                  compact={true}
+                  homework={homeworkTodo(user.homework)}
+                  type="todo"
                 />
-              </div>
-            </Card>
-          )}
+                <HomeworkCategory
+                  compact={true}
+                  homework={homeworkNotSubmitted(user.homework)}
+                  type="fail"
+                />
+                <HomeworkCategory
+                  compact={true}
+                  homework={homeworkLate(user.homework)}
+                  type="late"
+                />
+                <div className="px-5 pt-5">
+                  <Button
+                    size="3"
+                    link="/homework"
+                    text="View All"
+                    classes="w-full flex justify-center items-center"
+                  />
+                </div>
+              </Card>
+            )}
           <Card classes="px-5 pt-5" title="Recent Activity">
             <div className="overflow-y-scroll h-96">
               <Timeline limit={10} activity={user.activity} />
