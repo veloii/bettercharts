@@ -12,7 +12,7 @@ const Updates = () => {
 
   useEffect(() => {
     if (open !== undefined)
-      setCookie("dismiss_update_banner", open, {
+      setCookie("dismiss_update_banner", !open, {
         secure: true,
       });
   }, [open]);
