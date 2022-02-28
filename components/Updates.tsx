@@ -18,7 +18,7 @@ const Updates = () => {
   }, [open]);
 
   useEffect(() => {
-    setOpen(cookies.dismiss_update_banner === "true");
+    setOpen(cookies.dismiss_update_banner !== "true");
   }, []);
 
   return (
