@@ -5,6 +5,7 @@ import { HomeworksResponse } from "classcharts-api/dist/types";
 import { DateRangePicker } from "react-dates";
 import Container from "ui/Container";
 import Head from "next/head";
+import { useRouter } from "next/router";
 
 export const homeworkTodo = (homework: HomeworksResponse) =>
   homework.filter(
@@ -45,6 +46,12 @@ const homework = () => {
   useEffect(() => {
     if (!homework && user?.student) setHomework(user?.homework);
   }, [user]);
+
+  const router = useRouter();
+
+  useEffect(() => {
+    if (user === null) router.push("/login");
+  }, []);
 
   // Update to recent homework cus of dashboard might be changing it
   useEffect(() => {

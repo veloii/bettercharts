@@ -10,6 +10,7 @@ import "chart.js/auto";
 import Timeline from "ui/Timeline";
 import Container from "ui/Container";
 import Head from "next/head";
+import { useRouter } from "next/router";
 
 const behaviour = () => {
   const { user, setUser } = React.useContext(UserContext);
@@ -27,6 +28,12 @@ const behaviour = () => {
   );
   const [hasReset, setHasReset] = useState(false);
   const [ready, setReady] = useState(false);
+
+  const router = useRouter();
+
+  useEffect(() => {
+    if (user === null) router.push("/login");
+  }, []);
 
   // Reset data from overview
   useEffect(() => {
@@ -75,7 +82,7 @@ const behaviour = () => {
         <title>Behaviour | BetterCharts</title>
       </Head>
       <div className="pt-5 space-y-2">
-        <div className="dark:bg-gray-900 lg:-mt-24 lg:float-right sm:rounded-3xl flex justify-center items-center lg:bg-transparent bg-white lg:p-0 border dark:border-gray-700 lg:border-none lg:shadow-none lg:rounded-none lg:-mb-0 -mb-16 p-5">
+        <div className="flex items-center justify-center p-5 -mb-16 bg-white border dark:bg-gray-900 lg:-mt-24 lg:float-right sm:rounded-3xl lg:bg-transparent lg:p-0 dark:border-gray-700 lg:border-none lg:shadow-none lg:rounded-none lg:-mb-0">
           <DateRangePicker
             startDate={startDate}
             startDateId="s_id"
@@ -116,7 +123,7 @@ const behaviour = () => {
           </div>
         )}
         {activity && (
-          <div className="bg-white dark:bg-gray-900 sm:rounded-3xl shadow p-5">
+          <div className="p-5 bg-white shadow dark:bg-gray-900 sm:rounded-3xl">
             <Timeline activity={activity} />
           </div>
         )}

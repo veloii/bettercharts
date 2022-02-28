@@ -45,12 +45,12 @@ function parseTwitterDate(tdate: string) {
 
 const Badge = (props: { image: string; text: string; dateCreated: string }) => {
   return (
-    <div className="w-40 bg-white dark:bg-gray-900 p-2 rounded-lg border dark:border-gray-700">
+    <div className="w-40 p-2 bg-white border rounded-lg dark:bg-gray-800 dark:border-gray-700">
       <img className="w-full" src={props.image} />
-      <p className="text-center text-sm font-medium text-gray-800 dark:text-gray-100">
+      <p className="text-sm font-medium text-center text-gray-800 dark:text-gray-100">
         {props.text}
       </p>
-      <p className="text-center text-xs font-light text-gray-600 dark:text-gray-300">
+      <p className="text-xs font-light text-center text-gray-600 dark:text-gray-300">
         {parseTwitterDate(props.dateCreated)}
       </p>
     </div>

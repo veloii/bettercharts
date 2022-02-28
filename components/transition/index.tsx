@@ -8,17 +8,17 @@ const getTransitionStyles = {
   entering: {
     position: `absolute`,
     opacity: 0,
-    transform: `translateX(50px)`,
+    transform: `trangrayX(50px)`,
   },
   entered: {
     transition: `opacity ${TIMEOUT}ms ease-in-out, transform ${TIMEOUT}ms ease-in-out`,
     opacity: 1,
-    transform: `translateX(0px)`,
+    transform: `trangrayX(0px)`,
   },
   exiting: {
     transition: `opacity ${TIMEOUT}ms ease-in-out, transform ${TIMEOUT}ms ease-in-out`,
     opacity: 0,
-    transform: `translateX(-50px)`,
+    transform: `trangrayX(-50px)`,
   },
 };
 
@@ -44,7 +44,9 @@ const Transition = ({ children, location, user }: any) => {
         )}
       </ReactTransition>
     </TransitionGroup>
-  ) : children;
+  ) : (
+    children
+  );
 };
 
 export default Transition;

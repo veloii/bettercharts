@@ -9,6 +9,7 @@ import "react-dates/lib/css/_datepicker.css";
 import allowClassChartsFeature from "hooks/allowClassChartsFeature";
 import { CookiesProvider, useCookies } from "react-cookie";
 import CookieConsent from "components/CookieConsent";
+import Updates from "components/Updates";
 
 function MyApp({ Component, pageProps, router }: AppProps) {
   const [user, setUser] = useState<ClassCharts | null>();
@@ -23,7 +24,7 @@ function MyApp({ Component, pageProps, router }: AppProps) {
       .then((res) => {
         if (res?.message === "Unauthorized") {
           setUser(null);
-          return 
+          return;
         }
 
         const classCharts: ClassCharts = res as any;
@@ -56,6 +57,7 @@ function MyApp({ Component, pageProps, router }: AppProps) {
       <CookiesProvider>
         <UserContextProvider value={{ user, setUser }}>
           <CookieConsent />
+          <Updates />
           {user ? (
             <Header>
               <Component key={router.route} {...pageProps} />

@@ -115,9 +115,9 @@ const BarChartWeekly = (props: { behaviour: BehaviourResponse }) => {
             style={{
               zIndex: "1",
             }}
-            className="flex justify-center items-center"
+            className="flex items-center justify-center"
           >
-            <div className="absolute dark:text-gray-400 font-medium">
+            <div className="absolute font-medium dark:text-gray-400">
               Weekly Behaviour Breakdown
             </div>
           </div>

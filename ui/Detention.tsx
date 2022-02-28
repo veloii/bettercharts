@@ -70,7 +70,7 @@ export default function Detention(props: {
   return (
     <>
       {props.detentions.length !== 0 && props.title && (
-        <h2 className="text-2xl text-gray-900 dark:text-white font-bold py-2">
+        <h2 className="py-2 text-2xl font-bold text-gray-900 dark:text-white">
           {props.title}
         </h2>
       )}
@@ -94,14 +94,14 @@ export default function Detention(props: {
                         <p className="text-sm font-medium text-purple-600 truncate">
                           {detention.title}
                         </p>
-                        <p className="mt-2 flex flex-wrap gap-2 items-center text-sm text-gray-500">
+                        <p className="flex flex-wrap items-center gap-2 mt-2 text-sm text-gray-500">
                           {detention.lesson && (
                             <div className="flex gap-0.5">
                               <BookOpenIcon
                                 className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
                                 aria-hidden="true"
                               />
-                              <span className="truncate mr-5">
+                              <span className="mr-5 truncate">
                                 {detention.lesson}
                               </span>
                             </div>
@@ -113,7 +113,7 @@ export default function Detention(props: {
                                 className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
                                 aria-hidden="true"
                               />
-                              <span className="truncate mr-5">
+                              <span className="mr-5 truncate">
                                 {detention.subject}
                               </span>
                             </div>
@@ -125,7 +125,7 @@ export default function Detention(props: {
                                 className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
                                 aria-hidden="true"
                               />
-                              <span className="truncate mr-5">
+                              <span className="mr-5 truncate">
                                 {detention.teacher}
                               </span>
                             </div>
@@ -137,7 +137,7 @@ export default function Detention(props: {
                                 className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
                                 aria-hidden="true"
                               />
-                              <span className="truncate mr-5">
+                              <span className="mr-5 truncate">
                                 {detention.duration}
                               </span>
                             </div>
@@ -149,7 +149,7 @@ export default function Detention(props: {
                                 className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
                                 aria-hidden="true"
                               />
-                              <span className="truncate mr-5">
+                              <span className="mr-5 truncate">
                                 {detention.location}
                               </span>
                             </div>

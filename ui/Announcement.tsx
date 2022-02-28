@@ -16,12 +16,12 @@ const Announcement = (props: {
         <div className="flex space-x-3">
           <div className="flex-shrink-0">
             <img
-              className="h-10 w-10 rounded-xl"
+              className="w-10 h-10 rounded-xl"
               src={props.announcement.school_logo!}
               alt=""
             />
           </div>
-          <div className="min-w-0 flex-1">
+          <div className="flex-1 min-w-0">
             <p className="text-sm font-medium text-gray-900 dark:text-gray-50">
               <a href="#" className="hover:underline">
                 {props.announcement.teacher_name}
@@ -49,13 +49,18 @@ const Announcement = (props: {
         {/* this doesnt even work as if theres no valid attachments but you are allowed to attach it will not show anything */}
         {props.announcement.attachments.length != 0 && (
           <div>
-            <h1 className="text-gray-900 dark:text-gray-100 text-2xl pt-5 pb-2 font-semibold">
+            <h1 className="pt-5 pb-2 text-2xl font-semibold text-gray-900 dark:text-gray-100">
               Attachments
             </h1>
             <div className="flex gap-2">
               {props.announcement.attachments.map((attachment) => (
-                <a key={attachment.url} target="_blank" className="z-20" href={attachment.url}>
-                  <button className="transition bg-gray-400 text-gray-800 dark:text-gray-100 flex justify-center items-center gap-2 bg-opacity-30 rounded-lg font-medium p-2 px-4 hover:bg-opacity-60">
+                <a
+                  key={attachment.url}
+                  target="_blank"
+                  className="z-20"
+                  href={attachment.url}
+                >
+                  <button className="flex items-center justify-center gap-2 p-2 px-4 font-medium text-gray-800 transition bg-gray-400 rounded-lg dark:text-gray-100 bg-opacity-30 hover:bg-opacity-60">
                     <DownloadIcon className="w-6" />
                     {attachment.filename}
                   </button>

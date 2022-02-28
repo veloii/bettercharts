@@ -95,7 +95,7 @@ const Timeline = (props: { activity: ActivityResponse; limit?: number }) => {
                       )}
                     >
                       <event.icon
-                        className="h-5 w-5 text-white dark:text-black"
+                        className="w-5 h-5 text-white dark:text-black"
                         aria-hidden="true"
                       />
                     </span>
@@ -109,7 +109,7 @@ const Timeline = (props: { activity: ActivityResponse; limit?: number }) => {
                         </a>
                       </p>
                     </div>
-                    <div className="text-right text-sm whitespace-nowrap text-gray-500">
+                    <div className="text-sm text-right text-gray-500 whitespace-nowrap">
                       <time dateTime={event.datetime}>{event.date}</time>
                     </div>
                   </div>

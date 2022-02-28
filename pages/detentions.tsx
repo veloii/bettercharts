@@ -1,9 +1,10 @@
 import { UserContext } from "context/ClassChartsContext";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import Detention from "ui/Detention";
 import { Detention as DetentionType } from "classcharts-api/dist/types";
 import Container from "ui/Container";
 import Head from "next/head";
+import { useRouter } from "next/router";
 
 function capitalize(str: string) {
   return str.charAt(0).toUpperCase() + str.slice(1);
@@ -46,17 +47,23 @@ export const detentionType = (
 const detentions = () => {
   const { user } = useContext(UserContext);
 
+  const router = useRouter();
+
+  useEffect(() => {
+    if (user === null) router.push("/login");
+  }, []);
+
   return user ? (
     <Container>
       <Head>
         <title>Detentions | BetterCharts</title>
       </Head>
-      <div className="py-5 h-full">
+      <div className="h-full py-5">
         {user?.detentions.length === 0 ? (
-          <div className="flex justify-center items-center mt-16 bg-gray-800 p-10 rounded-3xl shadow dark:shadow-none">
+          <div className="flex items-center justify-center p-10 mt-16 bg-gray-800 shadow rounded-3xl dark:shadow-none">
             <div>
               <img className="w-96" src="/NoHomework.svg" />
-              <h2 className="text-3xl text-center text-gray-200 font-semibold py-2">
+              <h2 className="py-2 text-3xl font-semibold text-center text-gray-200">
                 No Detentions
               </h2>
             </div>
@@ -86,7 +93,7 @@ const detentions = () => {
       </div>
     </Container>
   ) : (
-    <div className="m-0 p-0 w-screen h-screen absolute top-0 left-0 bg-white dark:bg-gray-900 flex justify-center items-center z-50">
+    <div className="absolute top-0 left-0 z-50 flex items-center justify-center w-screen h-screen p-0 m-0 bg-white dark:bg-gray-900">
       <Head>
         <title>Loading | BetterCharts</title>
       </Head>

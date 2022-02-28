@@ -22,6 +22,7 @@ import Head from "next/head";
 import Announcement from "ui/Announcement";
 import Timetable from "ui/Timetable";
 import DangerButton from "ui/DangerButton";
+import { useRouter } from "next/router";
 
 const convertDate = (date: dayjs.Dayjs) =>
   date.year() + "-" + (date.month() + 1) + "-" + date.date();
@@ -30,6 +31,12 @@ const Dashboard: NextPage = () => {
   const { user, setUser } = useContext(UserContext);
   const [completedFetch, setCompletedFetch] = useState(false);
   const [ready, setReady] = useState(false);
+
+  const router = useRouter();
+
+  useEffect(() => {
+    if (user === null) router.push("/login");
+  }, []);
 
   const lateOrFailedHomework = () => {
     if (homeworkLate(user!.homework).length !== 0) return true;

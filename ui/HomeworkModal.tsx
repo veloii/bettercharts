@@ -151,11 +151,11 @@ export default function HomeworkModal(props: {
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
-            enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-            enterTo="opacity-100 translate-y-0 sm:scale-100"
+            enterFrom="opacity-0 trangray-y-4 sm:trangray-y-0 sm:scale-95"
+            enterTo="opacity-100 trangray-y-0 sm:scale-100"
             leave="ease-in duration-200"
-            leaveFrom="opacity-100 translate-y-0 sm:scale-100"
-            leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+            leaveFrom="opacity-100 trangray-y-0 sm:scale-100"
+            leaveTo="opacity-0 trangray-y-4 sm:trangray-y-0 sm:scale-95"
           >
             <div className="inline-block px-4 pt-5 pb-4 overflow-hidden text-left align-middle transition-all transform bg-white border rounded-lg dark:text-white dark:bg-gray-900 dark:border-gray-800 sm:my-8 max-w-7xl sm:p-6">
               <div>
@@ -305,7 +305,7 @@ export default function HomeworkModal(props: {
               <div className="mt-5 sm:mt-6">
                 <button
                   type="button"
-                  className="inline-flex justify-center w-full px-4 py-2 text-base font-medium text-white transition bg-purple-600 border border-transparent rounded-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:text-sm"
+                  className="inline-flex justify-center w-full px-4 py-2 text-base font-medium text-white transition bg-purple-600 border border-transparent rounded-md hover:bg-purple-700 focus:outline-none  sm:text-sm"
                   onClick={() => setOpen(false)}
                 >
                   Back

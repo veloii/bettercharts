@@ -57,11 +57,13 @@ const Login = () => {
         <Head>
           <title>Login | BetterCharts</title>
         </Head>
-        <div className="min-h-screen bg-white dark:bg-gray-900 flex">
-          <div className="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
-            <div className="mx-auto w-full max-w-sm lg:w-96">
+        <div className="flex min-h-screen bg-white dark:bg-gray-900">
+          <div className="flex flex-col justify-center flex-1 px-4 py-12 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
+            <div className="w-full max-w-sm mx-auto lg:w-96">
               <div>
-                <span className="text-3xl font-brand text-purple-600 dark:text-purple-300">bettercharts</span>
+                <span className="text-3xl text-purple-600 font-brand dark:text-purple-300">
+                  bettercharts
+                </span>
                 <h2 className="mt-6 text-3xl font-extrabold text-gray-900 dark:text-gray-50">
                   Sign in to your account
                 </h2>
@@ -84,7 +86,7 @@ const Login = () => {
                           type="password"
                           autoComplete="current-password"
                           required
-                          className="dark:bg-gray-800 dark:text-white appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm"
+                          className="block w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md shadow-sm appearance-none dark:bg-gray-800 dark:text-white dark:border-gray-600 focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm"
                         />
                       </div>
                     </div>
@@ -96,16 +98,16 @@ const Login = () => {
                         Date of birth
                       </label>
 
-                      <div className="mt-1 flex rounded-md">
+                      <div className="flex mt-1 rounded-md">
                         <input
                           type="number"
                           name="day"
                           required
                           id="day"
-                          className="z-10 shadow-sm dark:bg-gray-800  dark:border-gray-600 dark:text-white focus:ring-purple-500 dark:focus:ring-offset-gray-900 rounded-l-md focus:border-purple-500 w-12 text-center block rounded-none sm:text-sm border-gray-300"
+                          className="z-10 block w-12 text-center border-gray-300 rounded-none shadow-sm dark:bg-gray-800 dark:border-gray-600 dark:text-white focus:ring-purple-500 dark:focus:ring-offset-gray-900 rounded-l-md focus:border-purple-500 sm:text-sm"
                           placeholder="23"
                         />
-                        <span className="inline-flex shadow-sm dark:bg-gray-700 border border-x-0 dark:border-gray-600 items-center px-3 bg-gray-50 text-gray-500 text-sm">
+                        <span className="inline-flex items-center px-3 text-sm text-gray-500 border shadow-sm dark:bg-gray-700 border-x-0 dark:border-gray-600 bg-gray-50">
                           /
                         </span>
                         <input
@@ -113,10 +115,10 @@ const Login = () => {
                           name="month"
                           required
                           id="month"
-                          className="z-10 shadow-sm dark:bg-gray-800 dark:border-gray-600 dark:text-white focus:ring-purple-500 dark:focus:ring-offset-gray-900 focus:border-purple-500 block w-12 text-center rounded-none sm:text-sm border-gray-300"
+                          className="z-10 block w-12 text-center border-gray-300 rounded-none shadow-sm dark:bg-gray-800 dark:border-gray-600 dark:text-white focus:ring-purple-500 dark:focus:ring-offset-gray-900 focus:border-purple-500 sm:text-sm"
                           placeholder="02"
                         />
-                        <span className="shadow-sm inline-flex dark:bg-gray-700 border border-x-0 dark:border-gray-600 items-center px-3 bg-gray-50 text-gray-500 text-sm">
+                        <span className="inline-flex items-center px-3 text-sm text-gray-500 border shadow-sm dark:bg-gray-700 border-x-0 dark:border-gray-600 bg-gray-50">
                           /
                         </span>
                         <input
@@ -124,7 +126,7 @@ const Login = () => {
                           name="year"
                           required
                           id="year"
-                          className="shadow-sm z-10 dark:bg-gray-800 rounded-r-md dark:border-gray-600 dark:text-white focus:ring-purple-500 dark:focus:ring-offset-gray-900 focus:border-purple-500 text-center block w-16 rounded-none sm:text-sm border-gray-300"
+                          className="z-10 block w-16 text-center border-gray-300 rounded-none shadow-sm dark:bg-gray-800 rounded-r-md dark:border-gray-600 dark:text-white focus:ring-purple-500 dark:focus:ring-offset-gray-900 focus:border-purple-500 sm:text-sm"
                           placeholder="2003"
                         />
                       </div>
@@ -134,11 +136,11 @@ const Login = () => {
                         id="remember_me"
                         name="remember_me"
                         type="checkbox"
-                        className="h-4 w-4 text-purple-600 focus:ring-purple-500 dark:border-gray-600 dark:bg-gray-800 rounded dark:focus:ring-offset-gray-900"
+                        className="w-4 h-4 text-purple-600 rounded focus:ring-purple-500 dark:border-gray-600 dark:bg-gray-800 dark:focus:ring-offset-gray-900"
                       />
                       <label
                         htmlFor="remember_me"
-                        className="ml-2 block text-sm text-gray-900 dark:text-gray-50"
+                        className="block ml-2 text-sm text-gray-900 dark:text-gray-50"
                       >
                         Remember me
                       </label>
@@ -147,11 +149,11 @@ const Login = () => {
                     <div>
                       <button
                         type="submit"
-                        className="focus:dark:ring-offset-gray-900 w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
+                        className="flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-purple-600 border border-transparent rounded-md shadow-sm focus:dark:ring-offset-gray-900 hover:bg-purple-700 focus:outline-none "
                       >
                         Sign in
                       </button>
-                      <label className="block italic text-center mt-2 text-xs font-medium text-gray-800 dark:text-gray-400">
+                      <label className="block mt-2 text-xs italic font-medium text-center text-gray-800 dark:text-gray-400">
                         your data is only being used to access classcharts on
                         our server
                       </label>
@@ -161,9 +163,9 @@ const Login = () => {
               </div>
             </div>
           </div>
-          <div className="hidden lg:block relative w-0 flex-1">
+          <div className="relative flex-1 hidden w-0 lg:block">
             <img
-              className="absolute inset-0 h-full w-full object-cover"
+              className="absolute inset-0 object-cover w-full h-full"
               src="/classroom.jpg"
               alt=""
             />
@@ -173,7 +175,7 @@ const Login = () => {
     );
   else
     return (
-      <div className="m-0 p-0 w-screen h-screen absolute top-0 left-0 bg-white dark:bg-gray-900 flex justify-center items-center z-50">
+      <div className="absolute top-0 left-0 z-50 flex items-center justify-center w-screen h-screen p-0 m-0 bg-white dark:bg-gray-900">
         <Head>
           <title>Loading | BetterCharts</title>
         </Head>

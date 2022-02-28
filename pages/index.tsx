@@ -11,7 +11,7 @@ const Index: NextPage = () => {
   }, []);
 
   return (
-    <div className="m-0 p-0 w-screen h-screen absolute top-0 left-0 bg-white dark:bg-gray-900 flex justify-center items-center z-50">
+    <div className="absolute top-0 left-0 z-50 flex items-center justify-center w-screen h-screen p-0 m-0 bg-white dark:bg-gray-900">
       <Head>
         <title>Loading | BetterCharts</title>
       </Head>

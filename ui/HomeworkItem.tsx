@@ -64,13 +64,13 @@ const HomeworkItem = (props: {
                     {position.title}
                   </p>
                   <div className="flex">
-                    <div className="ml-2 flex-shrink-0 flex">
-                      <p className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-purple-100 dark:bg-purple-800 text-purple-800 dark:text-purple-100">
+                    <div className="flex flex-shrink-0 ml-2">
+                      <p className="inline-flex px-2 text-xs font-semibold leading-5 text-purple-800 bg-purple-100 rounded-full dark:bg-purple-800 dark:text-purple-100">
                         {position.homework_type}
                       </p>
                     </div>
                     {props.compact && (
-                      <div className="ml-2 flex-shrink-0 flex">
+                      <div className="flex flex-shrink-0 ml-2">
                         <p
                           className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${getChipColors()}`}
                         >

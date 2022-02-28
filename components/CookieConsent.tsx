@@ -10,14 +10,14 @@ const CookieConsent = () => {
   };
 
   return cookies?.dismiss_cookie_banner !== "yes" ? (
-    <div className="fixed bottom-0 w-full bg-opacity-80 dark:bg-opacity-80 bg-white gap-5 dark:text-white dark:bg-gray-900 p-2 lg:flex lg:space-y-0 space-y-2 justify-center border-b dark:border-b-gray-700 z-50">
+    <div className="fixed bottom-0 z-50 justify-center w-full gap-5 p-2 space-y-2 bg-white border-b bg-opacity-80 dark:bg-opacity-80 dark:text-white dark:bg-gray-900 lg:flex lg:space-y-0 dark:border-b-gray-700">
       <div className="text-sm">
         By using this website, you agree that we may set cookies for purposes
         such as remembering your session.
       </div>
       <button
         onClick={dismissBanner}
-        className="bg-purple-700 shadow px-3 rounded-full text-xs flex justify-center items-center border-2 dark:border-purple-600"
+        className="flex items-center justify-center px-3 text-xs bg-purple-700 border-2 rounded-full shadow dark:border-purple-600"
       >
         I understand
       </button>
