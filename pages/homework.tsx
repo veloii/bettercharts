@@ -105,7 +105,7 @@ const homework = () => {
         <title>Homework | BetterCharts</title>
       </Head>
       <div className="pt-5 space-y-2">
-        <div className="dark:bg-gray-900 lg:-mt-24 lg:float-right sm:rounded-3xl flex justify-center items-center lg:bg-transparent bg-white lg:p-0 border dark:border-gray-700 lg:border-none lg:shadow-none lg:rounded-none lg:-mb-0 -mb-16 p-5">
+        <div className="flex items-center justify-center p-5 -mb-16 bg-white border dark:bg-gray-900 lg:-mt-24 lg:float-right sm:rounded-3xl lg:bg-transparent lg:p-0 dark:border-gray-700 lg:border-none lg:shadow-none lg:rounded-none lg:-mb-0">
           <DateRangePicker
             startDate={startDate}
             startDateId="s_id"
@@ -140,36 +140,36 @@ const homework = () => {
           />
         </div>
 
-        <div className="pt-16 lg:pt-0 space-y-2">
-          {homework && (
+        <div className="pt-16 space-y-2 lg:pt-0">
+          {homework && homeworkTodo(homework).length !== 0 && (
             <HomeworkCategory
               type="todo"
               name="Todo"
               homework={homeworkTodo(homework)}
             />
           )}
-          {homework && (
+          {homework && homeworkCompleted(homework).length !== 0 && (
             <HomeworkCategory
               type="completed"
               name="Completed"
               homework={homeworkCompleted(homework)}
             />
           )}
-          {homework && (
+          {homework && homeworkLate(homework).length !== 0 && (
             <HomeworkCategory
               type="late"
               name="Late"
               homework={homeworkLate(homework)}
             />
           )}
-          {homework && (
+          {homework && homeworkNotSubmitted(homework).length !== 0 && (
             <HomeworkCategory
               type="fail"
               name="Not Submitted"
               homework={homeworkNotSubmitted(homework)}
             />
           )}
-          {homework && (
+          {homework && homeworkSubmitted(homework).length !== 0 && (
             <HomeworkCategory
               type="submitted"
               name="Submitted"
@@ -180,7 +180,7 @@ const homework = () => {
       </div>
     </Container>
   ) : (
-    <div className="m-0 p-0 w-screen h-screen absolute top-0 left-0 bg-white dark:bg-gray-900 flex justify-center items-center z-50">
+    <div className="absolute top-0 left-0 z-50 flex items-center justify-center w-screen h-screen p-0 m-0 bg-white dark:bg-gray-900">
       <Head>
         <title>Loading | BetterCharts</title>
       </Head>

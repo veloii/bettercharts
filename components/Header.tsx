@@ -33,7 +33,7 @@ export default function Header(props: { children: any }) {
       ) as any;
 
       setNavigation([
-        { name: "bettercharts", href: "/overview", logo: true },
+        { name: "Dashboard", href: "/overview", logo: false },
 
         ...classChartsFeatures!.map((feature) => ({
           name: feature,
@@ -50,14 +50,14 @@ export default function Header(props: { children: any }) {
 
   return navigation ? (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-800">
-      <Disclosure as="nav" className="bg-white dark:bg-gray-900 shadow">
+      <Disclosure as="nav" className="bg-white shadow dark:bg-gray-900">
         {({ open }) => (
           <>
-            <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
+            <div className="px-4 mx-auto max-w-7xl md:px-6 lg:px-8">
               <div className="flex justify-between h-16">
                 <div className="flex">
-                  <div className="flex-shrink-0 flex items-center">
-                    <span className="block md:hidden font-brand dark:text-purple-400 text-purple-500 text-3xl">
+                  <div className="flex items-center flex-shrink-0">
+                    <span className="block text-3xl text-purple-500 md:mr-10 font-brand dark:text-purple-400">
                       bettercharts
                     </span>
                   </div>
@@ -84,7 +84,7 @@ export default function Header(props: { children: any }) {
                               }
                             >
                               {item.logo ? (
-                                <span className="dark:text-purple-300 text-purple-500 font-brand text-3xl">
+                                <span className="text-3xl text-purple-500 dark:text-purple-300 font-brand">
                                   {item.name}
                                 </span>
                               ) : (
@@ -98,14 +98,14 @@ export default function Header(props: { children: any }) {
                 </div>
                 <div className="hidden md:ml-6 md:flex md:items-center">
                   {/* Profile dropdown */}
-                  <Menu as="div" className="ml-3 relative">
+                  <Menu as="div" className="relative ml-3">
                     {({ open }) => (
                       <>
                         <div>
-                          <Menu.Button className="bg-white dark:bg-gray-900 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-900 focus:ring-purple-500">
+                          <Menu.Button className="flex text-sm bg-white rounded-full dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-900 focus:ring-purple-500">
                             <span className="sr-only">Open user menu</span>
                             <img
-                              className="h-8 w-8 rounded-full"
+                              className="w-8 h-8 rounded-full"
                               src={user?.student?.avatar_url}
                               alt=""
                             />
@@ -123,7 +123,7 @@ export default function Header(props: { children: any }) {
                         >
                           <Menu.Items
                             static
-                            className="z-10 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 focus:outline-none"
+                            className="absolute right-0 z-10 w-48 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg dark:bg-gray-800 ring-1 ring-black ring-opacity-5 focus:outline-none"
                           >
                             {userNavigation.map((item) => (
                               <Menu.Item key={item.name}>
@@ -149,14 +149,14 @@ export default function Header(props: { children: any }) {
                     )}
                   </Menu>
                 </div>
-                <div className="-mr-2 flex items-center md:hidden">
+                <div className="flex items-center -mr-2 md:hidden">
                   {/* Mobile menu button */}
-                  <Disclosure.Button className="bg-white dark:bg-gray-900 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-900 focus:ring-purple-500">
+                  <Disclosure.Button className="inline-flex items-center justify-center p-2 text-gray-400 bg-white rounded-md dark:bg-gray-900 hover:text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-900 focus:ring-purple-500">
                     <span className="sr-only">Open main menu</span>
                     {open ? (
-                      <XIcon className="block h-6 w-6" aria-hidden="true" />
+                      <XIcon className="block w-6 h-6" aria-hidden="true" />
                     ) : (
-                      <MenuIcon className="block h-6 w-6" aria-hidden="true" />
+                      <MenuIcon className="block w-6 h-6" aria-hidden="true" />
                     )}
                   </Disclosure.Button>
                 </div>
@@ -187,7 +187,7 @@ export default function Header(props: { children: any }) {
                           }
                         >
                           {item.logo ? (
-                            <span className="dark:text-purple-300 font-brand text-3xl">
+                            <span className="text-3xl dark:text-purple-300 font-brand">
                               {item.name}
                             </span>
                           ) : (
@@ -202,7 +202,7 @@ export default function Header(props: { children: any }) {
                 <div className="flex items-center px-4">
                   <div className="flex-shrink-0">
                     <img
-                      className="h-10 w-10 rounded-full"
+                      className="w-10 h-10 rounded-full"
                       src={user?.student?.avatar_url}
                       alt=""
                     />
@@ -212,9 +212,9 @@ export default function Header(props: { children: any }) {
                       {user?.student?.first_name}
                     </div>
                   </div>
-                  <button className="ml-auto bg-white dark:bg-gray-900 flex-shrink-0 p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-900 focus:ring-purple-500">
+                  <button className="flex-shrink-0 p-1 ml-auto text-gray-400 bg-white rounded-full dark:bg-gray-900 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-900 focus:ring-purple-500">
                     <span className="sr-only">View notifications</span>
-                    <BellIcon className="h-6 w-6" aria-hidden="true" />
+                    <BellIcon className="w-6 h-6" aria-hidden="true" />
                   </button>
                 </div>
                 <div className="mt-3 space-y-1">
@@ -238,7 +238,7 @@ export default function Header(props: { children: any }) {
             router.asPath.includes("overview") ? "py-0 h-0" : "py-10 border-b"
           } filter drop-shadow dark:border-b-gray-700 mt-0.5 transition-all ease-in-out duration-500`}
         >
-          <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
+          <div className="px-4 mx-auto max-w-7xl md:px-6 lg:px-8">
             <h1
               className={`text-3xl font-bold leading-tight text-gray-900 dark:text-gray-100 ease-in-out duration-500`}
             >
@@ -255,7 +255,7 @@ export default function Header(props: { children: any }) {
             </h1>
           </div>
         </header>
-        <main className="bg-gray-100 dark:bg-gray-800 pb-5">
+        <main className="pb-5 bg-gray-100 dark:bg-gray-800">
           <div>
             <Transition user={user?.homework} location={router.pathname}>
               {props.children}

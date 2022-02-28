@@ -108,7 +108,7 @@ body {
 }
 
 .DateInput_input__focused {
-  border-bottom: 2px solid #A855F7 !important;
+  border-bottom: 2px solid #a855f7 !important;
 }
 
 .CalendarDay {
@@ -131,7 +131,7 @@ body {
 }
 
 .CalendarDay__selected_span {
-  background: #A855F7 !important;
+  background: #a855f7 !important;
   border: 1px double #7614d2 !important;
 }
 
@@ -248,23 +248,23 @@ body {
     bottom: 7em;
     height: 7em;
     background: -webkit-linear-gradient(
-      rgba(255, 255, 255, 0) 0%,
+      rgba(17, 24, 39, 0) 0%,
       #111827 100%
     ) !important;
     background-image: -moz-linear-gradient(
-      rgba(255, 255, 255, 0) 0%,
+      rgba(17, 24, 39, 0) 0%,
       #111827 100%
     ) !important;
     background-image: -o-linear-gradient(
-      rgba(255, 255, 255, 0) 0%,
+      rgba(17, 24, 39, 0) 0%,
       #111827 100%
     ) !important;
     background-image: linear-gradient(
-      rgba(255, 255, 255, 0) 0%,
+      rgba(17, 24, 39, 0) 0%,
       #111827 100%
     ) !important;
     background-image: -ms-linear-gradient(
-      rgba(255, 255, 255, 0) 0%,
+      rgba(17, 24, 39, 0) 0%,
       #111827 100%
     ) !important;
   }

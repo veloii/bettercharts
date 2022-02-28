@@ -38,45 +38,45 @@ export default function HomeworkModal(props: {
   const [open, setOpen] = useState<boolean | undefined>(undefined);
 
   const fail = (
-    <div className="flex items-center justify-center h-12 w-12 rounded-full bg-red-100 dark:bg-red-800">
+    <div className="flex items-center justify-center w-12 h-12 bg-red-100 rounded-full dark:bg-red-800">
       <XIcon
-        className="h-6 w-6 text-red-600 dark:text-red-200"
+        className="w-6 h-6 text-red-600 dark:text-red-200"
         aria-hidden="true"
       />
     </div>
   );
 
   const late = (
-    <div className="flex items-center justify-center h-12 w-12 rounded-full bg-yellow-100 dark:bg-yellow-800">
+    <div className="flex items-center justify-center w-12 h-12 bg-yellow-100 rounded-full dark:bg-yellow-800">
       <ExclamationCircleIcon
-        className="h-6 w-6 text-yellow-600 dark:text-yellow-200"
+        className="w-6 h-6 text-yellow-600 dark:text-yellow-200"
         aria-hidden="true"
       />
     </div>
   );
 
   const completed = (
-    <div className="flex items-center justify-center h-12 w-12 rounded-full bg-green-100 dark:bg-green-800">
+    <div className="flex items-center justify-center w-12 h-12 bg-green-100 rounded-full dark:bg-green-800">
       <CheckIcon
-        className="h-6 w-6 text-green-600 dark:text-green-200"
+        className="w-6 h-6 text-green-600 dark:text-green-200"
         aria-hidden="true"
       />
     </div>
   );
 
   const submitted = (
-    <div className="flex items-center justify-center h-12 w-12 rounded-full bg-green-100 dark:bg-green-800">
+    <div className="flex items-center justify-center w-12 h-12 bg-green-100 rounded-full dark:bg-green-800">
       <BadgeCheckIcon
-        className="h-6 w-6 text-green-600 dark:text-green-200"
+        className="w-6 h-6 text-green-600 dark:text-green-200"
         aria-hidden="true"
       />
     </div>
   );
 
   const todo = (
-    <div className="flex items-center justify-center h-12 w-12 rounded-full bg-gray-100 dark:bg-gray-800">
+    <div className="flex items-center justify-center w-12 h-12 bg-gray-100 rounded-full dark:bg-gray-800">
       <BookOpenIcon
-        className="h-6 w-6 text-gray-600 dark:text-gray-200"
+        className="w-6 h-6 text-gray-600 dark:text-gray-200"
         aria-hidden="true"
       />
     </div>
@@ -125,11 +125,11 @@ export default function HomeworkModal(props: {
       <Dialog
         as="div"
         static
-        className="fixed z-10 inset-0 overflow-y-auto"
+        className="absolute inset-0 overflow-y-auto"
         open={open === undefined ? false : true}
         onClose={setOpen}
       >
-        <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+        <div className="flex items-end justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -139,7 +139,7 @@ export default function HomeworkModal(props: {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Dialog.Overlay className="fixed inset-0 bg-gray-500 dark:bg-gray-900 dark:bg-opacity-75 bg-opacity-75 transition-opacity" />
+            <Dialog.Overlay className="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75 dark:bg-gray-900 dark:bg-opacity-75" />
           </Transition.Child>
           {/* This element is to trick the browser into centering the modal contents. */}
           <span
@@ -157,51 +157,57 @@ export default function HomeworkModal(props: {
             leaveFrom="opacity-100 translate-y-0 sm:scale-100"
             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           >
-            <div className="inline-block dark:text-white bg-white dark:bg-gray-900 dark:border-gray-800 rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden border transform transition-all sm:my-8 align-middle max-w-7xl  sm:p-6">
+            <div className="inline-block px-4 pt-5 pb-4 overflow-hidden text-left align-middle transition-all transform bg-white border rounded-lg dark:text-white dark:bg-gray-900 dark:border-gray-800 sm:my-8 max-w-7xl sm:p-6">
               <div>
                 {homeworkStatus}
                 <div className="mt-3 text-left sm:mt-5">
                   <Dialog.Title
                     as="h3"
-                    className="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100"
+                    className="text-lg font-medium leading-6 text-gray-900 dark:text-gray-100"
                   >
                     {props.homework.title}
                   </Dialog.Title>
-                  <div className="mt-2 mb-4 flex flex-wrap gap-4">
+                  <div className="flex flex-wrap gap-4 mt-2 mb-4">
                     <div className="flex justify-center">
-                      <BookOpenIcon className="w-4 flex-shrink-0 mr-1.5 text-gray-400" />
-                      <p className="text-gray-400 text-sm font-medium">
+                      <div className="flex items-center justify-center">
+                        <BookOpenIcon className="w-4 flex-shrink-0 mr-1.5 text-gray-400" />
+                      </div>
+                      <p className="text-sm font-medium text-gray-400">
                         {props.homework.lesson}
                       </p>
                     </div>
                     <div className="flex justify-center">
-                      <UsersIcon className="w-4 flex-shrink-0 mr-1.5 text-gray-400" />
-                      <p className="text-gray-400 text-sm font-medium">
+                      <div className="flex items-center justify-center">
+                        <UsersIcon className="w-4 flex-shrink-0 mr-1.5 text-gray-400" />
+                      </div>
+                      <p className="text-sm font-medium text-gray-400">
                         {props.homework.teacher}
                       </p>
                     </div>
                     <div className="flex justify-center">
-                      <AcademicCapIcon className="w-4 flex-shrink-0 mr-1.5 text-gray-400" />
-                      <p className="text-gray-400 text-sm font-medium">
+                      <div className="flex items-center justify-center">
+                        <AcademicCapIcon className="w-4 flex-shrink-0 mr-1.5 text-gray-400" />
+                      </div>
+                      <p className="text-sm font-medium text-gray-400">
                         {props.homework.subject}
                       </p>
                     </div>
                   </div>
-                  <div className="flex ">
-                    <p className="text-gray-400 text-sm font-medium">
+                  <div className="flex">
+                    <p className="text-sm font-medium text-gray-400">
                       <span className="font-semibold">Due Date:</span>{" "}
                       {props.homework.due_date}
                     </p>
                   </div>
                   <div className="flex ">
-                    <p className="text-gray-400 text-sm font-medium">
+                    <p className="text-sm font-medium text-gray-400">
                       <span className="font-semibold">Issue Date:</span>{" "}
                       {props.homework.issue_date}
                     </p>
                   </div>
                   {props.homework.completion_time_value && (
                     <div className="flex ">
-                      <p className="text-gray-400 text-sm font-medium">
+                      <p className="text-sm font-medium text-gray-400">
                         <span className="font-semibold">
                           Estimated completion time:
                         </span>{" "}
@@ -228,7 +234,7 @@ export default function HomeworkModal(props: {
                         fetch(
                           "/api/tickHomework?homeworkId=" +
                             props.homework.status.id,
-                            {method: "POST"}
+                          { method: "POST" }
                         );
 
                         markComplete(value);
@@ -246,7 +252,7 @@ export default function HomeworkModal(props: {
                   {/* this doesnt even work as if theres no valid attachments but you are allowed to attach it will not show anything */}{" "}
                   {props.homework.validated_attachments.length != 0 && (
                     <div>
-                      <h1 className="text-gray-900 dark:text-gray-100 text-2xl pt-5 pb-2 font-semibold">
+                      <h1 className="pt-5 pb-2 text-2xl font-semibold text-gray-900 dark:text-gray-100">
                         Attachments
                       </h1>
                       <div className="flex gap-2">
@@ -257,7 +263,7 @@ export default function HomeworkModal(props: {
                               target="_blank"
                               href={attachment.validated_file}
                             >
-                              <button className="transition bg-gray-400 text-gray-800 dark:text-gray-100 flex justify-center items-center gap-2 bg-opacity-30 rounded-lg font-medium p-2 px-4 hover:bg-opacity-60">
+                              <button className="flex items-center justify-center gap-2 p-2 px-4 font-medium text-gray-800 transition bg-gray-400 rounded-lg dark:text-gray-100 bg-opacity-30 hover:bg-opacity-60">
                                 <DownloadIcon className="w-6" />
                                 {attachment.file_name}
                               </button>
@@ -299,7 +305,7 @@ export default function HomeworkModal(props: {
               <div className="mt-5 sm:mt-6">
                 <button
                   type="button"
-                  className="transition inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-purple-600 text-base font-medium text-white hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:text-sm"
+                  className="inline-flex justify-center w-full px-4 py-2 text-base font-medium text-white transition bg-purple-600 border border-transparent rounded-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:text-sm"
                   onClick={() => setOpen(false)}
                 >
                   Back

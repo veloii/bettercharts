@@ -21,6 +21,7 @@ import dayjs from "dayjs";
 import Head from "next/head";
 import Announcement from "ui/Announcement";
 import Timetable from "ui/Timetable";
+import DangerButton from "ui/DangerButton";
 
 const convertDate = (date: dayjs.Dayjs) =>
   date.year() + "-" + (date.month() + 1) + "-" + date.date();
@@ -30,6 +31,12 @@ const Dashboard: NextPage = () => {
   const [completedFetch, setCompletedFetch] = useState(false);
   const [ready, setReady] = useState(false);
 
+  const lateOrFailedHomework = () => {
+    if (homeworkLate(user!.homework).length !== 0) return true;
+    if (homeworkNotSubmitted(user!.homework).length !== 0) return true;
+    return false;
+  };
+
   useEffect(() => {
     if (!user) return;
     if (completedFetch) return;
@@ -38,7 +45,7 @@ const Dashboard: NextPage = () => {
     fetch(
       `/api/getHBAT?startDate=${convertDate(
         dayjs().subtract(7, "day")
-      )}&endDate=${convertDate(dayjs())}`
+      )}&endDate=${convertDate(dayjs().add(7, "day"))}`
     )
       .then((res) => res.json())
       .then((res) => {
@@ -58,11 +65,11 @@ const Dashboard: NextPage = () => {
       <Head>
         <title>Dashboard | BetterCharts</title>
       </Head>
-      <div className="dark:bg-gray-900 bg-white border-b dark:border-gray-700 py-10 shadow-lg">
-        <h1 className="text-5xl font-brand dark:text-purple-300 text-purple-500 text-center">
+      <div className="py-10 bg-white border-b shadow-lg dark:bg-gray-900 dark:border-gray-700">
+        <h1 className="text-5xl text-center text-purple-500 font-brand dark:text-purple-300">
           dashboard
         </h1>
-        <p className="text-sm dark:text-gray-400 text-gray-700 text-center">
+        <p className="text-sm text-center text-gray-700 dark:text-gray-400">
           an exclusive bettercharts feature
         </p>
       </div>
@@ -80,68 +87,52 @@ const Dashboard: NextPage = () => {
                   detentionType(user.detentions, "today")
                 )}
               />
-              <div className="px-5 pt-5">
-                <Button
-                  size="3"
-                  link="/detentions"
-                  text="View All"
-                  classes="w-full flex justify-center items-center"
-                />
-              </div>
             </Card>
           )}
-          {user?.homework &&
-            homeworkTodo(user.homework).length > 0 &&
-            homeworkNotSubmitted(user.homework).length > 0 &&
-            homeworkLate.length > 0 && (
-              <Card title="Homework">
-                <HomeworkCategory
-                  compact={true}
-                  homework={homeworkTodo(user.homework)}
-                  type="todo"
-                />
-                <HomeworkCategory
-                  compact={true}
-                  homework={homeworkNotSubmitted(user.homework)}
-                  type="fail"
-                />
-                <HomeworkCategory
-                  compact={true}
-                  homework={homeworkLate(user.homework)}
-                  type="late"
-                />
+          {user?.homework && (
+            <Card title="Homework">
+              <HomeworkCategory
+                compact={true}
+                homework={homeworkTodo(user.homework)}
+                type="todo"
+              />
+              <HomeworkCategory
+                compact={true}
+                homework={homeworkCompleted(user.homework)}
+                type="completed"
+              />
+              <HomeworkCategory
+                compact={true}
+                homework={homeworkNotSubmitted(user.homework)}
+                type="fail"
+              />
+              <HomeworkCategory
+                compact={true}
+                homework={homeworkLate(user.homework)}
+                type="late"
+              />
+              {lateOrFailedHomework() && (
                 <div className="px-5 pt-5">
-                  <Button
+                  <DangerButton
                     size="3"
                     link="/homework"
-                    text="View All"
+                    text="You have failed / late homework, view now"
                     classes="w-full flex justify-center items-center"
                   />
                 </div>
-              </Card>
-            )}
+              )}
+            </Card>
+          )}
           <Card classes="px-5 pt-5" title="Recent Activity">
             <div className="overflow-y-scroll h-96">
               <Timeline limit={10} activity={user.activity} />
             </div>
-            <div className="fade -mb-24"></div>
-            <Button
-              size="3"
-              link="/behaviour"
-              text="View All"
-              classes="w-full flex justify-center items-center"
-            />
+            <div className="-mb-24 fade"></div>
           </Card>
           <Card classes="px-5 pt-5" title="Behaviour Weekly">
-            <div className="flex justify-center items-center">
+            <div className="flex items-center justify-center">
               <PieChartBreakdown behaviour={user.behaviour} />
             </div>
-            <Button
-              size="3"
-              link="/behaviour"
-              text="View More Data"
-              classes="w-full flex justify-center items-center"
-            />
           </Card>
           {user?.announcements?.length > 0 && (
             <Card title="Announcements">
@@ -154,7 +145,7 @@ const Dashboard: NextPage = () => {
                       announcement={user?.announcements[1]}
                     />
                   </div>
-                  <div className="fade -mb-24 z-10"></div>
+                  <div className="z-10 -mb-24 fade"></div>
                   <div className="px-5 pt-5">
                     <Button
                       size="3"
@@ -174,10 +165,10 @@ const Dashboard: NextPage = () => {
               {user.lessons?.length !== 0 ? (
                 <Timetable compact noShadow timetable={user.lessons} />
               ) : (
-                <div className="dark:bg-transparent bg-gray-800 m-5 py-5 dark:py-0 dark:mx-0 flex justify-center items-center pt-16 rounded-3xl shadow dark:shadow-none">
+                <div className="flex items-center justify-center py-5 pt-16 m-5 bg-gray-800 shadow dark:bg-transparent dark:py-0 dark:mx-0 rounded-3xl dark:shadow-none">
                   <div>
                     <img className="w-96" src="/NoHomework.svg" />
-                    <h2 className="text-3xl text-center text-gray-200 font-semibold py-2">
+                    <h2 className="py-2 text-3xl font-semibold text-center text-gray-200">
                       Data for today is not available
                     </h2>
                   </div>
