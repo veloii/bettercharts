@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 :root {
-  --light-color: rgba(147, 51, 234, 0.2);
-  --dark-color: #9333ea;
+  --light-color: rgba(16, 185, 129, 0.2);
+  --dark-color: #10b981;
   --radius: 64px;
   --ring-width: 4px;
 }
@@ -108,7 +108,7 @@ body {
 }
 
 .DateInput_input__focused {
-  border-bottom: 2px solid #a855f7 !important;
+  border-bottom: 2px solid #55f7c1 !important;
 }
 
 .CalendarDay {
@@ -126,24 +126,24 @@ body {
 .CalendarDay__selected,
 .CalendarDay__selected:active,
 .CalendarDay__selected:hover {
-  background: #a94dff !important;
-  border: 1px solid #873bce !important;
+  background: #4dffc3 !important;
+  border: 1px solid #3bce9d !important;
 }
 
 .CalendarDay__selected_span {
-  background: #a855f7 !important;
-  border: 1px double #7614d2 !important;
+  background: #55f7c1 !important;
+  border: 1px double #14d293 !important;
 }
 
 .CalendarDay__hovered_span {
-  background: rgba(139, 21, 249, 0.3) !important;
-  border: 1px double rgba(111, 0, 214, 0.1) !important;
-  color: rgba(95, 0, 184, 1) !important;
+  background: rgba(21, 249, 173, 0.3) !important;
+  border: 1px double rgba(0, 214, 143, 0.1) !important;
+  color: #00b87b !important;
 }
 
 .CalendarDay__hovered_span:hover {
-  background: #a94dff !important;
-  border: 1px solid #873bce !important;
+  background: #4dffc3 !important;
+  border: 1px solid #3bce9d !important;
   color: #fff !important;
 }
 .DayPickerKeyboardShortcuts_show__bottomRight::before {

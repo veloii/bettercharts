@@ -34,7 +34,7 @@ const HomeworkCategory = (props: {
               {props.homework.length}
             </span>
           </h3>
-          <button className="h-full p-2 my-auto transition bg-gray-100 cursor-pointer focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-900 focus:ring-purple-500 focus:outline-none rounded-xl dark:bg-gray-800">
+          <button className="h-full p-2 my-auto transition bg-gray-100 cursor-pointer focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-900 focus:ring-emerald-500 focus:outline-none rounded-xl dark:bg-gray-800">
             <ChevronDownIcon
               className={`text-gray-500 w-6 transition duration-500  ${
                 open && "rotate-180"

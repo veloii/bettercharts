@@ -60,12 +60,12 @@ const HomeworkItem = (props: {
             >
               <div className={`${!props.compact && "sm:px-6"} px-4 py-4`}>
                 <div className="flex items-center justify-between">
-                  <p className="text-sm font-medium text-purple-600 truncate">
+                  <p className="text-sm font-medium text-emerald-600 truncate">
                     {position.title}
                   </p>
                   <div className="flex">
                     <div className="flex flex-shrink-0 ml-2">
-                      <p className="inline-flex px-2 text-xs font-semibold leading-5 text-purple-800 bg-purple-100 rounded-full dark:bg-purple-800 dark:text-purple-100">
+                      <p className="inline-flex px-2 text-xs font-semibold leading-5 text-emerald-800 bg-emerald-100 rounded-full dark:bg-emerald-800 dark:text-emerald-100">
                         {position.homework_type}
                       </p>
                     </div>

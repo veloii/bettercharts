@@ -1,99 +1,193 @@
 import classNames from "../lib/classNames";
-import { Fragment, useContext, useEffect, useState } from "react";
+import { Fragment, useContext } from "react";
 import {
   Disclosure,
   Menu,
+  Popover,
   Transition as HeadlessUITransition,
 } from "@headlessui/react";
-import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
+import {
+  BookOpenIcon,
+  ChartBarIcon,
+  ChevronDownIcon,
+  ClockIcon,
+  ExclamationIcon,
+  MenuIcon,
+  QuestionMarkCircleIcon,
+  SpeakerphoneIcon,
+  TemplateIcon,
+  UserIcon,
+  XIcon,
+} from "@heroicons/react/outline";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { UserContext } from "../context/ClassChartsContext";
 import Transition from "./transition/index";
 import TextTransition from "react-text-transition";
-import allowClassChartsFeature from "../hooks/allowClassChartsFeature";
+import { ThemeContext } from "context/ThemeContext";
 
-const userNavigation = [
-  { name: "Awards", href: "/awards" },
-  { name: "Sign out", href: "/logout" },
+const userNavigation = [{ name: "Sign out", href: "/logout" }];
+
+const navigation = [
+  {
+    name: "Dashboard",
+    href: "/overview",
+  },
+  {
+    name: "csf",
+    href: "/csf",
+  },
+  {
+    name: "Behaviour",
+    href: "/behaviour",
+  },
+  {
+    name: "Homework",
+    href: "/homework",
+  },
+  {
+    name: "Detentions",
+    href: "/detentions",
+  },
+  {
+    name: "Awards",
+    href: "/awards",
+  },
+  {
+    name: "report-bug",
+    href: "/report-bug",
+  },
+];
+
+const callsToAction = [
+  { name: "Report a bug", href: "#", icon: ExclamationIcon },
+  {
+    name: "Can't see all features?",
+    href: "/csf",
+    icon: QuestionMarkCircleIcon,
+  },
 ];
 
 export default function Header(props: { children: any }) {
   const router = useRouter();
   const { user } = useContext(UserContext);
-  const [navigation, setNavigation] = useState<
-    | undefined
-    | Array<{ name: string; href: string; logo?: boolean; hidden?: boolean }>
-  >(undefined);
+  const { theme } = useContext(ThemeContext);
 
-  useEffect(() => {
-    if (user && navigation === undefined) {
-      const classChartsFeatures: string[] = allowClassChartsFeature(
-        user
-      ) as any;
-
-      setNavigation([
-        { name: "Dashboard", href: "/overview", logo: false },
-
-        ...classChartsFeatures!.map((feature) => ({
-          name: feature,
-          href: "/" + feature.toLowerCase(),
-        })),
-        ...userNavigation!.map((nav) => ({
-          name: nav.name,
-          href: nav.href,
-          hidden: true,
-        })),
-      ]);
-    }
-  }, [user]);
-
-  return navigation ? (
+  return theme ? (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-800">
-      <Disclosure as="nav" className="bg-white shadow dark:bg-gray-900">
+      <Popover as="nav" className="bg-white shadow dark:bg-gray-900">
         {({ open }) => (
           <>
             <div className="px-4 mx-auto max-w-7xl md:px-6 lg:px-8">
               <div className="flex justify-between h-16">
                 <div className="flex">
                   <div className="flex items-center flex-shrink-0">
-                    <span className="block text-3xl text-purple-500 md:mr-10 font-brand dark:text-purple-400">
-                      bettercharts
+                    <span className="block text-3xl text-emerald-500 md:mr-10 font-brand dark:text-emerald-400">
+                      bcx
                     </span>
                   </div>
-                  <div className="hidden md:-my-px md:flex md:space-x-8">
-                    {navigation.map(
-                      (item) =>
-                        !item?.hidden && (
-                          <Link key={item.name} href={item.href}>
-                            <a
-                              className={classNames(
-                                router.asPath
-                                  .toLowerCase()
-                                  .includes(item.href.toLowerCase())
-                                  ? "border-purple-400 text-gray-900 dark:text-gray-200 font-semibold "
-                                  : "border-transparent text-gray-500 hover:text-gray-700 dark:hover:text-gray-400 hover:border-gray-300 dark:hover:border-gray-600",
-                                "inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-all duration-250"
-                              )}
-                              aria-current={
-                                router.asPath
-                                  .toLowerCase()
-                                  .includes(item.href.toLowerCase())
-                                  ? "page"
-                                  : undefined
-                              }
-                            >
-                              {item.logo ? (
-                                <span className="text-3xl text-purple-500 dark:text-purple-300 font-brand">
-                                  {item.name}
-                                </span>
-                              ) : (
-                                item.name
-                              )}
-                            </a>
-                          </Link>
-                        )
-                    )}
+                  <div className="items-center justify-center hidden md:-my-px md:flex md:space-x-8">
+                    <Popover.Group as="nav" className="flex space-x-10">
+                      {theme.desktopNavigation.map((category) => (
+                        <Popover key={category.name}>
+                          {({ open }) => (
+                            <>
+                              <Popover.Button
+                                className={classNames(
+                                  open ? "text-gray-900" : "text-gray-700",
+                                  "group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none "
+                                )}
+                              >
+                                <span className="text-sm">{category.name}</span>
+                                <ChevronDownIcon
+                                  className={classNames(
+                                    open ? "text-gray-600" : "text-gray-400",
+                                    "ml-2 h-5 w-5 group-hover:text-gray-500"
+                                  )}
+                                  aria-hidden="true"
+                                />
+                              </Popover.Button>
+
+                              <HeadlessUITransition
+                                show={open}
+                                as={Fragment}
+                                enter="transition ease-out duration-200"
+                                enterFrom="opacity-0 -translate-y-1"
+                                enterTo="opacity-100 translate-y-0"
+                                leave="transition ease-in duration-150"
+                                leaveFrom="opacity-100 translate-y-0"
+                                leaveTo="opacity-0 -translate-y-1"
+                              >
+                                <Popover.Panel
+                                  static
+                                  className="absolute inset-x-0 z-50 hidden transform bg-white shadow-lg top-[4.1rem] md:block"
+                                >
+                                  <div className="grid px-4 py-6 mx-auto max-w-7xl gap-y-6 sm:grid-cols-2 sm:gap-8 sm:px-6 sm:py-8 lg:grid-cols-4 lg:px-8 lg:py-12 xl:py-16">
+                                    {category.items.map((item) => (
+                                      <Link href={item.href}>
+                                        <a
+                                          key={item.name}
+                                          className="flex flex-col justify-between p-3 -m-3 rounded-lg hover:bg-gray-50"
+                                        >
+                                          <div className="flex md:h-full lg:flex-col">
+                                            <div className="flex-shrink-0">
+                                              <span className="inline-flex items-center justify-center w-10 h-10 text-white rounded-md bg-emerald-500 sm:h-12 sm:w-12">
+                                                <item.icon
+                                                  className="w-6 h-6"
+                                                  aria-hidden="true"
+                                                />
+                                              </span>
+                                            </div>
+                                            <div className="ml-4 md:flex-1 md:flex md:flex-col md:justify-between lg:ml-0 lg:mt-4">
+                                              <div>
+                                                <p className="text-base font-medium text-gray-900">
+                                                  {item.name}
+                                                </p>
+                                                <p className="mt-1 text-sm text-gray-500">
+                                                  {item.description}
+                                                </p>
+                                              </div>
+                                              <p className="mt-2 text-sm font-medium text-emerald-600 lg:mt-4">
+                                                {item.info}{" "}
+                                                <span aria-hidden="true">
+                                                  &rarr;
+                                                </span>
+                                              </p>
+                                            </div>
+                                          </div>
+                                        </a>
+                                      </Link>
+                                    ))}
+                                  </div>
+                                  <div className="bg-gray-50">
+                                    <div className="px-4 py-5 mx-auto space-y-6 max-w-7xl sm:flex sm:space-y-0 sm:space-x-10 sm:px-6 lg:px-8">
+                                      {callsToAction.map((item) => (
+                                        <div
+                                          key={item.name}
+                                          className="flow-root"
+                                        >
+                                          <Link href={item.href}>
+                                            <a className="flex items-center p-3 -m-3 text-base font-medium text-gray-900 rounded-md hover:bg-gray-100">
+                                              <item.icon
+                                                className="flex-shrink-0 w-6 h-6 text-gray-400"
+                                                aria-hidden="true"
+                                              />
+                                              <span className="ml-3">
+                                                {item.name}
+                                              </span>
+                                            </a>
+                                          </Link>
+                                        </div>
+                                      ))}
+                                    </div>
+                                  </div>
+                                </Popover.Panel>
+                              </HeadlessUITransition>
+                            </>
+                          )}
+                        </Popover>
+                      ))}
+                    </Popover.Group>
                   </div>
                 </div>
                 <div className="hidden md:ml-6 md:flex md:items-center">
@@ -101,16 +195,25 @@ export default function Header(props: { children: any }) {
                   <Menu as="div" className="relative ml-3">
                     {({ open }) => (
                       <>
-                        <div>
-                          <Menu.Button className="flex text-sm bg-white rounded-full dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-900 focus:ring-purple-500">
+                        <Menu.Button className="flex text-sm bg-white rounded-full dark:bg-gray-900 ">
+                          <div className="flex items-center justify-center gap-4 px-3 py-2 transition duration-100 border rounded-md dark:border-gray-800 dark:hover:bg-gray-800 hover:bg-gray-50">
                             <span className="sr-only">Open user menu</span>
                             <img
-                              className="w-8 h-8 rounded-full"
+                              className="border dark:border-gray-800 rounded-xl w-9 h-9"
                               src={user?.student?.avatar_url}
                               alt=""
                             />
-                          </Menu.Button>
-                        </div>
+                            <div>
+                              <div className="text-sm font-semibold text-left dark:text-gray-50">
+                                {user?.student?.first_name}
+                              </div>
+                              <div className="text-xs font-light text-left dark:text-gray-50">
+                                {user?.student?.last_name}
+                              </div>
+                            </div>
+                          </div>
+                        </Menu.Button>
+
                         <HeadlessUITransition
                           show={open}
                           as={Fragment}
@@ -123,7 +226,7 @@ export default function Header(props: { children: any }) {
                         >
                           <Menu.Items
                             static
-                            className="absolute right-0 z-10 w-48 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg dark:bg-gray-800 ring-1 ring-black ring-opacity-5 focus:outline-none"
+                            className="absolute right-0 z-10 w-48 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg dark:bg-gray-900 ring-1 ring-black ring-opacity-5 focus:outline-none"
                           >
                             {userNavigation.map((item) => (
                               <Menu.Item key={item.name}>
@@ -134,7 +237,7 @@ export default function Header(props: { children: any }) {
                                         active
                                           ? "bg-gray-100 dark:bg-gray-800"
                                           : "",
-                                        "block px-4 py-2 text-sm text-gray-700 dark:text-gray-200"
+                                        "block px-4 py-2 text-sm hover:bg-gray-100 hover:dark:bg-gray-800 text-gray-700 dark:text-gray-200 transition"
                                       )}
                                     >
                                       {item.name}
@@ -151,91 +254,96 @@ export default function Header(props: { children: any }) {
                 </div>
                 <div className="flex items-center -mr-2 md:hidden">
                   {/* Mobile menu button */}
-                  <Disclosure.Button className="inline-flex items-center justify-center p-2 text-gray-400 bg-white rounded-md dark:bg-gray-900 hover:text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-900 focus:ring-purple-500">
-                    <span className="sr-only">Open main menu</span>
-                    {open ? (
-                      <XIcon className="block w-6 h-6" aria-hidden="true" />
-                    ) : (
-                      <MenuIcon className="block w-6 h-6" aria-hidden="true" />
-                    )}
-                  </Disclosure.Button>
+                  <div className="-my-2 -mr-2 md:hidden">
+                    <Popover.Button className="inline-flex items-center justify-center p-2 text-gray-400 bg-white rounded-md hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-emerald-500">
+                      <span className="sr-only">Open menu</span>
+                      <MenuIcon className="w-6 h-6" aria-hidden="true" />
+                    </Popover.Button>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <Disclosure.Panel className="md:hidden">
-              <div className="pt-2 pb-3 space-y-1">
-                {navigation.map(
-                  (item) =>
-                    !item?.hidden && (
-                      <Link key={item.name} href={item.href}>
-                        <a
-                          className={classNames(
-                            router.asPath
-                              .toLowerCase()
-                              .includes(item.href.toLowerCase())
-                              ? "bg-purple-50 dark:bg-purple-900 border-purple-500 dark:border-purple-700 text-purple-600 dark:text-purple-200 font-semibold "
-                              : "border-transparent text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 hover:border-gray-300 dark:hover:border-gray-700 hover:text-gray-800 dark:hover:text-gray-300",
-                            "block pl-3 pr-4 py-2 border-l-4 text-base font-medium transition-all duration-250"
+            <HeadlessUITransition
+              show={open}
+              as={Fragment}
+              enter="duration-200 ease-out"
+              enterFrom="opacity-0 scale-95"
+              enterTo="opacity-100 scale-100"
+              leave="duration-100 ease-in"
+              leaveFrom="opacity-100 scale-100"
+              leaveTo="opacity-0 scale-95"
+            >
+              <Popover.Panel
+                focus
+                static
+                className="absolute inset-x-0 top-0 z-30 p-2 transition origin-top-right transform md:hidden"
+              >
+                <div className="bg-white divide-y-2 rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 divide-gray-50">
+                  <div className="px-5 pt-5 pb-6 sm:pb-8">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <span className="block text-3xl text-emerald-500 md:mr-10 font-brand dark:text-emerald-400">
+                          bcx
+                        </span>
+                      </div>
+                      <div className="-mr-2">
+                        <Popover.Button className="inline-flex items-center justify-center p-2 text-gray-400 bg-white rounded-md hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-emerald-500">
+                          <span className="sr-only">Close menu</span>
+                          <XIcon className="w-6 h-6" aria-hidden="true" />
+                        </Popover.Button>
+                      </div>
+                    </div>
+                    <div className="mt-6 sm:mt-8">
+                      <nav>
+                        <div className="grid gap-7 sm:grid-cols-2 sm:gap-y-8 sm:gap-x-4">
+                          {theme.desktopNavigation.map((item) =>
+                            item.items.map((item) => (
+                              <Link href={item.href}>
+                                <a
+                                  key={item.name}
+                                  className="flex items-center p-3 -m-3 rounded-lg hover:bg-gray-50"
+                                >
+                                  <div className="flex items-center justify-center flex-shrink-0 w-10 h-10 text-white rounded-md bg-emerald-500 sm:h-12 sm:w-12">
+                                    <item.icon
+                                      className="w-6 h-6"
+                                      aria-hidden="true"
+                                    />
+                                  </div>
+                                  <div className="ml-4 text-base font-medium text-gray-900">
+                                    {item.name}
+                                  </div>
+                                </a>
+                              </Link>
+                            ))
                           )}
-                          aria-current={
-                            router.asPath
-                              .toLowerCase()
-                              .includes(item.href.toLowerCase())
-                              ? "page"
-                              : undefined
-                          }
-                        >
-                          {item.logo ? (
-                            <span className="text-3xl dark:text-purple-300 font-brand">
-                              {item.name}
-                            </span>
-                          ) : (
-                            item.name
-                          )}
-                        </a>
-                      </Link>
-                    )
-                )}
-              </div>
-              <div className="pt-4 pb-3 border-t border-gray-200 dark:border-gray-800">
-                <div className="flex items-center px-4">
-                  <div className="flex-shrink-0">
-                    <img
-                      className="w-10 h-10 rounded-full"
-                      src={user?.student?.avatar_url}
-                      alt=""
-                    />
-                  </div>
-                  <div className="ml-3">
-                    <div className="text-base font-medium text-gray-800 dark:text-gray-100">
-                      {user?.student?.first_name}
+                        </div>
+                        <div className="mt-8 text-base">
+                          <Link href="/logout">
+                            <a className="font-medium text-emerald-600 hover:text-emerald-500">
+                              {" "}
+                              Logout <span aria-hidden="true">&rarr;</span>
+                            </a>
+                          </Link>
+                        </div>
+                      </nav>
                     </div>
                   </div>
-                  <button className="flex-shrink-0 p-1 ml-auto text-gray-400 bg-white rounded-full dark:bg-gray-900 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-900 focus:ring-purple-500">
-                    <span className="sr-only">View notifications</span>
-                    <BellIcon className="w-6 h-6" aria-hidden="true" />
-                  </button>
                 </div>
-                <div className="mt-3 space-y-1">
-                  {userNavigation.map((item) => (
-                    <Link key={item.name} href={item.href}>
-                      <a className="block px-4 py-2 text-base font-medium text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-800">
-                        {item.name}
-                      </a>
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            </Disclosure.Panel>
+              </Popover.Panel>
+            </HeadlessUITransition>
           </>
         )}
-      </Disclosure>
+      </Popover>
 
       <div>
         <header
           className={`bg-white dark:bg-gray-900 ${
-            router.asPath.includes("overview") ? "py-0 h-0" : "py-10 border-b"
+            router.asPath.includes("overview") ||
+            router.asPath.includes("csf") ||
+            router.asPath.includes("report-bug")
+              ? "py-0 h-0"
+              : "py-10 border-b"
           } filter drop-shadow dark:border-b-gray-700 mt-0.5 transition-all ease-in-out duration-500`}
         >
           <div className="px-4 mx-auto max-w-7xl md:px-6 lg:px-8">
@@ -246,7 +354,9 @@ export default function Header(props: { children: any }) {
                 text={
                   (
                     navigation.find((nav) => {
-                      if (nav.name === "bettercharts") return "";
+                      if (nav.name === "Dashboard") return "";
+                      if (nav.name === "csf") return "";
+                      if (nav.name === "report-bug") return "";
                       else return router.asPath.includes(nav.href);
                     }) || { name: "" }
                   ).name
@@ -264,7 +374,5 @@ export default function Header(props: { children: any }) {
         </main>
       </div>
     </div>
-  ) : (
-    props.children
-  );
+  ) : null;
 }

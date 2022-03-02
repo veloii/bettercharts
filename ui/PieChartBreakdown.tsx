@@ -95,6 +95,9 @@ const PieChartPositive = (props: {
       {pieChartData && (
         <>
           <Doughnut
+            style={{
+              zIndex: 2,
+            }}
             options={{
               responsive: true,
               plugins: {
@@ -118,9 +121,9 @@ const PieChartPositive = (props: {
             style={{
               zIndex: "1",
             }}
-            className="flex justify-center items-start"
+            className="flex items-start justify-center"
           >
-            <div className="absolute dark:text-gray-400 font-medium xl:-mt-0 -mt-4">
+            <div className="absolute -mt-4 font-medium dark:text-gray-400 xl:-mt-0">
               {props.text}
             </div>
           </div>
@@ -128,7 +131,7 @@ const PieChartPositive = (props: {
             style={{
               zIndex: "1",
             }}
-            className="text-center -mt-60 text-sm text-gray-200 font-light bg-green-800 py-16 rounded-full relative w-36 mx-auto"
+            className="relative py-16 mx-auto text-sm font-light text-center text-gray-200 bg-green-800 rounded-full -mt-60 w-36"
           >
             {100 - pointsPercentage}% Positive
           </div>
