@@ -10,9 +10,14 @@ import allowClassChartsFeature from "hooks/allowClassChartsFeature";
 import { CookiesProvider, useCookies } from "react-cookie";
 import CookieConsent from "components/CookieConsent";
 import Updates from "components/Updates";
+import { ThemeContextProvider } from "context/ThemeContext";
+import Theme from "../types/Theme";
+import setupTheme from "lib/setupTheme";
 
 function MyApp({ Component, pageProps, router }: AppProps) {
   const [user, setUser] = useState<ClassCharts | null>();
+  const [theme, setTheme] = useState<Theme | null>(null);
+
   const [cookies, setCookie, removeCookie] = useCookies([
     "cc_access_code",
     "cc_date_of_birth",
@@ -27,44 +32,27 @@ function MyApp({ Component, pageProps, router }: AppProps) {
           return;
         }
 
-        const classCharts: ClassCharts = res as any;
-        const features: Array<{ name: string; value: boolean }> =
-          allowClassChartsFeature(classCharts, true) as any;
-
-        features.forEach((feature) => {
-          if (router.asPath.includes(feature.name) && feature.value === false)
-            router.push("/");
-        });
+        setTheme(setupTheme(res!));
 
         setUser(res);
       });
   }, []);
 
-  router.events?.on("routeChangeStart", (path) => {
-    if (user) {
-      const features: Array<{ name: string; value: boolean }> =
-        allowClassChartsFeature(user, true) as any;
-
-      features.forEach((feature) => {
-        if (path.includes(feature.name) && feature.value === false)
-          router.push("/");
-      });
-    }
-  });
-
   return (
     <React.Fragment>
       <CookiesProvider>
         <UserContextProvider value={{ user, setUser }}>
-          <CookieConsent />
-          <Updates />
-          {user ? (
-            <Header>
+          <ThemeContextProvider value={{ theme, setTheme }}>
+            <CookieConsent />
+            <Updates />
+            {user ? (
+              <Header>
+                <Component key={router.route} {...pageProps} />
+              </Header>
+            ) : (
               <Component key={router.route} {...pageProps} />
-            </Header>
-          ) : (
-            <Component key={router.route} {...pageProps} />
-          )}
+            )}
+          </ThemeContextProvider>
         </UserContextProvider>
       </CookiesProvider>
     </React.Fragment>

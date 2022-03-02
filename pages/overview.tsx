@@ -23,6 +23,7 @@ import Announcement from "ui/Announcement";
 import Timetable from "ui/Timetable";
 import DangerButton from "ui/DangerButton";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 const convertDate = (date: dayjs.Dayjs) =>
   date.year() + "-" + (date.month() + 1) + "-" + date.date();
@@ -72,14 +73,7 @@ const Dashboard: NextPage = () => {
       <Head>
         <title>Dashboard | BetterCharts</title>
       </Head>
-      <div className="py-10 bg-white border-b shadow-lg dark:bg-gray-900 dark:border-gray-700">
-        <h1 className="text-5xl text-center text-purple-500 font-brand dark:text-purple-300">
-          dashboard
-        </h1>
-        <p className="text-sm text-center text-gray-700 dark:text-gray-400">
-          an exclusive bettercharts feature
-        </p>
-      </div>
+
       <div>
         <Masonry
           breakpointCols={{ default: 3, 1100: 2, 700: 1, 500: 1 }}
@@ -154,14 +148,15 @@ const Dashboard: NextPage = () => {
                   </div>
                   <div className="z-10 -mb-24 fade"></div>
                   <div className="px-5 pt-5">
-                    <Button
-                      size="3"
-                      link="/announcements"
-                      text={`View ${
-                        user?.announcements?.length - 1
-                      } more announcements`}
-                      classes="w-full flex justify-center items-center"
-                    />
+                    <Link href="/announcements">
+                      <Button
+                        size="3"
+                        className="flex items-center justify-center w-full"
+                      >
+                        View {user?.announcements?.length - 1} more
+                        announcements
+                      </Button>
+                    </Link>
                   </div>
                 </>
               )}
