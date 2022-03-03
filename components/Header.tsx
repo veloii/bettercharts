@@ -1,22 +1,15 @@
 import classNames from "../lib/classNames";
 import { Fragment, useContext } from "react";
 import {
-  Disclosure,
   Menu,
   Popover,
   Transition as HeadlessUITransition,
 } from "@headlessui/react";
 import {
-  BookOpenIcon,
-  ChartBarIcon,
   ChevronDownIcon,
-  ClockIcon,
   ExclamationIcon,
   MenuIcon,
   QuestionMarkCircleIcon,
-  SpeakerphoneIcon,
-  TemplateIcon,
-  UserIcon,
   XIcon,
 } from "@heroicons/react/outline";
 import { useRouter } from "next/router";
@@ -25,6 +18,7 @@ import { UserContext } from "../context/ClassChartsContext";
 import Transition from "./transition/index";
 import TextTransition from "react-text-transition";
 import { ThemeContext } from "context/ThemeContext";
+import React from "react";
 
 const userNavigation = [{ name: "Sign out", href: "/logout" }];
 
@@ -94,15 +88,19 @@ export default function Header(props: { children: any }) {
                             <>
                               <Popover.Button
                                 className={classNames(
-                                  open ? "text-gray-900" : "text-gray-700",
-                                  "group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none "
+                                  open
+                                    ? "text-gray-900 dark:text-gray-100"
+                                    : "text-gray-700 dark:text-gray-300",
+                                  "group bg-white dark:bg-gray-900 rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 hover:dark:text-gray-100 focus:outline-none "
                                 )}
                               >
                                 <span className="text-sm">{category.name}</span>
                                 <ChevronDownIcon
                                   className={classNames(
-                                    open ? "text-gray-600" : "text-gray-400",
-                                    "ml-2 h-5 w-5 group-hover:text-gray-500"
+                                    open
+                                      ? "text-gray-600 dark:text-gray-400"
+                                      : "text-gray-400 dark:text-gray-500",
+                                    "ml-2 h-5 w-5 group-hover:text-gray-500 dark:group-hover:text-gray-400"
                                   )}
                                   aria-hidden="true"
                                 />
@@ -120,18 +118,18 @@ export default function Header(props: { children: any }) {
                               >
                                 <Popover.Panel
                                   static
-                                  className="absolute inset-x-0 z-50 hidden transform bg-white shadow-lg top-[4.1rem] md:block"
+                                  className="absolute inset-x-0 z-50 hidden transform bg-white dark:bg-gray-900 shadow-lg top-[4.1rem] md:block"
                                 >
                                   <div className="grid px-4 py-6 mx-auto max-w-7xl gap-y-6 sm:grid-cols-2 sm:gap-8 sm:px-6 sm:py-8 lg:grid-cols-4 lg:px-8 lg:py-12 xl:py-16">
                                     {category.items.map((item) => (
-                                      <Link href={item.href}>
+                                      <Link key={item.href} href={item.href}>
                                         <a
                                           key={item.name}
-                                          className="flex flex-col justify-between p-3 -m-3 rounded-lg hover:bg-gray-50"
+                                          className="flex flex-col justify-between p-3 -m-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800"
                                         >
                                           <div className="flex md:h-full lg:flex-col">
                                             <div className="flex-shrink-0">
-                                              <span className="inline-flex items-center justify-center w-10 h-10 text-white rounded-md bg-emerald-500 sm:h-12 sm:w-12">
+                                              <span className="inline-flex items-center justify-center w-10 h-10 text-white rounded-md dark:text-black bg-emerald-500 sm:h-12 sm:w-12">
                                                 <item.icon
                                                   className="w-6 h-6"
                                                   aria-hidden="true"
@@ -140,10 +138,10 @@ export default function Header(props: { children: any }) {
                                             </div>
                                             <div className="ml-4 md:flex-1 md:flex md:flex-col md:justify-between lg:ml-0 lg:mt-4">
                                               <div>
-                                                <p className="text-base font-medium text-gray-900">
+                                                <p className="text-base font-medium text-gray-900 dark:text-gray-100">
                                                   {item.name}
                                                 </p>
-                                                <p className="mt-1 text-sm text-gray-500">
+                                                <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
                                                   {item.description}
                                                 </p>
                                               </div>
@@ -159,7 +157,7 @@ export default function Header(props: { children: any }) {
                                       </Link>
                                     ))}
                                   </div>
-                                  <div className="bg-gray-50">
+                                  <div className="bg-gray-50 dark:bg-gray-800">
                                     <div className="px-4 py-5 mx-auto space-y-6 max-w-7xl sm:flex sm:space-y-0 sm:space-x-10 sm:px-6 lg:px-8">
                                       {callsToAction.map((item) => (
                                         <div
@@ -167,9 +165,9 @@ export default function Header(props: { children: any }) {
                                           className="flow-root"
                                         >
                                           <Link href={item.href}>
-                                            <a className="flex items-center p-3 -m-3 text-base font-medium text-gray-900 rounded-md hover:bg-gray-100">
+                                            <a className="flex items-center p-3 -m-3 text-base font-medium text-gray-900 rounded-md dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700">
                                               <item.icon
-                                                className="flex-shrink-0 w-6 h-6 text-gray-400"
+                                                className="flex-shrink-0 w-6 h-6 text-gray-400 dark:text-gray-500"
                                                 aria-hidden="true"
                                               />
                                               <span className="ml-3">
@@ -255,7 +253,7 @@ export default function Header(props: { children: any }) {
                 <div className="flex items-center -mr-2 md:hidden">
                   {/* Mobile menu button */}
                   <div className="-my-2 -mr-2 md:hidden">
-                    <Popover.Button className="inline-flex items-center justify-center p-2 text-gray-400 bg-white rounded-md hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-emerald-500">
+                    <Popover.Button className="inline-flex items-center justify-center p-2 text-gray-400 bg-white rounded-md dark:text-gray-600 dark:bg-gray-900 hover:text-gray-500 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-emerald-500">
                       <span className="sr-only">Open menu</span>
                       <MenuIcon className="w-6 h-6" aria-hidden="true" />
                     </Popover.Button>
@@ -279,7 +277,7 @@ export default function Header(props: { children: any }) {
                 static
                 className="absolute inset-x-0 top-0 z-30 p-2 transition origin-top-right transform md:hidden"
               >
-                <div className="bg-white divide-y-2 rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 divide-gray-50">
+                <div className="bg-white divide-y-2 rounded-lg shadow-lg dark:bg-gray-900 ring-1 ring-black dark:ring-offset-gray-900 ring-opacity-5 divide-gray-50 dark:divide-gray-800">
                   <div className="px-5 pt-5 pb-6 sm:pb-8">
                     <div className="flex items-center justify-between">
                       <div>
@@ -288,7 +286,7 @@ export default function Header(props: { children: any }) {
                         </span>
                       </div>
                       <div className="-mr-2">
-                        <Popover.Button className="inline-flex items-center justify-center p-2 text-gray-400 bg-white rounded-md hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-emerald-500">
+                        <Popover.Button className="inline-flex items-center justify-center p-2 text-gray-400 bg-white rounded-md dark:text-gray-600 dark:bg-gray-900 hover:text-gray-500 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-emerald-500">
                           <span className="sr-only">Close menu</span>
                           <XIcon className="w-6 h-6" aria-hidden="true" />
                         </Popover.Button>
@@ -299,18 +297,18 @@ export default function Header(props: { children: any }) {
                         <div className="grid gap-7 sm:grid-cols-2 sm:gap-y-8 sm:gap-x-4">
                           {theme.desktopNavigation.map((item) =>
                             item.items.map((item) => (
-                              <Link href={item.href}>
+                              <Link key={item.href} href={item.href}>
                                 <a
                                   key={item.name}
-                                  className="flex items-center p-3 -m-3 rounded-lg hover:bg-gray-50"
+                                  className="flex items-center p-3 -m-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800"
                                 >
-                                  <div className="flex items-center justify-center flex-shrink-0 w-10 h-10 text-white rounded-md bg-emerald-500 sm:h-12 sm:w-12">
+                                  <div className="flex items-center justify-center flex-shrink-0 w-10 h-10 text-white rounded-md dark:text-black bg-emerald-500 sm:h-12 sm:w-12">
                                     <item.icon
                                       className="w-6 h-6"
                                       aria-hidden="true"
                                     />
                                   </div>
-                                  <div className="ml-4 text-base font-medium text-gray-900">
+                                  <div className="ml-4 text-base font-medium text-gray-900 dark:text-gray-100">
                                     {item.name}
                                   </div>
                                 </a>
