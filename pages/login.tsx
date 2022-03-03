@@ -19,9 +19,8 @@ const Login = () => {
 
   useEffect(() => {
     if (user) {
-      return () => {
-        router.push("/overview");
-      };
+      router.push("/overview");
+      return;
     }
     if (
       router.query?.password &&

@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { ClasschartsClient } from "classcharts-api";
+import { lessonsInfo } from "lib/fakeUser";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { date } = req.query;
