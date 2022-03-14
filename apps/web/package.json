@@ -2,7 +2,7 @@
   "name": "next",
   "private": true,
   "scripts": {
-    "dev": "next dev -H 192.168.10.46",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",

@@ -9,6 +9,7 @@ This turborepo uses [Yarn](https://classic.yarnpkg.com/lang/en/) as a package ma
 ### Apps and Packages
 
 - `web`: [Next.js](https://nextjs.org) app
+- `brand`: [Next.js](https://nextjs.org) app
 - `api`: [Express](https://expressjs.com) app
 - `config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
 - `tsconfig`: `tsconfig.json`s used throughout the monorepo
