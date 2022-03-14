@@ -85,7 +85,7 @@ export default function Header(props: { children: any }) {
                 <div className="flex">
                   <div className="flex items-center flex-shrink-0">
                     <span className="block text-3xl text-emerald-500 md:mr-10 font-brand dark:text-emerald-400">
-                      bcx
+                      bc
                     </span>
                   </div>
                   <div className="items-center justify-center hidden md:-my-px md:flex md:space-x-8">

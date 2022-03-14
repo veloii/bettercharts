@@ -15,9 +15,12 @@ import setupTheme from "lib/setupTheme";
 import { SocketContextProvider } from "context/SocketIOContext";
 import { io, Socket } from "socket.io-client";
 import Login from "./login";
+import { CalendarContextProvider } from "context/CalendarContext";
+import Calendar from "types/Calendar";
 
 function MyApp({ Component, pageProps, router }: AppProps) {
   const [user, setUser] = useState<ClassCharts | null>();
+  const [calendar, setCalendar] = useState<Calendar | undefined>();
   const [theme, setTheme] = useState<Theme | null>(null);
   const [socket, setSocket] = useState<Socket | null>();
   const [cookies, setCookie, removeCookie] = useCookies([
@@ -32,13 +35,16 @@ function MyApp({ Component, pageProps, router }: AppProps) {
 
       setStatus("Connecting to Socket.IO");
 
-      const _socket = io(process.env.NEXT_PUBLIC_API_URL || "https://api.zelr.me", {
-        auth: {
-          accessCode: cookies.cc_access_code,
-          dateOfBirth: cookies.cc_date_of_birth,
-        },
-        withCredentials: true,
-      });
+      const _socket = io(
+        process.env.NEXT_PUBLIC_API_URL || "https://api.zelr.me",
+        {
+          auth: {
+            accessCode: cookies.cc_access_code,
+            dateOfBirth: cookies.cc_date_of_birth,
+          },
+          withCredentials: true,
+        }
+      );
 
       _socket.on("ready", () => {
         setStatus("Initializing BetterCharts");
@@ -75,20 +81,22 @@ function MyApp({ Component, pageProps, router }: AppProps) {
         <SocketContextProvider value={{ socket, setSocket }}>
           <UserContextProvider value={{ user, setUser }}>
             <ThemeContextProvider value={{ theme, setTheme }}>
-              <CookieConsent />
-              <Updates />
-              {user ? (
-                <Header>
-                  <Component key={router.route} {...pageProps} />
-                </Header>
-              ) : user === null ? (
-                <Login />
-              ) : (
-                <div className="absolute top-0 left-0 z-50 flex items-center justify-center w-screen h-screen p-0 m-0 bg-white dark:bg-gray-900">
-                  <div className="loading"></div>
-                  <div className="pl-5">{status}</div>
-                </div>
-              )}
+              <CalendarContextProvider value={{ calendar, setCalendar }}>
+                <CookieConsent />
+                <Updates />
+                {user ? (
+                  <Header>
+                    <Component key={router.route} {...pageProps} />
+                  </Header>
+                ) : user === null ? (
+                  <Login />
+                ) : (
+                  <div className="absolute top-0 left-0 z-50 flex items-center justify-center w-screen h-screen p-0 m-0 bg-white dark:bg-gray-900">
+                    <div className="loading"></div>
+                    <div className="pl-5">{status}</div>
+                  </div>
+                )}
+              </CalendarContextProvider>
             </ThemeContextProvider>
           </UserContextProvider>
         </SocketContextProvider>

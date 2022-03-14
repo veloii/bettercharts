@@ -53,8 +53,8 @@ const WeekDayContent = () => {
 
   useEffect(() => {
     addEvent({
-      bgColor: "bg-green-50",
-      textColor: "text-green-600",
+      bgColor: "bg-green-50 dark:bg-green-800",
+      textColor: "text-green-600 dark:text-green-200",
       name: "Spanish",
       date: new Date(
         "Sat Mar 12 2022 17:10:37 GMT+0000 (Coordinated Universal Time)"
@@ -94,7 +94,7 @@ const WeekDayContent = () => {
           </div>
         ))}
       </div>
-      <div className="isolate divide-y -mt-[30px]">
+      <div className="isolate divide-y dark:divide-gray-700 -mt-[30px]">
         <div className="h-16"></div>
         <div className="h-16"></div>
         <div className="h-16"></div>

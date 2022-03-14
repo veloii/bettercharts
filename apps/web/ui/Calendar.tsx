@@ -12,11 +12,11 @@ const Calendar = () => {
 
   return (
     <div>
-      <div className="bg-gray-50 flex items-center justify-between p-5 px-7">
+      <div className="bg-gray-50 dark:text-white dark:bg-gray-800 flex items-center justify-between p-5 px-7">
         <h1 className="font-bold text-xl text-center">
           {month} {year}
         </h1>
-        <div className="flex gap-4">
+        <div className="gap-4 md:flex hidden">
           <SimpleSelect
             defaultIndex={0}
             data={[
@@ -31,7 +31,16 @@ const Calendar = () => {
       </div>
 
       {view === "month" && <MonthView yearState={year} monthState={month} />}
-      {view === "week" && <WeekView yearState={year} monthState={month} />}
+      {view === "week" && (
+        <>
+          <div className="md:block hidden">
+            <WeekView yearState={year} monthState={month} />
+          </div>
+          <div className="md:hidden">
+            <MonthView yearState={year} monthState={month} />
+          </div>
+        </>
+      )}
     </div>
   );
 };

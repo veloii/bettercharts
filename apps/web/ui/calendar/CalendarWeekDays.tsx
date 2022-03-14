@@ -4,8 +4,9 @@ const CalendarWeekDays = (props: {
 }) => {
   return (
     <div>
-      <div className="divide-y-2">
-        <div className="p-3">{props.name}</div>
+      <div className="divide-y-2 dark:divide-gray-700">
+        <div className="p-3 md:hidden block">{props.name.substring(1, 0)}</div>
+        <div className="p-3 md:block hidden">{props.name}</div>
         {props.children}
       </div>
     </div>

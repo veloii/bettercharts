@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import CalendarWeeklyDays from "../CalendarWeeklyDays";
 import Day from "../Day";
+import MonthView from "./MonthView";
 
 function daysInMonthFunction(year: number, month: number) {
   return new Date(year, month + 1, 0).getDate();
@@ -54,7 +55,7 @@ const WeekView = (props: {
   }, []);
 
   return (
-    <div className="bg-white">
+    <div className="bg-white dark:bg-gray-900 hide-scrollbar">
       <CalendarWeeklyDays />
     </div>
   );

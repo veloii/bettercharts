@@ -110,7 +110,7 @@ const MonthView = (props: {
 
   return (
     <div className="flex">
-      <div className="grid grid-cols-7 w-full bg-white divide-x-2 text-center font-semibold text-sm border-y-2">
+      <div className="grid grid-cols-7 w-full dark:divide-gray-700 bg-white divide-x-2 text-center font-semibold text-sm border-y dark:border-gray-700 dark:bg-gray-900 dark:text-white">
         <CalendarWeekDays name="Mon">
           {days
             .filter((day) => day.getDay() === 1)
@@ -188,6 +188,7 @@ const MonthView = (props: {
               />
             ))}
         </CalendarWeekDays>
+        <div className="md:hidden">Show events here</div>
       </div>
     </div>
   );

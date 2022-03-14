@@ -3,23 +3,23 @@ import WeeklyDay from "./WeeklyDay";
 
 const CalendarWeeklyDays = () => {
   return (
-    <div className="overflow-y-none">
-      <div className="shadow">
-        <div className="flex divide-x">
+    <div>
+      <div className="shadow hide-scrollbar">
+        <div className="flex divide-x dark:divide-gray-700">
           <div className="w-[450px]"></div>
           <WeeklyDay day="Mon" date="10" />
           <WeeklyDay day="Tue" date="11" />
           <WeeklyDay day="Wed" date="12" />
           <WeeklyDay day="Thu" date="13" />
-          <WeeklyDay day="Fri" date="14" />
+          <WeeklyDay day="Fri" date="15" />
           <WeeklyDay day="Sat" date="15" />
           <WeeklyDay day="Sun" date="16" />
           <div className="w-64"></div>
         </div>
       </div>
-      <div className="calendar-height overflow-auto hide-scrollbar">
-        <div className="flex divide-x">
-          <div className="w-[450px] text-right mt-[25px] text-sm">
+      <div className="calendar-height">
+        <div className="flex divide-x dark:divide-gray-700">
+          <div className="w-[450px] dark:text-white text-right mt-[25px] text-sm">
             <div className="pr-2">
               <div className="h-32">00:00</div>
               <div className="h-32">01:00</div>
