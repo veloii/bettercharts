@@ -5,159 +5,149 @@ import { useCookies } from "react-cookie";
 import dayjs from "dayjs";
 import { UserContext } from "context/ClassChartsContext";
 import Head from "next/head";
-import Button from "ui/Button";
+import React from "react";
+import {
+  TextInput,
+  PasswordInput,
+  Checkbox,
+  Anchor,
+  Paper,
+  Title,
+  Text,
+  Container,
+  Group,
+  Button,
+} from "@mantine/core";
+import { DatePicker } from "@mantine/dates";
+import { useForm } from "@mantine/hooks";
+import { SocketContext } from "context/SocketIOContext";
 
 const Login = () => {
   const { user } = useContext(UserContext);
-  const [date, setDate] = useState<any>(null);
-  const [focused, setFocused] = useState<any>(false);
+  const [loading, setLoading] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [error, setError] = useState(false);
   const [cookies, setCookie, removeCookie] = useCookies([
     "cc_access_code",
     "cc_date_of_birth",
   ]);
   const router = useRouter();
+  const { socket, setSocket } = useContext(SocketContext);
+
+  const form = useForm({
+    initialValues: {
+      rememberMe: "off",
+      accessCode: "",
+      birth: undefined,
+    },
+  });
 
   useEffect(() => {
     if (user) {
-      router.push("/overview");
-      return;
-    }
-    if (
-      router.query?.password &&
-      router.query?.day &&
-      router.query?.month &&
-      router.query?.year
-    ) {
-      const options =
-        router.query?.remember_me === "on" ? { maxAge: 31536000 } : {};
-
-      const date =
-        router.query?.day +
-        "/" +
-        router.query?.month +
-        "/" +
-        router.query?.year;
-
-      setCookie(
-        "cc_access_code",
-        router.query?.password.toString().toUpperCase(),
-        options
-      );
-      setCookie("cc_date_of_birth", date, options);
-
-      router.replace("/login", undefined, { shallow: true });
-      window.location.href = "https://app.bettercharts.zelr.me/overview";
-
+      router.push("/dashboard");
       return;
     }
   });
+
+  const handleSubmit = (values: {
+    rememberMe: string;
+    accessCode: string;
+    birth: Date | undefined;
+  }) => {
+    if (!values.birth) return setError(true);
+    setError(false);
+    setLoading(true);
+
+    const options = values.rememberMe === "on" ? { maxAge: 31536000 } : {};
+
+    const jsDate: Date = values.birth;
+    const date = ("0" + jsDate.getDate()).slice(-2);
+    const month = ("0" + (jsDate.getMonth() + 1)).slice(-2);
+    const year = jsDate.getFullYear();
+    const birth = `${date}/${month}/${year}`;
+
+    setCookie("cc_access_code", values.accessCode, options);
+    setCookie("cc_date_of_birth", birth, options);
+
+    // trigger to try to login
+    setSocket(undefined);
+  };
+
+  useEffect(() => {
+    if (loggedIn) return;
+    if (socket === null) {
+      setError(true);
+      removeCookie("cc_access_code");
+      removeCookie("cc_date_of_birth");
+      setLoading(false);
+      return;
+    }
+    if (user !== null) {
+      if (user !== undefined) {
+        setLoggedIn(true);
+        setError(false);
+        setLoading(false);
+        return;
+      }
+    }
+  }, [socket, user]);
+
+  useEffect(() => {
+    setError(false);
+  }, [form.values]);
 
   return (
     <div>
       <Head>
         <title>Login | BetterCharts</title>
       </Head>
-      <div className="min-h-screen bg-white md:flex dark:bg-gray-900">
-        <div className="absolute z-50 flex flex-col justify-center flex-1 w-full -translate-x-1/2 -translate-y-1/2 bg-white md:p-5 md:w-auto md:shadow-lg lg:p-6 dark:md:border dark:border-gray-800 dark:bg-gray-900 md:rounded-2xl top-1/2 left-1/2 lg:flex-none">
-          <div className="w-full max-w-sm mx-auto lg:w-96">
-            <div>
-              <span className="text-3xl text-emerald-600 font-brand dark:text-emerald-300">
-                bcx
-              </span>
-              <h2 className="mt-4 text-3xl font-extrabold text-gray-900 dark:text-gray-50">
-                Sign in to your account
-              </h2>
-            </div>
+      <Container size={420} my={40}>
+        <Title
+          align="center"
+          sx={(theme) => ({
+            fontWeight: 900,
+            color:
+              theme.colorScheme === "dark"
+                ? theme.colors.gray[0]
+                : theme.colors.gray[9],
+          })}
+        >
+          Welcome back!
+        </Title>
+        <Text color="dimmed" size="sm" align="center" mt={5}>
+          No account needed. Put your ClassCharts code in.
+        </Text>
 
-            <div>
-              <div className="mt-4">
-                <form className="space-y-6">
-                  <div className="flex items-center justify-center w-full gap-2">
-                    <div className="space-y-1">
-                      <div className="mt-1">
-                        <input
-                          placeholder="Access Code"
-                          id="password"
-                          name="password"
-                          type="password"
-                          autoComplete="current-password"
-                          required
-                          className="block w-40 px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md shadow-sm appearance-none dark:bg-gray-800 dark:text-white dark:border-gray-600 focus:outline-none sm:text-sm focus:ring-emerald-500 dark:focus:ring-offset-gray-900 focus:border-emerald-500"
-                        />
-                      </div>
-                    </div>
-                    <div className="space-y-1">
-                      <div className="flex mt-1 text-center rounded-md">
-                        <input
-                          type="number"
-                          name="day"
-                          required
-                          id="day"
-                          className="z-10 block w-12 text-center border-gray-300 rounded-none shadow-sm dark:bg-gray-800 dark:border-gray-600 dark:text-white focus:ring-emerald-500 dark:focus:ring-offset-gray-900 rounded-l-md focus:border-emerald-500 sm:text-sm"
-                          placeholder="23"
-                        />
-                        <span className="inline-flex items-center px-3 text-sm text-gray-500 border shadow-sm dark:bg-gray-700 border-x-0 dark:border-gray-600 bg-gray-50">
-                          /
-                        </span>
-                        <input
-                          type="number"
-                          name="month"
-                          required
-                          id="month"
-                          className="z-10 block w-12 text-center border-gray-300 rounded-none shadow-sm dark:bg-gray-800 dark:border-gray-600 dark:text-white focus:ring-emerald-500 dark:focus:ring-offset-gray-900 focus:border-emerald-500 sm:text-sm"
-                          placeholder="02"
-                        />
-                        <span className="inline-flex items-center px-3 text-sm text-gray-500 border shadow-sm dark:bg-gray-700 border-x-0 dark:border-gray-600 bg-gray-50">
-                          /
-                        </span>
-                        <input
-                          type="number"
-                          name="year"
-                          required
-                          id="year"
-                          className="z-10 block w-16 text-center border-gray-300 rounded-none shadow-sm dark:bg-gray-800 rounded-r-md dark:border-gray-600 dark:text-white focus:ring-emerald-500 dark:focus:ring-offset-gray-900 focus:border-emerald-500 sm:text-sm"
-                          placeholder="2003"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex items-center">
-                    <input
-                      id="remember_me"
-                      name="remember_me"
-                      type="checkbox"
-                      className="w-4 h-4 border-gray-300 rounded text-emerald-600 focus:ring-emerald-500 dark:border-gray-600 dark:bg-gray-800 dark:focus:ring-offset-gray-900"
-                    />
-                    <label
-                      htmlFor="remember_me"
-                      className="block ml-2 text-sm text-gray-700 dark:text-gray-200"
-                    >
-                      Remember me
-                    </label>
-                  </div>
-
-                  <div>
-                    <Button
-                      type="submit"
-                      size="3"
-                      className="items-center justify-center w-full"
-                    >
-                      Sign in
-                    </Button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="relative flex-1 hidden w-0 md:block">
-          <img
-            className="absolute inset-0 object-cover w-full h-full"
-            src="/classroom.jpg"
-            alt=""
-          />
-        </div>
-      </div>
+        <Paper withBorder shadow="md" p={30} mt={30} radius="md">
+          <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
+            <PasswordInput
+              {...form.getInputProps("accessCode")}
+              label="Access Code"
+              placeholder="A2XPQIL5UJ"
+              required
+              mt="md"
+              error={error}
+            />
+            <DatePicker
+              {...form.getInputProps("birth")}
+              placeholder="April 15, 2007"
+              label="Date of birth"
+              mt="md"
+              required
+              error={error}
+            />
+            <Group position="apart" mt="md">
+              <Checkbox
+                {...form.getInputProps("rememberMe")}
+                label="Remember me"
+              />
+            </Group>
+            <Button loading={loading} type="submit" fullWidth mt="xl">
+              Sign in
+            </Button>
+          </form>
+        </Paper>
+      </Container>
     </div>
   );
 };

@@ -1,14 +1,18 @@
+import { CalendarContext } from "context/CalendarContext";
 import React, { useEffect } from "react";
+import { CalendarDay } from "types/Calendar";
 import CalendarWeekDays from "../CalendarWeekDays";
 import Day from "../Day";
+import MobileEventsView from "../MobileEventsView";
 
 function daysInMonthFunction(year: number, month: number) {
   return new Date(year, month + 1, 0).getDate();
 }
 
-interface Day extends Date {
+export interface Day extends Date {
   active: boolean;
   today?: boolean;
+  events?: CalendarDay[] | undefined;
 }
 
 const MonthView = (props: {
@@ -24,6 +28,7 @@ const MonthView = (props: {
   const [days, setDays] = React.useState<Day[]>([]);
   const [month, setMonth] = props.monthState;
   const [year, setYear] = props.yearState;
+  const { calendar } = React.useContext(CalendarContext);
 
   const getMonth = () => {
     const date = new Date(),
@@ -99,6 +104,30 @@ const MonthView = (props: {
       if (m === 11) return "December";
     };
 
+    localDays = localDays.map((day) => {
+      const thisDay =
+        day.getDate() + "/" + day.getMonth() + "/" + day.getFullYear();
+
+      const events = calendar?.days?.filter((event) => {
+        const date = new Date(event.date);
+        const eventDay =
+          date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear();
+        if (thisDay === eventDay) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+
+      if (events && events.length > 0) {
+        let dayCopy = day;
+        dayCopy.events = events;
+        return dayCopy;
+      } else {
+        return day;
+      }
+    });
+
     setMonth(getMonth());
     setYear(y.toString());
     setDays(localDays);
@@ -109,86 +138,60 @@ const MonthView = (props: {
   }, []);
 
   return (
-    <div className="flex">
+    <div>
       <div className="grid grid-cols-7 w-full dark:divide-gray-700 bg-white divide-x-2 text-center font-semibold text-sm border-y dark:border-gray-700 dark:bg-gray-900 dark:text-white">
         <CalendarWeekDays name="Mon">
           {days
             .filter((day) => day.getDay() === 1)
             .map((day) => (
-              <Day
-                today={day.today}
-                active={day.active}
-                date={day.getDate().toString()}
-              />
+              <Day day={day} />
             ))}
         </CalendarWeekDays>
         <CalendarWeekDays name="Tue">
           {days
             .filter((day) => day.getDay() === 2)
             .map((day) => (
-              <Day
-                today={day.today}
-                active={day.active}
-                date={day.getDate().toString()}
-              />
+              <Day day={day} />
             ))}
         </CalendarWeekDays>
         <CalendarWeekDays name="Wed">
           {days
             .filter((day) => day.getDay() === 3)
             .map((day) => (
-              <Day
-                today={day.today}
-                active={day.active}
-                date={day.getDate().toString()}
-              />
+              <Day day={day} />
             ))}
         </CalendarWeekDays>
         <CalendarWeekDays name="Thu">
           {days
             .filter((day) => day.getDay() === 4)
             .map((day) => (
-              <Day
-                today={day.today}
-                active={day.active}
-                date={day.getDate().toString()}
-              />
+              <Day day={day} />
             ))}
         </CalendarWeekDays>
         <CalendarWeekDays name="Fri">
           {days
             .filter((day) => day.getDay() === 5)
             .map((day) => (
-              <Day
-                today={day.today}
-                active={day.active}
-                date={day.getDate().toString()}
-              />
+              <Day day={day} />
             ))}
         </CalendarWeekDays>
         <CalendarWeekDays name="Sat">
           {days
             .filter((day) => day.getDay() === 6)
             .map((day) => (
-              <Day
-                today={day.today}
-                active={day.active}
-                date={day.getDate().toString()}
-              />
+              <Day day={day} />
             ))}
         </CalendarWeekDays>
         <CalendarWeekDays name="Sun">
           {days
             .filter((day) => day.getDay() === 0)
             .map((day) => (
-              <Day
-                today={day.today}
-                active={day.active}
-                date={day.getDate().toString()}
-              />
+              <Day day={day} />
             ))}
         </CalendarWeekDays>
-        <div className="md:hidden">Show events here</div>
+      </div>
+      <div className="md:hidden">
+        <MobileEventsView />
       </div>
     </div>
   );

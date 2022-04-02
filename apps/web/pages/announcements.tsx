@@ -1,34 +1,33 @@
+import { Group, Paper, Center, Title, Text, Stack } from "@mantine/core";
 import { UserContext } from "context/ClassChartsContext";
-import { NextPage } from "next";
-import Head from "next/head";
+import dayjs from "dayjs";
 import { useContext } from "react";
-import Announcement from "ui/Announcement";
-import Container from "ui/Container";
+import { Announcement } from "ui/mantine/Announcement";
 
-const Announcements: NextPage = () => {
+const Announcements = () => {
   const { user } = useContext(UserContext);
 
   return (
-    <Container>
-      <Head>
-        <title>Announcements | BetterCharts</title>
-      </Head>
-      <div className="pt-4 space-y-4">
-        {user?.announcements.length === 0 && (
-          <div className="flex items-center justify-center p-10 mt-16 bg-gray-800 shadow rounded-3xl dark:shadow-none">
-            <div>
-              <img className="w-96" src="/NoHomework.svg" />
-              <h2 className="py-2 text-3xl font-semibold text-center text-gray-200">
-                No Announcements
-              </h2>
-            </div>
-          </div>
-        )}
-        {user?.announcements?.map((announcement) => (
-          <Announcement announcement={announcement} key={announcement.id} />
+    <>
+      <Title order={1} px="md" pt="xl">
+        Announcements
+      </Title>
+      <Text px="md" pb="sm">
+        See all the announcements your school has posted
+      </Text>
+      <Stack p="md">
+        {user?.announcements.map((announcement) => (
+          <Announcement
+            postedAt={dayjs(announcement.timestamp).toString()}
+            body={announcement.description!}
+            author={{
+              name: announcement.teacher_name,
+              image: announcement.school_logo || "",
+            }}
+          />
         ))}
-      </div>
-    </Container>
+      </Stack>
+    </>
   );
 };
 

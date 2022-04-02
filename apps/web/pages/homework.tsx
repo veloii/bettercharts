@@ -1,121 +1,65 @@
-import HomeworkCategory from "../ui/HomeworkCategory";
-import { UserContext } from "../context/ClassChartsContext";
-import React, { useEffect, useState } from "react";
-import { HomeworksResponse } from "classcharts-api/dist/types";
-import Container from "ui/Container";
-import Head from "next/head";
-import DateRangePicker from "@wojtekmaj/react-daterange-picker/dist/entry.nostyle";
+import { useContext, useState } from "react";
+import { UserContext } from "context/ClassChartsContext";
+import { HomeworkTable } from "ui/mantine/HomeworkTable";
+import { Box, Group, Stack, Title, Text } from "@mantine/core";
+import { DateRangePicker } from "@mantine/dates";
 import { SocketContext } from "context/SocketIOContext";
+import { useEffect } from "react";
 
-export const homeworkTodo = (homework: HomeworksResponse) =>
-  homework.filter(
-    (item) => item.status.state === null && item.status.ticked === "no"
-  );
+const convertDate = (jsDate: Date) => {
+  const date = ("0" + jsDate.getDate()).slice(-2);
+  const month = ("0" + (jsDate.getMonth() + 1)).slice(-2);
+  const year = jsDate.getFullYear();
+  return `${year}-${month}-${date}`;
+};
 
-export const homeworkCompleted = (homework: HomeworksResponse) =>
-  homework.filter(
-    (item) => item.status.state === null && item.status.ticked === "yes"
-  );
-
-export const homeworkNotSubmitted = (homework: HomeworksResponse) =>
-  homework.filter((item) => item.status.state === "not_completed");
-
-export const homeworkLate = (homework: HomeworksResponse) =>
-  homework.filter((item) => item.status.state === "late");
-
-export const homeworkSubmitted = (homework: HomeworksResponse) =>
-  homework.filter((item) => item.status.state === "completed");
-
-const homework = () => {
-  const { user } = React.useContext(UserContext);
-  const [dates, setDates] = useState<Date[]>();
-  const homework = user?.homework;
-  const { socket } = React.useContext(SocketContext);
-
-  const handleChangeDate = (dates: Date[]) => {
-    if (dates) {
-      const startDate = dates[0];
-      const endDate = dates[1];
-
-      const startDateFormatted =
-        startDate.getFullYear() +
-        "-" +
-        (startDate.getUTCMonth() + 1) +
-        "-" +
-        startDate.getUTCDate();
-      const endDateFormatted =
-        endDate.getFullYear() +
-        "-" +
-        (endDate.getUTCMonth() + 1) +
-        "-" +
-        endDate.getUTCDate();
-
-      socket?.emit("getHomework", [startDateFormatted, endDateFormatted]);
-    } else {
-      socket?.emit("getHomework");
-    }
-  };
+const Homework = () => {
+  const [value, setValue] = useState<[Date | null, Date | null]>();
+  const { socket } = useContext(SocketContext);
+  const { user } = useContext(UserContext);
 
   useEffect(() => {
-    socket?.emit("getHomework");
+    getHomework();
   }, []);
 
-  return (
-    <Container>
-      <Head>
-        <title>Homework | BetterCharts</title>
-      </Head>
-      <div className="pt-5 space-y-2">
-        <div className="flex items-center justify-center p-5 -mb-16 bg-white border dark:bg-gray-900 lg:-mt-24 lg:float-right sm:rounded-3xl lg:bg-transparent lg:p-0 dark:border-gray-700 lg:border-none lg:shadow-none lg:rounded-none lg:-mb-0">
-          <DateRangePicker
-            value={dates}
-            onChange={(value: Date[]) => {
-              handleChangeDate(value);
-              setDates(value);
-            }}
-          />
-        </div>
+  const getHomework = (from?: string, to?: string) => {
+    if (!from) return socket?.emit("getHomework");
+    if (!to) return socket?.emit("getHomework");
 
-        <div className="pt-16 space-y-2 lg:pt-0">
-          {homework && homeworkTodo(homework).length !== 0 && (
-            <HomeworkCategory
-              type="todo"
-              name="Todo"
-              homework={homeworkTodo(homework)}
+    socket?.emit("getHomework", [from, to]);
+  };
+
+  if (!user) return <div></div>;
+  return (
+    <Box p="md" py="xl">
+      <Stack>
+        <Box>
+          <Group pb="sm" position="apart">
+            <Box>
+              <Title order={1}>Homework</Title>
+              <Text>View and complete the homework set for each class</Text>
+            </Box>
+            <DateRangePicker
+              placeholder="Pick dates range"
+              value={value}
+              onChange={(dates) => {
+                setValue(dates);
+
+                if (dates[0] === null) return getHomework();
+                if (dates[1] === null) return getHomework();
+
+                const from = convertDate(dates[0]);
+                const to = convertDate(dates[1]);
+
+                getHomework(from, to);
+              }}
             />
-          )}
-          {homework && homeworkCompleted(homework).length !== 0 && (
-            <HomeworkCategory
-              type="completed"
-              name="Completed"
-              homework={homeworkCompleted(homework)}
-            />
-          )}
-          {homework && homeworkLate(homework).length !== 0 && (
-            <HomeworkCategory
-              type="late"
-              name="Late"
-              homework={homeworkLate(homework)}
-            />
-          )}
-          {homework && homeworkNotSubmitted(homework).length !== 0 && (
-            <HomeworkCategory
-              type="fail"
-              name="Not Submitted"
-              homework={homeworkNotSubmitted(homework)}
-            />
-          )}
-          {homework && homeworkSubmitted(homework).length !== 0 && (
-            <HomeworkCategory
-              type="submitted"
-              name="Submitted"
-              homework={homeworkSubmitted(homework)}
-            />
-          )}
-        </div>
-      </div>
-    </Container>
+          </Group>
+        </Box>
+        <HomeworkTable data={user.homework} />
+      </Stack>
+    </Box>
   );
 };
 
-export default homework;
+export default Homework;

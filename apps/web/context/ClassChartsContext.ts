@@ -1,13 +1,14 @@
 import { createContext } from "react";
 import ClassCharts from "../types/ClassCharts";
+import fakeUser from "lib/fakeUser";
 
 export type UserContextType = {
-  user?: ClassCharts | null;
+  user?: ClassCharts | null | undefined;
   setUser: Function;
 };
 
 export const UserContext = createContext<UserContextType>({
-  user: undefined,
+  user: fakeUser,
   setUser: () => {},
 });
 

@@ -18,6 +18,8 @@ export default interface ClassCharts {
   announcements: AnnouncementsResponse;
   lessons: LessonsResponse;
   awards: BadgesResponse;
+  allTimeBehaviour: BehaviourResponse;
+  fake?: boolean;
 }
 
 export type ClassChartsFeature =

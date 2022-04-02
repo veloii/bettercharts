@@ -1,30 +1,24 @@
-import ReactDOM, { unmountComponentAtNode } from "react-dom";
-import React from "react";
-import HomeworkModal from "../ui/HomeworkModal";
-import { UserContextType } from "../context/ClassChartsContext";
 import { Homework } from "classcharts-api/dist/types";
-import { Socket } from "socket.io-client";
+import { ModalsContextProps } from "@mantine/modals/lib/context";
+import HomeworkModal from "../ui/mantine/HomeworkModal";
+import { UserContextType } from "context/ClassChartsContext";
+import { SocketContextType } from "context/SocketIOContext";
 
-const openHomeworkModal = (
-  userContext: UserContextType,
-  socketContext: Socket,
+export default (
   homework: Homework,
-  status: "late" | "submitted" | "fail" | "completed" | "todo"
+  modals: ModalsContextProps,
+  userContext: UserContextType,
+  socketContext: SocketContextType
 ) => {
-  const next = document.querySelector("#__next");
-  const container = document.createElement("div");
-  next?.appendChild(container);
-
-  ReactDOM.render(
-    <HomeworkModal
-      socketContext={socketContext}
-      homework={homework}
-      userContext={userContext}
-      open={true}
-      status={status}
-    />,
-    container
-  );
+  modals.openModal({
+    centered: true,
+    withCloseButton: false,
+    children: (
+      <HomeworkModal
+        socketContext={socketContext}
+        userContext={userContext}
+        homework={homework}
+      />
+    ),
+  });
 };
-
-export default openHomeworkModal;

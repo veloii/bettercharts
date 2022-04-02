@@ -9,6 +9,10 @@ import getTimetable from "./lib/getTimetable";
 import getUser from "./lib/getUser";
 import ClassCharts from "./types/ClassCharts";
 import { ClasschartsClient } from "classcharts-api";
+import getCalendar from "./lib/getCalendar";
+import createCalendarEvent, {
+  createCalendarEventParams,
+} from "./lib/createCalendarEvent";
 
 const app = express();
 
@@ -99,6 +103,22 @@ io.on("connection", async (socket) => {
     socket.emit("refreshData", user);
   });
 
+  // socket.on("createCalendarEvent", async (event: createCalendarEventParams) => {
+  //   const create = await createCalendarEvent(
+  //     user!.student!.id!.toString(),
+  //     event
+  //   );
+  //   if (create) {
+  //     const calendar = await getCalendar(user!.student!.id!.toString());
+  //     socket.emit("refreshCalendar", calendar);
+  //   }
+  // });
+
+  // socket.on("getCalendar", async () => {
+  //   const calendar = await getCalendar(user!.student!.id!.toString());
+  //   socket.emit("refreshCalendar", calendar);
+  // });
+
   socket.on("tickHomework", async (homeworkId: string | number) => {
     await client.makeAuthedRequest(
       `https://www.classcharts.com/apiv2student/homeworkticked/${homeworkId}?pupil_id=${user?.student.id}`,
@@ -106,9 +126,7 @@ io.on("connection", async (socket) => {
     );
   });
 
-  socket.on("getInfo", async () => {
-    socket.emit("refreshData", user);
-  });
+  socket.on("getInfo", async () => socket.emit("refreshData", user));
 });
 
 app.get("*", (req, res) => {

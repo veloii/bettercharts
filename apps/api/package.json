@@ -10,6 +10,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@prisma/client": "^3.11.1",
     "@types/cors": "^2.8.12",
     "classcharts-api": "^0.4.1",
     "cors": "^2.8.5",

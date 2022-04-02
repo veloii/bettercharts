@@ -1,5 +1,8 @@
 import type { ClasschartsClient } from "classcharts-api";
 
+const convertDate = (date: Date) =>
+  date.getFullYear() + "-" + (date.getUTCMonth() + 1) + "-" + date.getUTCDate();
+
 const getUser = async (client: ClasschartsClient) => {
   const studentInfo = await client.getStudentInfo();
 
@@ -13,8 +16,13 @@ const getUser = async (client: ClasschartsClient) => {
 
   if (studentInfo.display_homework)
     user.homework = await client.listHomeworks();
-  if (studentInfo.display_behaviour)
+  if (studentInfo.display_behaviour) {
     user.behaviour = await client.getBehaviour();
+    user.allTimeBehaviour = await client.getBehaviour({
+      from: "2000-1-1",
+      to: convertDate(new Date()),
+    });
+  }
   if (studentInfo.display_activity) user.activity = await client.getActivity();
   if (studentInfo.display_detentions)
     user.detentions = await client.getDetentions();

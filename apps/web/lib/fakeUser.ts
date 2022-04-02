@@ -1,9 +1,18 @@
+import {
+  BehaviourResponse,
+  HomeworksResponse,
+  BadgesResponse,
+  ActivityResponse,
+} from "classcharts-api/dist/types";
+import ClassCharts from "types/ClassCharts";
+
 export const studentInfo = {
   allow_pupils_add_timetable_notes: false,
   announcements_count: 0,
   avatar_url:
     "https://195ec04504ea0272771e-7c2c6dacbab7a2b2d574b53c70c1fe31.ssl.cf3.rackcdn.com/23.2.0/img/faces/default.png",
-  can_upload_attachments: false,
+  survey_id: 0,
+  can_upload_attachments: "no",
   detention_alias_plural_uc: "Detentions",
   display_absences: false,
   display_activity: true,
@@ -156,7 +165,7 @@ export const lessonsInfo = [
   },
 ];
 
-export const homeworkInfo = [
+export const homeworkInfo: HomeworksResponse = [
   {
     lesson: "9/Sp1",
     subject: "Spanish",
@@ -219,8 +228,8 @@ export const homeworkInfo = [
       mark_relative: 0,
       ticked: "no",
       allow_attachments: "no",
-      first_seen_date: null,
-      last_seen_date: null,
+      first_seen_date: "null",
+      last_seen_date: "null",
       attachments: [],
       has_feedback: false,
     },
@@ -361,8 +370,8 @@ export const homeworkInfo = [
       mark_relative: 0,
       ticked: "no",
       allow_attachments: "no",
-      first_seen_date: null,
-      last_seen_date: null,
+      first_seen_date: "null",
+      last_seen_date: "null",
       attachments: [],
       has_feedback: false,
     },
@@ -433,8 +442,8 @@ export const homeworkInfo = [
       mark_relative: 0,
       ticked: "no",
       allow_attachments: "yes",
-      first_seen_date: null,
-      last_seen_date: null,
+      first_seen_date: "null",
+      last_seen_date: "null",
       attachments: [],
       has_feedback: false,
     },
@@ -447,7 +456,7 @@ export const homeworkInfo = [
 
 export const detentionInfo = [];
 
-export const behaviourInfo = {
+export const behaviourInfo: BehaviourResponse = {
   timeline: [
     {
       positive: 4,
@@ -494,42 +503,21 @@ export const behaviourInfo = {
     "Good contribution to lesson": 6,
     "Good attitude to lesson": 7,
   },
-  negative_reasons: [],
+  negative_reasons: {},
   other_positive: [],
   other_negative: [],
   other_positive_count: [],
   other_negative_count: [],
 };
 
-export const awardsInfo = [
+export const awardsInfo: BadgesResponse = [
   {
     id: 815,
     name: "Bronze House Point Award",
     icon: "17.svg",
     colour: "bronze",
     created_date: "2021-08-23T12:33:23+00:00",
-    pupil_badges: [
-      {
-        pupil_event: {
-          timestamp: "2021-09-28T08:42:20+00:00",
-          lesson_pupil_behaviour: {
-            reason: "Good attitude to lesson",
-            score: 1,
-            icon: "good/+general15.png",
-            polarity: "positive",
-            timestamp: "2021-09-28T08:42:20+00:00",
-            teacher: {
-              title: "Mr",
-              first_name: "Taylor",
-              last_name: "Wright",
-            },
-          },
-          event: {
-            label: "Bronze House Point Award",
-          },
-        },
-      },
-    ],
+    pupil_badges: [],
     icon_url:
       "https://195ec04504ea0272771e-7c2c6dacbab7a2b2d574b53c70c1fe31.ssl.cf3.rackcdn.com/23.2.0/img/eventbadgeicons/bronze/17.svg",
   },
@@ -539,28 +527,7 @@ export const awardsInfo = [
     icon: "17.svg",
     colour: "silver",
     created_date: "2021-08-23T12:34:52+00:00",
-    pupil_badges: [
-      {
-        pupil_event: {
-          timestamp: "2021-11-10T10:29:19+00:00",
-          lesson_pupil_behaviour: {
-            reason: "Good attitude to lesson",
-            score: 1,
-            icon: "good/+general15.png",
-            polarity: "positive",
-            timestamp: "2021-11-10T10:29:19+00:00",
-            teacher: {
-              title: "Mrs",
-              first_name: "Emily",
-              last_name: "Wallace",
-            },
-          },
-          event: {
-            label: "Silver House Point Award",
-          },
-        },
-      },
-    ],
+    pupil_badges: [],
     icon_url:
       "https://195ec04504ea0272771e-7c2c6dacbab7a2b2d574b53c70c1fe31.ssl.cf3.rackcdn.com/23.2.0/img/eventbadgeicons/silver/17.svg",
   },
@@ -570,28 +537,7 @@ export const awardsInfo = [
     icon: "17.svg",
     colour: "gold",
     created_date: "2021-08-23T12:36:07+00:00",
-    pupil_badges: [
-      {
-        pupil_event: {
-          timestamp: "2021-12-06T12:02:28+00:00",
-          lesson_pupil_behaviour: {
-            reason: "Good attitude to lesson",
-            score: 1,
-            icon: "good/+general15.png",
-            polarity: "positive",
-            timestamp: "2021-12-06T12:02:28+00:00",
-            teacher: {
-              title: "Miss",
-              first_name: "Angie",
-              last_name: "Dodson",
-            },
-          },
-          event: {
-            label: "Gold House Point Award",
-          },
-        },
-      },
-    ],
+    pupil_badges: [],
     icon_url:
       "https://195ec04504ea0272771e-7c2c6dacbab7a2b2d574b53c70c1fe31.ssl.cf3.rackcdn.com/23.2.0/img/eventbadgeicons/gold/17.svg",
   },
@@ -601,28 +547,7 @@ export const awardsInfo = [
     icon: "17.svg",
     colour: "yellow",
     created_date: "2021-08-23T12:37:34+00:00",
-    pupil_badges: [
-      {
-        pupil_event: {
-          timestamp: "2022-01-17T10:57:14+00:00",
-          lesson_pupil_behaviour: {
-            reason: "Homework completion",
-            score: 1,
-            icon: "good/+reading2.png",
-            polarity: "positive",
-            timestamp: "2022-01-17T10:57:14+00:00",
-            teacher: {
-              title: "Ms",
-              first_name: "Natasha",
-              last_name: "Wild",
-            },
-          },
-          event: {
-            label: "Diamond House Point Award",
-          },
-        },
-      },
-    ],
+    pupil_badges: [],
     icon_url:
       "https://195ec04504ea0272771e-7c2c6dacbab7a2b2d574b53c70c1fe31.ssl.cf3.rackcdn.com/23.2.0/img/eventbadgeicons/yellow/17.svg",
   },
@@ -630,7 +555,7 @@ export const awardsInfo = [
 
 export const announcementsInfo = [];
 
-export const activityInfo = [
+export const activityInfo: ActivityResponse = [
   {
     id: 786580657,
     type: "behaviour",
@@ -647,7 +572,7 @@ export const activityInfo = [
     lesson_name: "9/Re1",
     teacher_name: "Mrs S Farrell",
     room_name: null,
-    note: null,
+    note: "null",
     _can_delete: false,
     badges: "",
     detention_date: null,
@@ -671,7 +596,7 @@ export const activityInfo = [
     lesson_name: "9A/En",
     teacher_name: "Mr C Peacock",
     room_name: null,
-    note: null,
+    note: "null",
     _can_delete: false,
     badges: "",
     detention_date: null,
@@ -695,7 +620,7 @@ export const activityInfo = [
     lesson_name: "9/Re1",
     teacher_name: "Mrs S Farrell",
     room_name: null,
-    note: null,
+    note: "null",
     _can_delete: false,
     badges: "",
     detention_date: null,
@@ -719,7 +644,7 @@ export const activityInfo = [
     lesson_name: "9A/Ma",
     teacher_name: "Mr S Kaur",
     room_name: null,
-    note: null,
+    note: "null",
     _can_delete: false,
     badges: "",
     detention_date: null,
@@ -743,7 +668,7 @@ export const activityInfo = [
     lesson_name: "9A/En",
     teacher_name: "Mr C Peacock",
     room_name: null,
-    note: null,
+    note: "null",
     _can_delete: false,
     badges: "",
     detention_date: null,
@@ -767,7 +692,7 @@ export const activityInfo = [
     lesson_name: "9/Gg1",
     teacher_name: "Mrs A Field",
     room_name: null,
-    note: null,
+    note: "null",
     _can_delete: false,
     badges: "",
     detention_date: null,
@@ -791,7 +716,7 @@ export const activityInfo = [
     lesson_name: "9A/Ma",
     teacher_name: "Mr S Kaur",
     room_name: null,
-    note: null,
+    note: "null",
     _can_delete: false,
     badges: "",
     detention_date: null,
@@ -815,7 +740,7 @@ export const activityInfo = [
     lesson_name: "9A/Ma",
     teacher_name: "Mr S Kaur",
     room_name: null,
-    note: null,
+    note: "null",
     _can_delete: false,
     badges: "",
     detention_date: null,
@@ -839,7 +764,7 @@ export const activityInfo = [
     lesson_name: "9A/En",
     teacher_name: "Mr C Peacock",
     room_name: null,
-    note: null,
+    note: "null",
     _can_delete: false,
     badges: "",
     detention_date: null,
@@ -863,7 +788,7 @@ export const activityInfo = [
     lesson_name: "9A/En",
     teacher_name: "Mr C Peacock",
     room_name: null,
-    note: null,
+    note: "null",
     _can_delete: false,
     badges: "",
     detention_date: null,
@@ -887,7 +812,7 @@ export const activityInfo = [
     lesson_name: "9/Dr1",
     teacher_name: "Ms M Murphy",
     room_name: null,
-    note: null,
+    note: "null",
     _can_delete: false,
     badges: "",
     detention_date: null,
@@ -911,7 +836,7 @@ export const activityInfo = [
     lesson_name: "9A/En",
     teacher_name: "Mr C Peacock",
     room_name: null,
-    note: null,
+    note: "null",
     _can_delete: false,
     badges: "",
     detention_date: null,
@@ -935,7 +860,7 @@ export const activityInfo = [
     lesson_name: "9A/En",
     teacher_name: "Mr C Peacock",
     room_name: null,
-    note: null,
+    note: "null",
     _can_delete: false,
     badges: "",
     detention_date: null,
@@ -959,7 +884,7 @@ export const activityInfo = [
     lesson_name: "9A/Ma",
     teacher_name: "Miss E Shah",
     room_name: null,
-    note: null,
+    note: "null",
     _can_delete: false,
     badges: "",
     detention_date: null,
@@ -983,7 +908,7 @@ export const activityInfo = [
     lesson_name: "9/Sp1",
     teacher_name: "Mr S Kaur",
     room_name: null,
-    note: null,
+    note: "null",
     _can_delete: false,
     badges: "",
     detention_date: null,
@@ -1007,7 +932,7 @@ export const activityInfo = [
     lesson_name: "9/Sp1",
     teacher_name: "Mr S Kaur",
     room_name: null,
-    note: null,
+    note: "null",
     _can_delete: false,
     badges: "",
     detention_date: null,
@@ -1031,7 +956,7 @@ export const activityInfo = [
     lesson_name: "9/Hi1",
     teacher_name: "Ms S Bird",
     room_name: null,
-    note: null,
+    note: "null",
     _can_delete: false,
     badges: "",
     detention_date: null,
@@ -1055,7 +980,7 @@ export const activityInfo = [
     lesson_name: "9A/En",
     teacher_name: "Mr C Peacock",
     room_name: null,
-    note: null,
+    note: "null",
     _can_delete: false,
     badges: "",
     detention_date: null,
@@ -1079,7 +1004,7 @@ export const activityInfo = [
     lesson_name: "9/Re1",
     teacher_name: "Mrs S Farrell",
     room_name: null,
-    note: null,
+    note: "null",
     _can_delete: false,
     badges: "",
     detention_date: null,
@@ -1103,7 +1028,7 @@ export const activityInfo = [
     lesson_name: "9A/En",
     teacher_name: "Mr S Kaur",
     room_name: null,
-    note: null,
+    note: "null",
     _can_delete: false,
     badges: "",
     detention_date: null,
@@ -1127,7 +1052,7 @@ export const activityInfo = [
     lesson_name: "TuN3/Tu",
     teacher_name: "Mrs E Mellor",
     room_name: null,
-    note: null,
+    note: "null",
     _can_delete: false,
     badges: "",
     detention_date: null,
@@ -1151,7 +1076,7 @@ export const activityInfo = [
     lesson_name: "9A/Ma",
     teacher_name: "Miss E Shah",
     room_name: null,
-    note: null,
+    note: "null",
     _can_delete: false,
     badges: "",
     detention_date: null,
@@ -1175,7 +1100,7 @@ export const activityInfo = [
     lesson_name: "9A/Sc",
     teacher_name: "Mr S Kaur",
     room_name: null,
-    note: null,
+    note: "null",
     _can_delete: false,
     badges: "",
     detention_date: null,
@@ -1184,3 +1109,18 @@ export const activityInfo = [
     detention_type: null,
   },
 ];
+
+const user: ClassCharts = {
+  student: studentInfo,
+  lessons: lessonsInfo,
+  homework: homeworkInfo,
+  detentions: detentionInfo,
+  behaviour: behaviourInfo,
+  awards: awardsInfo,
+  announcements: announcementsInfo,
+  activity: activityInfo,
+  allTimeBehaviour: behaviourInfo,
+  fake: true,
+};
+
+export default user;

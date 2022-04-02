@@ -1,3 +1,4 @@
+import { Box } from "@mantine/core";
 import Document, {
   Html,
   Head,
@@ -14,7 +15,7 @@ class MyDocument extends Document {
 
   render() {
     return (
-      <Html lang="en" className="w-full h-full cursor-default dark:bg-gray-900">
+      <Html lang="en" className="w-full h-full">
         <Head>
           <meta name="title" content="BetterCharts" />
           <meta
@@ -42,8 +43,14 @@ class MyDocument extends Document {
           <meta property="og:type" content="website" />
           <link rel="icon" href="/favicon.ico" />
           <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+          <link rel="preconnect" href="https://fonts.googleapis.com"></link>
+          <link rel="preconnect" href="https://fonts.gstatic.com"></link>
+          <link
+            href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap"
+            rel="stylesheet"
+          ></link>
         </Head>
-        <body className="w-full h-full dark:bg-gray-900">
+        <body className="w-full h-full">
           <Main />
           <NextScript />
         </body>

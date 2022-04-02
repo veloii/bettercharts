@@ -13,6 +13,7 @@ export default interface ClassCharts {
   student: Student;
   homework: HomeworksResponse;
   behaviour: BehaviourResponse;
+  allTimeBehaviour: BehaviourResponse;
   activity: ActivityResponse;
   detentions: DetentionsResponse;
   announcements: AnnouncementsResponse;
