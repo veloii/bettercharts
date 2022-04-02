@@ -28,11 +28,8 @@ const Phone = () => {
                 : theme.colors.gray[9],
           })}
         >
-          I am working on an app
+          I am working on an app, sorry
         </Text>
-        <a href="https://app.bettercharts-legacy.zelr.me">
-          <Button fullWidth>Use the legacy bettercharts</Button>
-        </a>
       </Stack>
     </Center>
   );

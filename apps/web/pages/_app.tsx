@@ -80,10 +80,11 @@ function MyApp({ Component, pageProps, router }: AppProps) {
       _socket?.on("refreshCalendar", (calendar) => {
         const localCalendar = { days: calendar };
         setCalendar(localCalendar);
-        setLoaded(true);
       });
 
       _socket?.on("refreshData", (user) => {
+        setLoaded(true);
+
         setUser(user);
       });
 
