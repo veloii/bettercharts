@@ -16,7 +16,7 @@ const app = (0, express_1.default)();
 const server = http_1.default.createServer(app);
 const io = new socket_io_1.Server(server, {
     cors: {
-        origin: process.env.REDIRECT_HOST,
+        origin: process.env.REDIRECT_HOST || process.env.REDIRECT_HOST_2,
         credentials: true,
     },
 });
@@ -87,12 +87,24 @@ io.on("connection", async (socket) => {
         user.activity = activity;
         socket.emit("refreshData", user);
     });
+    // socket.on("createCalendarEvent", async (event: createCalendarEventParams) => {
+    //   const create = await createCalendarEvent(
+    //     user!.student!.id!.toString(),
+    //     event
+    //   );
+    //   if (create) {
+    //     const calendar = await getCalendar(user!.student!.id!.toString());
+    //     socket.emit("refreshCalendar", calendar);
+    //   }
+    // });
+    // socket.on("getCalendar", async () => {
+    //   const calendar = await getCalendar(user!.student!.id!.toString());
+    //   socket.emit("refreshCalendar", calendar);
+    // });
     socket.on("tickHomework", async (homeworkId) => {
         await client.makeAuthedRequest(`https://www.classcharts.com/apiv2student/homeworkticked/${homeworkId}?pupil_id=${user?.student.id}`, { method: "GET" });
     });
-    socket.on("getInfo", async () => {
-        socket.emit("refreshData", user);
-    });
+    socket.on("getInfo", async () => socket.emit("refreshData", user));
 });
 app.get("*", (req, res) => {
     res.status(404).end();

@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://app.bettercharts.zelr.me
+
+# Sitemaps
+Sitemap: https://app.bettercharts.zelr.me/sitemap.xml

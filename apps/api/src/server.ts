@@ -19,7 +19,7 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: process.env.REDIRECT_HOST,
+    origin: process.env.REDIRECT_HOST || process.env.REDIRECT_HOST_2,
     credentials: true,
   },
 });
