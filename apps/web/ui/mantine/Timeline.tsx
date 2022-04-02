@@ -58,9 +58,7 @@ const Timeline = (props: { timeline: ActivityResponse | undefined | null }) => {
               </Text>
             </Group>
             <Text color="dimmed" size="xs" align="right">
-              {parseTwitterDate(
-                timeline?.timestamp?.replaceAll(" ", "T") + "Z"
-              )}
+              {parseTwitterDate(timeline?.timestamp?.replace(" ", "T") + "Z")}
             </Text>
           </Group>
         </List.Item>
