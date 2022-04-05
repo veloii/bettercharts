@@ -150,6 +150,7 @@ const Dashboard: NextPage = () => {
                     name: user?.announcements[0].teacher_name,
                     image: user?.announcements[0].school_logo || "",
                   }}
+                  attachments={user.announcements[0].attachments}
                 />
                 {user.announcements.length > 1 && (
                   <Button variant="subtle">

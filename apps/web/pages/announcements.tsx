@@ -1,6 +1,7 @@
 import { Group, Paper, Center, Title, Text, Stack } from "@mantine/core";
 import { UserContext } from "context/ClassChartsContext";
 import dayjs from "dayjs";
+import Head from "next/head";
 import { useContext } from "react";
 import { Announcement } from "ui/mantine/Announcement";
 
@@ -9,6 +10,9 @@ const Announcements = () => {
 
   return (
     <>
+          <Head>
+        <title>Announcements | BetterCharts</title>
+      </Head>
       <Title order={1} px="md" pt="xl">
         Announcements
       </Title>
@@ -24,6 +28,7 @@ const Announcements = () => {
               name: announcement.teacher_name,
               image: announcement.school_logo || "",
             }}
+            attachments={announcement.attachments}
           />
         ))}
       </Stack>

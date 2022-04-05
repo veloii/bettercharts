@@ -6,6 +6,7 @@ import { Calendar, DatePicker } from "@mantine/dates";
 import { SocketContext } from "context/SocketIOContext";
 import { useEffect } from "react";
 import { Timetable as TimetableTable } from "ui/mantine/Timetable";
+import Head from "next/head";
 
 const convertDate = (jsDate: Date) => {
   const date = ("0" + jsDate.getDate()).slice(-2);
@@ -40,6 +41,9 @@ const Timetable = () => {
         height: "100vh",
       }}
     >
+            <Head>
+        <title>No Lessons | BetterCharts</title>
+      </Head>
       <Stack spacing={20}>
         <Title order={3} align="center">
           No Lessons Today
@@ -49,6 +53,9 @@ const Timetable = () => {
     </Center>
   ) : (
     <Box p="md" py="xl">
+            <Head>
+        <title>{value.toLocaleDateString()} Timetable | BetterCharts</title>
+      </Head>
       <Stack>
         <Box>
           <Group pb="sm" position="apart">

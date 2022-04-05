@@ -10,7 +10,11 @@ const Index: NextPage = () => {
     router.push("/login");
   }, []);
 
-  return <div></div>;
+  return <div>
+          <Head>
+        <title>Loading | BetterCharts</title>
+      </Head>
+  </div>;
 };
 
 export default Index;

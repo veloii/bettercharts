@@ -23,7 +23,11 @@ const logout = () => {
     router.push("/login");
   }, []);
 
-  return <div></div>;
+  return (<div>
+          <Head>
+        <title>Logging out | BetterCharts</title>
+      </Head>
+  </div>);
 };
 
 export default logout;

@@ -6,7 +6,10 @@ import {
   Group,
   TypographyStylesProvider,
   Paper,
+  Space,
+  Button,
 } from "@mantine/core";
+import Link from "next/link";
 
 const useStyles = createStyles((theme) => ({
   comment: {
@@ -33,9 +36,13 @@ interface CommentHtmlProps {
     name: string;
     image: string;
   };
+  attachments: {
+    filename: string;
+    url: string;
+}[]
 }
 
-export function Announcement({ postedAt, body, author }: CommentHtmlProps) {
+export function Announcement({ postedAt, body, author, attachments }: CommentHtmlProps) {
   const { classes } = useStyles();
   return (
     <Paper withBorder radius="md" className={classes.comment}>
@@ -53,7 +60,16 @@ export function Announcement({ postedAt, body, author }: CommentHtmlProps) {
           className={classes.content}
           dangerouslySetInnerHTML={{ __html: body }}
         />
+        
       </TypographyStylesProvider>
+      <Space h="md" />
+      <Group className={classes.body}>
+        {attachments?.map((attachment) => (
+          <Link passHref href={attachment.url}>
+        <Button>{attachment.filename}</Button>
+</Link>
+        ))}
+      </Group>
     </Paper>
   );
 }

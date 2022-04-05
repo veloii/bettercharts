@@ -1,6 +1,7 @@
 import { Group, Box, Stack, Title, Text } from "@mantine/core";
 import { UserContext } from "context/ClassChartsContext";
 import { SocketContext } from "context/SocketIOContext";
+import Head from "next/head";
 import { useState, useContext, useEffect } from "react";
 import { DetentionTable } from "ui/mantine/DetentionTable";
 
@@ -17,6 +18,9 @@ const Detentions = () => {
 
   return (
     <Box p="md" py="xl">
+            <Head>
+        <title>Detentions | BetterCharts</title>
+      </Head>
       <Stack>
         <Box>
           <Group pb="sm" position="apart">

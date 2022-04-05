@@ -5,6 +5,7 @@ import { Box, Group, Stack, Title, Text } from "@mantine/core";
 import { DateRangePicker } from "@mantine/dates";
 import { SocketContext } from "context/SocketIOContext";
 import { useEffect } from "react";
+import Head from "next/head";
 
 const convertDate = (jsDate: Date) => {
   const date = ("0" + jsDate.getDate()).slice(-2);
@@ -32,6 +33,9 @@ const Homework = () => {
   if (!user) return <div></div>;
   return (
     <Box p="md" py="xl">
+            <Head>
+        <title>Homework | BetterCharts</title>
+      </Head>
       <Stack>
         <Box>
           <Group pb="sm" position="apart">

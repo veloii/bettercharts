@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useContext, useState } from "react";
 import { UserInfo } from "ui/mantine/UserInfo";
 import { useCookies } from "react-cookie";
+import Head from "next/head";
 
 const User: NextPage = () => {
   const { user } = useContext(UserContext);
@@ -15,6 +16,9 @@ const User: NextPage = () => {
 
   return (
     <>
+          <Head>
+        <title>User | BetterCharts</title>
+      </Head>
       <Title order={1} px="md" pt="xl" pb="sm">
         User
       </Title>

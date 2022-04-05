@@ -21,6 +21,7 @@ import "chart.js/auto";
 import PieChartBehaviour from "ui/mantine/PieChartBehaviour";
 import PieChartBehaviourCard from "ui/mantine/PieChartBehaviourCard";
 import BarChartWeeklyBreakdown from "ui/mantine/BarChartWeeklyBreakdown";
+import Head from "next/head";
 
 const Behaviour = () => {
   const { user } = useContext(UserContext);
@@ -37,6 +38,9 @@ const Behaviour = () => {
         width: "100%",
       }}
     >
+            <Head>
+        <title>Behaviour | BetterCharts</title>
+      </Head>
       <Title order={1} px="md" pt="xl">
         Behaviour
       </Title>

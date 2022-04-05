@@ -1,4 +1,5 @@
 import { Box, Button, Center, Stack, Text, Title } from "@mantine/core";
+import Head from "next/head";
 
 const Phone = () => {
   return (
@@ -7,6 +8,9 @@ const Phone = () => {
         height: "100vh",
       }}
     >
+            <Head>
+        <title>No Phone | BetterCharts</title>
+      </Head>
       <Stack p="md">
         <Title
           align="center"
