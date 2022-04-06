@@ -26,6 +26,7 @@ import "chart.js/auto";
 import { DetentionTable } from "ui/mantine/DetentionTable";
 import { Timetable } from "ui/mantine/Timetable";
 import { Announcement } from "ui/mantine/Announcement";
+import Link from "next/link";
 
 const convertDate = (date: dayjs.Dayjs) =>
   date.year() + "-" + (date.month() + 1) + "-" + date.date();
@@ -52,6 +53,7 @@ const Dashboard: NextPage = () => {
   const { socket } = useContext(SocketContext);
   const { classes } = useStyles();
   const [ready, setReady] = useState<boolean>(false);
+  const reversedAnnouncements = [].concat(user.announcements).reverse();
 
   useEffect(() => {
     if (ready) return;
@@ -144,19 +146,23 @@ const Dashboard: NextPage = () => {
             <Paper withBorder shadow="md" p="sm">
               <Stack>
                 <Announcement
-                  postedAt={dayjs(user?.announcements[0].timestamp).toString()}
-                  body={user?.announcements[0].description!}
+                  postedAt={dayjs(
+                    reversedAnnouncements[0].timestamp
+                  ).toString()}
+                  body={reversedAnnouncements[0].description!}
                   author={{
-                    name: user?.announcements[0].teacher_name,
-                    image: user?.announcements[0].school_logo || "",
+                    name: reversedAnnouncements[0].teacher_name,
+                    image: reversedAnnouncements[0].school_logo || "",
                   }}
-                  attachments={user.announcements[0].attachments}
+                  attachments={reversedAnnouncements[0].attachments}
                 />
                 {user.announcements.length > 1 && (
-                  <Button variant="subtle">
-                    View {user.announcements.length - 1} more announcement
-                    {user.announcements.length - 1 !== 2 && "s"}
-                  </Button>
+                  <Link passHref href="/announcements">
+                    <Button variant="subtle">
+                      View {user.announcements.length - 1} more announcement
+                      {user.announcements.length - 1 !== 2 && "s"}
+                    </Button>
+                  </Link>
                 )}
               </Stack>
             </Paper>
