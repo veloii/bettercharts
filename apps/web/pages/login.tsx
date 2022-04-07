@@ -17,6 +17,7 @@ import {
   Container,
   Group,
   Button,
+  Box,
 } from "@mantine/core";
 import { DatePicker } from "@mantine/dates";
 import { useForm } from "@mantine/hooks";
@@ -97,7 +98,15 @@ const Login = () => {
   }, [form.values]);
 
   return (
-    <div>
+    <Box
+      sx={(theme) => ({
+        height: "100vh",
+        backgroundColor:
+          theme.colorScheme === "dark"
+            ? theme.colors.dark[8]
+            : theme.colors.gray[0],
+      })}
+    >
       <Head>
         <title>Login | BetterCharts</title>
       </Head>
@@ -148,7 +157,7 @@ const Login = () => {
           </form>
         </Paper>
       </Container>
-    </div>
+    </Box>
   );
 };
 
