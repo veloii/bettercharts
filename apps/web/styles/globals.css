@@ -1,0 +1,18 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  overflow: overlay;
+}
+
+.mantine-List-itemWrapper {
+  width: 100%;
+}
+
+span {
+  width: inherit;
+}
+
+.mantine-List-itemIcon {
+  width: auto !important;
+}
