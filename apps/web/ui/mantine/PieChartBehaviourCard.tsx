@@ -24,6 +24,10 @@ const PieChartBehaviourCard = (props: {
     negative: number;
   }>({ positive: 0, negative: 0 });
 
+  const behaviourThisWeek =
+    user.behaviour.negative_reasons.length >= 1 &&
+    user.behaviour.positive_reasons.length >= 1;
+
   useEffect(() => {
     let pos: number = 0;
     let neg: number = 0;
@@ -39,7 +43,7 @@ const PieChartBehaviourCard = (props: {
     setPoints({ positive: pos, negative: neg });
   }, [props.behaviour]);
 
-  return (
+  return behaviourThisWeek ? (
     <Box
       sx={{
         display: "flex",
@@ -77,6 +81,8 @@ const PieChartBehaviourCard = (props: {
         </Stack>
       </Box>
     </Box>
+  ) : (
+    <div></div>
   );
 };
 

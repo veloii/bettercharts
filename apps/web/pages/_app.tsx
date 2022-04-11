@@ -8,7 +8,6 @@ import ClassCharts from "../types/ClassCharts";
 import "react-dates/initialize";
 import "react-dates/lib/css/_datepicker.css";
 import { useCookies } from "react-cookie";
-import Theme from "../types/Theme";
 import { SocketContextProvider } from "context/SocketIOContext";
 import { io, Socket } from "socket.io-client";
 import Login from "./login";
@@ -23,7 +22,7 @@ import {
 import { Sidebar } from "ui/Sidebar";
 import Dashboard from "./dashboard";
 import fakeUser from "lib/fakeUser";
-import { useLocalStorage, useHotkeys, useColorScheme } from "@mantine/hooks";
+import { useLocalStorage, useColorScheme } from "@mantine/hooks";
 import Phone from "./phone";
 
 function MyApp({ Component, pageProps, router }: AppProps) {

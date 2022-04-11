@@ -160,7 +160,7 @@ const Dashboard: NextPage = () => {
                   <Link passHref href="/announcements">
                     <Button variant="subtle">
                       View {user.announcements.length - 1} more announcement
-                      {user.announcements.length - 1 !== 2 && "s"}
+                      {user.announcements.length - 1 !== 1 && "s"}
                     </Button>
                   </Link>
                 )}
