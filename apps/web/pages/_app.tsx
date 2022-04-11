@@ -1,5 +1,4 @@
 import "../styles/globals.css";
-import { BrowserView, MobileView } from "react-device-detect";
 import { ModalsProvider } from "@mantine/modals";
 import type { AppProps } from "next/app";
 import React, { useEffect, useState } from "react";
@@ -159,12 +158,7 @@ function MyApp({ Component, pageProps, router }: AppProps) {
                                 : theme.colors.gray[9],
                           })}
                         >
-                          <BrowserView>
-                            <Component key={router.route} {...pageProps} />
-                          </BrowserView>
-                          <MobileView>
-                            <Phone />
-                          </MobileView>
+                          <Component key={router.route} {...pageProps} />
                         </Box>
                       </ScrollArea>
                     </Box>
@@ -176,12 +170,7 @@ function MyApp({ Component, pageProps, router }: AppProps) {
                       width: "100%",
                     }}
                   >
-                    <BrowserView>
-                      <Login />
-                    </BrowserView>
-                    <MobileView>
-                      <Phone />
-                    </MobileView>
+                    <Login />
                   </ScrollArea>
                 ) : user !== undefined ? (
                   <div style={{ display: "flex" }}>
@@ -216,12 +205,7 @@ function MyApp({ Component, pageProps, router }: AppProps) {
                                 : theme.colors.gray[9],
                           })}
                         >
-                          <BrowserView>
-                            <Dashboard />
-                          </BrowserView>
-                          <MobileView>
-                            <Phone />
-                          </MobileView>
+                          <Dashboard />
                         </Box>
                       </ScrollArea>
                     </Box>
@@ -233,12 +217,7 @@ function MyApp({ Component, pageProps, router }: AppProps) {
                       width: "100%",
                     }}
                   >
-                    <BrowserView>
-                      <Login />
-                    </BrowserView>
-                    <MobileView>
-                      <Phone />
-                    </MobileView>
+                    <Login />
                   </ScrollArea>
                 )}
               </UserContextProvider>
